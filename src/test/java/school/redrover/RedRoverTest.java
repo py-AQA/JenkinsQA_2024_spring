@@ -27,7 +27,7 @@ public class RedRoverTest {
         WebElement message = driver.findElement(By.id("message"));
         String value = message.getText();
 
-        Assert.assertEquals(value, "Received!");
+        Assert.assertEquals(value, "Received");
 
         driver.quit();
     }
