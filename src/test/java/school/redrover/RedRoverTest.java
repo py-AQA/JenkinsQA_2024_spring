@@ -21,9 +21,6 @@ public class RedRoverTest {
         WebElement textBox = driver.findElement( By.name("my-text") );
         textBox.sendKeys("Selenium");
 
-        WebElement textArea = driver.findElement(By.name("my-textarea"));
-        textArea.sendKeys("Sergey!");
-
         WebElement submitButton = driver.findElement(By.className("btn"));
         submitButton.click();
 
