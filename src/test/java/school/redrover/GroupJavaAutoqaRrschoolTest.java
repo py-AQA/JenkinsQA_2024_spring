@@ -13,7 +13,6 @@ public class GroupJavaAutoqaRrschoolTest {
     @Test
     public void testReturnToHomePageFromInventoryDetailsCard() {
         WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
 
         driver.get("https://www.saucedemo.com");
 
