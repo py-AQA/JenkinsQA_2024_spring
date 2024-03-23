@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 
 public class DemoQASubmitTest {
     @Test
-    public void testPracticeForm() {
+    public void testSubmitForm() {
         WebDriver driver = new ChromeDriver();
         JavascriptExecutor js = (JavascriptExecutor) driver;
         driver.get("https://demoqa.com/automation-practice-form");
