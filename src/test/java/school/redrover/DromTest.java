@@ -26,7 +26,7 @@ public class DromTest {
         WebElement buttonSubmit = driver.findElement(By.xpath("//div[text()='Показать']"));
         buttonSubmit.click();
 
-        WebElement result = driver.findElement(By.xpath("//button[text()='Сначала новые объявления']"));
+        WebElement result = driver.findElement(By.cssSelector(".css-qg9fv5.e75dypj1"));
         String resultValue = result.getText();
         Assert.assertEquals("Сначала новые объявления", resultValue);
 
