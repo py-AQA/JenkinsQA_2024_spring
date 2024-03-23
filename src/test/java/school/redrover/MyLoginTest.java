@@ -8,7 +8,6 @@ import org.testng.annotations.Test;
 
 public class MyLoginTest {
         @Test
-
         public void testTest() {
 
             WebDriver driver = new ChromeDriver();
