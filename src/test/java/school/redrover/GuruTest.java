@@ -23,8 +23,6 @@ public class GuruTest {
         password.sendKeys("abcdefghlkjl");
 
         WebElement login = driver.findElement(By.id("SubmitLogin"));
-        email.sendKeys("abcd@gmail.com");
-        password.sendKeys("abcdefghlkjl");
         login.click();
 
         driver.quit();
