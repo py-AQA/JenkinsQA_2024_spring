@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -27,7 +28,9 @@ public class AqaGroupEviltesterTest {
             wait.until(ExpectedConditions.elementToBeClickable(By.id("button02"))).click();
             wait.until(ExpectedConditions.elementToBeClickable(By.id("button03"))).click();
 
-            Boolean found = wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("buttonmessage"), "All Buttons Clicked"));
+            Boolean found = wait.until(ExpectedConditions.textToBePresentInElementLocated(
+                            By.id("buttonmessage"),
+                            "All Buttons Clicked"));
             Assert.assertTrue(found, "Text \"All Buttons Clicked\" not found");
         } finally {
             driver.quit();
@@ -71,7 +74,9 @@ public class AqaGroupEviltesterTest {
             Alert alert = wait.until(ExpectedConditions.alertIsPresent());
             alert.accept();
 
-            Assert.assertEquals(driver.findElement(By.id("alertexplanation")).getText(), "You triggered and handled the alert dialog");
+            Assert.assertEquals(
+                    driver.findElement(By.id("alertexplanation")).getText(),
+                    "You triggered and handled the alert dialog");
         } finally {
             driver.quit();
         }
@@ -91,7 +96,9 @@ public class AqaGroupEviltesterTest {
             Alert alert = wait.until(ExpectedConditions.alertIsPresent());
             alert.accept();
 
-            Assert.assertEquals(driver.findElement(By.id("confirmexplanation")).getText(), "You clicked OK, confirm returned true.");
+            Assert.assertEquals(
+                    driver.findElement(By.id("confirmexplanation")).getText(),
+                    "You clicked OK, confirm returned true.");
         } finally {
             driver.quit();
         }
@@ -111,7 +118,9 @@ public class AqaGroupEviltesterTest {
             Alert alert = wait.until(ExpectedConditions.alertIsPresent());
             alert.dismiss();
 
-            Assert.assertEquals(driver.findElement(By.id("confirmexplanation")).getText(), "You clicked Cancel, confirm returned false.");
+            Assert.assertEquals(
+                    driver.findElement(By.id("confirmexplanation")).getText(),
+                    "You clicked Cancel, confirm returned false.");
         } finally {
             driver.quit();
         }
@@ -134,7 +143,9 @@ public class AqaGroupEviltesterTest {
             alert.sendKeys(myKeys);
             alert.accept();
 
-            Assert.assertEquals(driver.findElement(By.id("promptexplanation")).getText(), String.format("You clicked OK. 'prompt' returned %s", myKeys));
+            Assert.assertEquals(
+                    driver.findElement(By.id("promptexplanation")).getText(),
+                    String.format("You clicked OK. 'prompt' returned %s", myKeys));
         } finally {
             driver.quit();
         }
@@ -154,7 +165,30 @@ public class AqaGroupEviltesterTest {
             Alert alert = wait.until(ExpectedConditions.alertIsPresent());
             alert.dismiss();
 
-            Assert.assertEquals(driver.findElement(By.id("promptexplanation")).getText(), "You clicked Cancel. 'prompt' returned null");
+            Assert.assertEquals(
+                    driver.findElement(By.id("promptexplanation")).getText(),
+                    "You clicked Cancel. 'prompt' returned null");
+        } finally {
+            driver.quit();
+        }
+    }
+
+    @Test
+    public void testExpandingDivWithClickableLink() {
+        String link = "https://testpages.eviltester.com/styled/expandingdiv.html";
+        WebDriver driver = new ChromeDriver();
+
+        try {
+            driver.get(link);
+            new Actions(driver)
+                    .moveToElement(driver.findElement(By.className("expand")))
+                    .pause(500)
+                    .moveToElement(driver.findElement(By.cssSelector(".expand p a")))
+                    .click()
+                    .pause(500)
+                    .perform();
+
+            Assert.assertTrue(driver.getCurrentUrl().contains("expandeddiv"), "Unexpected URL.");
         } finally {
             driver.quit();
         }
