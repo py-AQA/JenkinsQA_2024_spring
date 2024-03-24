@@ -17,10 +17,8 @@ public class FairfaxIceArenaTest {
 
         driver.get("https://www.fairfaxicearena.com/");
 
-
         WebElement proShopBtn = driver.findElement(By.xpath("//a[normalize-space()='Pro Shop']"));
         proShopBtn.click();
-
 
         String currentUrl = driver.getCurrentUrl();
         Assert.assertEquals(currentUrl, "https://www.fairfaxicearena.com/pro-shop.html");
