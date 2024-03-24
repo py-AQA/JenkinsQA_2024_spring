@@ -18,6 +18,8 @@ public class RedRoverTest {
 
         driver.get("https://www.selenium.dev/selenium/web/web-form.html");
 
+        WebElement textBox = driver.findElement(By.name("my-text"));
+        textBox.sendKeys("Selenium");
 
 
 
