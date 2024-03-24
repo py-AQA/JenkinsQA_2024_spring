@@ -9,6 +9,7 @@ import org.testng.annotations.Test;
 public class UnderdogsGroupTest {
     @Test
     public void testDemoqaInput() {
+
         WebDriver driver = new ChromeDriver();
 
         driver.get("https://demoqa.com/");
