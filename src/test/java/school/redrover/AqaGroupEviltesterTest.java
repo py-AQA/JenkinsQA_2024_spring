@@ -5,6 +5,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
@@ -155,6 +156,27 @@ public class AqaGroupEviltesterTest {
             alert.dismiss();
 
             Assert.assertEquals(driver.findElement(By.id("promptexplanation")).getText(), "You clicked Cancel. 'prompt' returned null");
+        } finally {
+            driver.quit();
+        }
+    }
+
+    @Test
+    public void testExpandingDivWithClickableLink() {
+        String link = "https://testpages.eviltester.com/styled/expandingdiv.html";
+        WebDriver driver = new ChromeDriver();
+
+        try {
+            driver.get(link);
+            new Actions(driver)
+                    .moveToElement(driver.findElement(By.className("expand")))
+                    .pause(500)
+                    .moveToElement(driver.findElement(By.cssSelector(".expand p a")))
+                    .click()
+                    .pause(500)
+                    .perform();
+
+            Assert.assertTrue(driver.getCurrentUrl().contains("expandeddiv"), "Unexpected URL.");
         } finally {
             driver.quit();
         }
