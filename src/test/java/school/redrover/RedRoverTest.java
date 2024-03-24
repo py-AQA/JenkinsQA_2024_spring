@@ -22,9 +22,14 @@ public class RedRoverTest {
 
         WebElement submitButton = driver.findElement(By.className("btn"));//find button
         submitButton.click();
+       
 
         WebElement message = driver.findElement(By.id("message"));
         String value = message.getText();
+
+
+
+
 
         Assert.assertEquals(value, "Received!");
 
