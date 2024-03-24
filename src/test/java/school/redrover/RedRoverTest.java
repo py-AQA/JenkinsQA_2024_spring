@@ -22,8 +22,6 @@ public class RedRoverTest {
         textBox.sendKeys("Selenium");
 
 
-
-
         WebElement submitButton = driver.findElement(By.className("btn"));//find button
         submitButton.click();
        
@@ -35,7 +33,7 @@ public class RedRoverTest {
 
 
 
-        Assert.assertEquals(value, "Received!");
+        Assert.assertEquals(value, "Received!!!");
 
 
         driver.quit();
