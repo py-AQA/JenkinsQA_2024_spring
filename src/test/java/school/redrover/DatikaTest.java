@@ -23,7 +23,7 @@ public class DatikaTest {
         WebElement message = driver.findElement(By.xpath("//*[@id=\"page-content\"]/h1"));
         String value = message.getText();
 
-        Assert.assertEquals("По запросу «Акция»", value);
+        Assert.assertEquals(value, "По запросу «Акция»");
 
         driver.quit();
     }
