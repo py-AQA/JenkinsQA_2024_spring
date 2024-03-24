@@ -79,4 +79,38 @@ public class JavAngryTest {
 
         return stringList;
     }
+
+    @Test
+    public void testCheckBox1(){
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://demoqa.com/checkbox");
+
+
+        WebElement checkBox = driver.findElement(By.className("rct-checkbox"));
+        checkBox.click();
+        WebElement resultText = driver.findElement(By.id("result"));
+        resultText.getText();
+        Assert.assertEquals(resultText.getText(),"You have selected :\n" +
+                "home\n" +
+                "desktop\n" +
+                "notes\n" +
+                "commands\n" +
+                "documents\n" +
+                "workspace\n" +
+                "react\n" +
+                "angular\n" +
+                "veu\n" +
+                "office\n" +
+                "public\n" +
+                "private\n" +
+                "classified\n" +
+                "general\n" +
+                "downloads\n" +
+                "wordFile\n" +
+                "excelFile");
+
+        driver.quit();
+
+    }
+
 }
