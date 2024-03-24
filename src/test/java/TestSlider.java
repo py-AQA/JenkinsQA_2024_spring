@@ -38,7 +38,7 @@ public class TestSlider {
         System.out.println("Slider Value: " + sliderValue);
         System.out.println("Slider min " + slider.getAttribute("min"));
         System.out.println("Slider max " + slider.getAttribute("max"));
-
+//Close the WebDriver
         driver.quit();
     }
 
