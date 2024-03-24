@@ -36,7 +36,6 @@ public class TestSlider {
             expectedValue -= step;
         }
 
-
         driver.quit();
 
     }
