@@ -36,7 +36,7 @@ public class TestSlider {
             expectedValue -= step;
         }
 
-//Close the WebDriver
+
         driver.quit();
     }
 
