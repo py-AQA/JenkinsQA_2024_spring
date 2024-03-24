@@ -26,7 +26,6 @@ public class WordHuntTest {
         WebElement translation = driver.findElement(By.className("t_inline_en"));
         String value = translation.getText();
 
-
         Assert.assertEquals("яблоко, яблоня, чепуха, лесть, яблочный", value);
         driver.quit();
 
