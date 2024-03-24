@@ -84,8 +84,6 @@ public class JavAngryTest {
     public void testCheckBox1(){
         WebDriver driver = new ChromeDriver();
         driver.get("https://demoqa.com/checkbox");
-
-
         WebElement checkBox = driver.findElement(By.className("rct-checkbox"));
         checkBox.click();
         WebElement resultText = driver.findElement(By.id("result"));
@@ -108,7 +106,6 @@ public class JavAngryTest {
                 "downloads\n" +
                 "wordFile\n" +
                 "excelFile");
-
         driver.quit();
 
     }
