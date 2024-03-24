@@ -5,6 +5,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class DoradoMainHw15Test {
@@ -21,6 +22,10 @@ public class DoradoMainHw15Test {
         search.sendKeys("jeans");
 
         search.sendKeys(Keys.RETURN);
+
+        WebElement SearchResults = driver.findElement(By.className("woocommerce-products-header"));
+        String value = SearchResults.getText();
+        Assert.assertEquals(value, "Search results: “jeans”");
 
         driver.quit();
     }
