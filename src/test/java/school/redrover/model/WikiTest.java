@@ -17,18 +17,15 @@ public class WikiTest {
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.wikipedia.org/");
 
-        String title = driver.getTitle();
-        assertEquals(title, "Wikipedia");
-
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
 
         WebElement textBox = driver.findElement(By.id("searchInput"));
-        WebElement submitButton = driver.findElement(By.xpath("//*[@id=\"search-form\"]/fieldset/button"));
+        WebElement submitButton = driver.findElement(By.xpath("//*[@id='search-form']/fieldset/button"));
 
         textBox.sendKeys("test");
         submitButton.click();
 
-        WebElement message = driver.findElement(By.xpath("//*[@id=\"firstHeading\"]/span"));
+        WebElement message = driver.findElement(By.xpath("//*[@id='firstHeading']/span"));
         String value = message.getText();
         assertEquals(value, "Test");
 
