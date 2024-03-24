@@ -28,7 +28,9 @@ public class AqaGroupEviltesterTest {
             wait.until(ExpectedConditions.elementToBeClickable(By.id("button02"))).click();
             wait.until(ExpectedConditions.elementToBeClickable(By.id("button03"))).click();
 
-            Boolean found = wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("buttonmessage"), "All Buttons Clicked"));
+            Boolean found = wait.until(ExpectedConditions.textToBePresentInElementLocated(
+                            By.id("buttonmessage"),
+                            "All Buttons Clicked"));
             Assert.assertTrue(found, "Text \"All Buttons Clicked\" not found");
         } finally {
             driver.quit();
@@ -72,7 +74,9 @@ public class AqaGroupEviltesterTest {
             Alert alert = wait.until(ExpectedConditions.alertIsPresent());
             alert.accept();
 
-            Assert.assertEquals(driver.findElement(By.id("alertexplanation")).getText(), "You triggered and handled the alert dialog");
+            Assert.assertEquals(
+                    driver.findElement(By.id("alertexplanation")).getText(),
+                    "You triggered and handled the alert dialog");
         } finally {
             driver.quit();
         }
@@ -92,7 +96,9 @@ public class AqaGroupEviltesterTest {
             Alert alert = wait.until(ExpectedConditions.alertIsPresent());
             alert.accept();
 
-            Assert.assertEquals(driver.findElement(By.id("confirmexplanation")).getText(), "You clicked OK, confirm returned true.");
+            Assert.assertEquals(
+                    driver.findElement(By.id("confirmexplanation")).getText(),
+                    "You clicked OK, confirm returned true.");
         } finally {
             driver.quit();
         }
@@ -112,7 +118,9 @@ public class AqaGroupEviltesterTest {
             Alert alert = wait.until(ExpectedConditions.alertIsPresent());
             alert.dismiss();
 
-            Assert.assertEquals(driver.findElement(By.id("confirmexplanation")).getText(), "You clicked Cancel, confirm returned false.");
+            Assert.assertEquals(
+                    driver.findElement(By.id("confirmexplanation")).getText(),
+                    "You clicked Cancel, confirm returned false.");
         } finally {
             driver.quit();
         }
@@ -135,7 +143,9 @@ public class AqaGroupEviltesterTest {
             alert.sendKeys(myKeys);
             alert.accept();
 
-            Assert.assertEquals(driver.findElement(By.id("promptexplanation")).getText(), String.format("You clicked OK. 'prompt' returned %s", myKeys));
+            Assert.assertEquals(
+                    driver.findElement(By.id("promptexplanation")).getText(),
+                    String.format("You clicked OK. 'prompt' returned %s", myKeys));
         } finally {
             driver.quit();
         }
@@ -155,7 +165,9 @@ public class AqaGroupEviltesterTest {
             Alert alert = wait.until(ExpectedConditions.alertIsPresent());
             alert.dismiss();
 
-            Assert.assertEquals(driver.findElement(By.id("promptexplanation")).getText(), "You clicked Cancel. 'prompt' returned null");
+            Assert.assertEquals(
+                    driver.findElement(By.id("promptexplanation")).getText(),
+                    "You clicked Cancel. 'prompt' returned null");
         } finally {
             driver.quit();
         }
