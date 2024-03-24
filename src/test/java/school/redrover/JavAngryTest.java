@@ -88,6 +88,7 @@ public class JavAngryTest {
         checkBox.click();
         WebElement resultText = driver.findElement(By.id("result"));
         resultText.getText();
+
         Assert.assertEquals(resultText.getText(),"You have selected :\n" +
                 "home\n" +
                 "desktop\n" +
