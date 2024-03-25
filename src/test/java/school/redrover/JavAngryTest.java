@@ -8,6 +8,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -108,6 +109,20 @@ public class JavAngryTest {
                 "wordFile\n" +
                 "excelFile");
         driver.quit();
+
+    }
+    @Test
+    public void testBuyBlueShoes() throws InterruptedException {
+        WebDriver driver = new ChromeDriver();
+        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
+        driver.manage().window().maximize();
+        driver.get("https://askomdch.com/");
+        driver.findElement(By.xpath("//a[@href='/store'][text()='Shop Now']")).click();
+        driver.findElement(By.xpath("//a[contains(@aria-label,'Blue Shoes')]")).click();
+//        Thread.sleep(5000);
+//        List<WebElement> count = driver.findElements(By.xpath("//*[@id='ast-site-header-cart']//a//span"));
+//        String countStr = count.get(0).getText();
+//        Assert.assertEquals(countStr, " 1 ");
 
     }
 
