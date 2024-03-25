@@ -82,7 +82,7 @@ public class JavAngryTest {
     }
 
     @Test
-    public void testCheckBox1(){
+    public void testCheckBox1() {
         WebDriver driver = new ChromeDriver();
         driver.get("https://demoqa.com/checkbox");
         WebElement checkBox = driver.findElement(By.className("rct-checkbox"));
@@ -90,7 +90,7 @@ public class JavAngryTest {
         WebElement resultText = driver.findElement(By.id("result"));
         resultText.getText();
 
-        Assert.assertEquals(resultText.getText(),"You have selected :\n" +
+        Assert.assertEquals(resultText.getText(), "You have selected :\n" +
                 "home\n" +
                 "desktop\n" +
                 "notes\n" +
@@ -111,18 +111,18 @@ public class JavAngryTest {
         driver.quit();
 
     }
+
     @Test
-    public void testBuyBlueShoes() throws InterruptedException {
+    public void testBuyBlueJeans() {
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
         driver.manage().window().maximize();
         driver.get("https://askomdch.com/");
         driver.findElement(By.xpath("//a[@href='/store'][text()='Shop Now']")).click();
-        driver.findElement(By.xpath("//a[contains(@aria-label,'Blue Shoes')]")).click();
-//        Thread.sleep(5000);
-//        List<WebElement> count = driver.findElements(By.xpath("//*[@id='ast-site-header-cart']//a//span"));
-//        String countStr = count.get(0).getText();
-//        Assert.assertEquals(countStr, " 1 ");
+        driver.findElement(By.xpath("//a[contains(@aria-label,'Basic Blue Jeans')]")).click();
+        driver.findElement(By.xpath("//a[@class='added_to_cart wc-forward']")).click();
+        String pageName = driver.findElement(By.xpath("//h1")).getText();
+        Assert.assertEquals(pageName, "Cart");
 
     }
 
