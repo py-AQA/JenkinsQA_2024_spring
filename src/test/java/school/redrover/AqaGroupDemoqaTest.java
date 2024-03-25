@@ -49,4 +49,13 @@ public class AqaGroupDemoqaTest extends AqaGroupBaseTest {
                 "You have done a dynamic click",
                 "Right click attempt failed.");
     }
+        @Test
+    public void RadioButtonTest4() throws InterruptedException{
+        driver.get("https://demoqa.com/radio-button");
+        driver.findElement(By.xpath("//*[@for=\"impressiveRadio\"]")).click();
+        Thread.sleep(5000);
+        Assert.assertTrue(driver.findElement(By.className("text-success")).isDisplayed(), "radiobutton is not selected");
+
+    }
+
 }
