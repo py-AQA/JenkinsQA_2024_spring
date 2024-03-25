@@ -27,6 +27,6 @@ public class GoogleTest {
 
         assertEquals(resultText, "Selenium");
 
-        driver.quit();
+        driver.quit(); // comment
     }
 }
