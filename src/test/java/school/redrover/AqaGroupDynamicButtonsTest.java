@@ -11,18 +11,9 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class AqaGroupDynamicButtonsTest {
-
-    WebDriver driver;
-
-    @AfterMethod
-    public void close() {
-        if (driver != null) driver.quit();
-    }
-
+public class AqaGroupDynamicButtonsTest extends AqaGroupBaseTest {
     @Test
     public void simpleDynamicButtonsTest() {
-        driver = new ChromeDriver();
         driver.get("https://testpages.eviltester.com/styled/dynamic-buttons-simple.html");
 
         driver.findElement(By.id("button00")).click();
@@ -38,7 +29,6 @@ public class AqaGroupDynamicButtonsTest {
 
     @Test
     public void XHTTPMessagesTest() {
-        driver = new ChromeDriver();
         driver.get("https://testpages.eviltester.com/styled/sync/xhttp-messages.html");
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(60));

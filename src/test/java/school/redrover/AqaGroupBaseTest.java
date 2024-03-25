@@ -29,6 +29,7 @@ public class AqaGroupBaseTest {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
         return element;
     }
+
     protected WebDriverWait getWait5() {
         if (wait5 == null) {
             wait5 = new WebDriverWait(driver, Duration.ofSeconds(5));
