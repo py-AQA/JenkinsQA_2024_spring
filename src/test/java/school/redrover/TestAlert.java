@@ -17,6 +17,7 @@ public class TestAlert {
 
     @Test
     public void testAlertAppearsAfterItemIsAddedToCart() {
+
         WebDriver driver = new ChromeDriver();
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(2));
         driver.get("https://magento.softwaretestingboard.com/");
