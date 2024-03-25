@@ -20,8 +20,6 @@ public class Nyc311GetTitleTest {
             Assert.assertEquals(actualTitleResult, expectedResult);
 
             driver.quit();
-
         }
-
     }
 
