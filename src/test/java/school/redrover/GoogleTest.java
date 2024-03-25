@@ -17,7 +17,7 @@ public class GoogleTest {
         WebElement text = driver.findElement(By.id("APjFqb"));
         text.sendKeys("Selenium");
 
-        Thread.sleep(1000);
+       // Thread.sleep(1000);
 
         WebElement button = driver.findElement(By.className("gNO89b"));
         button.click();
@@ -28,5 +28,6 @@ public class GoogleTest {
         assertEquals(resultText, "Selenium");
 
         driver.quit();
+        // comment
     }
 }
