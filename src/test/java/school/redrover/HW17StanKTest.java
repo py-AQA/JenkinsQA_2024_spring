@@ -12,7 +12,6 @@ public class HW17StanKTest {
     public void newTest(){
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.saucedemo.com");
-
         WebElement fieldLogin = driver.findElement(By.name("user-name"));
         fieldLogin.sendKeys("standard_user");
         WebElement fieldPassword = driver.findElement(By.name("password"));
