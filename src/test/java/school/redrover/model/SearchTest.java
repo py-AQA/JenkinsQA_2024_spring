@@ -16,9 +16,7 @@ import java.time.Duration;
             WebDriver driver = new ChromeDriver();
             driver.get("https://yandex.by");
             driver.manage().timeouts().implicitlyWait(Duration.ofMillis(2000));
-//        WebElement closePopUp =  driver.findElement(By.xpath("/html/body/div[18]/button"));
-//        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(2000));
-//        closePopUp.click();
+
             WebElement searchField = driver.findElement(By.xpath("//*[@id=\"text\"]"));
             searchField.click();
             searchField.sendKeys("RedRover School");
