@@ -11,7 +11,7 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-import static org.testng.AssertJUnit.assertEquals;
+
 
 public class TestAlert {
 
