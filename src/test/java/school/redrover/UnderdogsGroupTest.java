@@ -66,7 +66,6 @@ public class UnderdogsGroupTest {
         driver.findElement(By.xpath("//a[@title='View your shopping cart']")).click();
 
         String quantity = driver.findElement(By.xpath("//div[@class='quantity']//input[@value='1']")).getAttribute("value");
-
         Assert.assertEquals(quantity, "1");
 
         driver.quit();
