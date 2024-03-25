@@ -10,7 +10,7 @@ import static org.testng.Assert.assertEquals;
 
 public class GoogleTest {
     @Test
-    public void testGoogle() throws InterruptedException {
+    public void testGoogle() {
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.google.com");
 
