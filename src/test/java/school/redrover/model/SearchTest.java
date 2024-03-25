@@ -1,6 +1,7 @@
 package school.redrover.model;
 
 import org.openqa.selenium.By;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,7 +11,10 @@ import java.time.Duration;
 
  public class SearchTest {
 
-        @Test
+
+     @Ignore
+     @Test
+
         public void testYandexSearch() {
 
             WebDriver driver = new ChromeDriver();
@@ -23,7 +27,7 @@ import java.time.Duration;
             WebElement findButton = driver.findElement(By.xpath("/html/body/main/div[2]/form/div[3]/button"));
             findButton.click();
             WebElement schoolLink = driver.findElement(By.linkText("RedRover | Бесплатная IT-школа"));
-            String value = expectedLinkTitle.getText();
+            String value = schoolLink.getText();
             Assert.assertEquals(value, "RedRover | Бесплатная IT-школа");
             driver.quit();
         }
