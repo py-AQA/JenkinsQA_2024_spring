@@ -30,7 +30,7 @@ public class SauceEditCartTest {
     }
 
     @Test
-    public void testRemoveItemFromTheCart() throws InterruptedException {
+    public void testRemoveItemFromTheCart(){
         //Preconditions
         login();
         driver.findElement(By.xpath("//button[@id='add-to-cart-sauce-labs-backpack']")).click();
@@ -45,7 +45,7 @@ public class SauceEditCartTest {
     }
 
     @AfterMethod
-    public void clear(){};
+    public void clear(){}
     public void quit(){driver.quit();
     }
 }

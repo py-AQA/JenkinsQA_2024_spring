@@ -16,7 +16,7 @@ public class SauceSuccessLoginTest {
     }
 
     @Test
-    public void testLoginSuccess() throws InterruptedException {
+    public void testLoginSuccess(){
         String expectedResult = "https://www.saucedemo.com/inventory.html";
         login();
         String actualResult = driver.getCurrentUrl();
