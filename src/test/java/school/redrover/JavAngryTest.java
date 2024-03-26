@@ -126,4 +126,21 @@ public class JavAngryTest {
 
     }
 
+    @Test
+    public void testInputAndPagination() {
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://portal.311.nyc.gov/");
+        driver.findElement(By.xpath("//input[@aria-label='Search']")).sendKeys("concerts");
+        driver.findElement(By.className("search-magnify")).click();
+        WebElement widgets = driver.findElement(By.xpath("//ul[@class='pagination']"));
+        int deltaY = widgets.getRect().y;
+        new Actions(driver)
+                .scrollByAmount(0, deltaY)
+                .perform();
+        driver.findElement(By.xpath("//ul[@class='pagination']"));
+        driver.findElement(By.linkText("2")).click();
+
+        Assert.assertEquals(driver.getCurrentUrl(),"https://portal.311.nyc.gov/search/?q=concerts&page=2");
+        driver.quit();
+    }
 }
