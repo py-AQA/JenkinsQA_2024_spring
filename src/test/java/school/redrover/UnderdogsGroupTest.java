@@ -2,13 +2,16 @@ package school.redrover;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class UnderdogsGroupTest {
     @Test
     public void testDemoqaInput() {
+
         WebDriver driver = new ChromeDriver();
 
         driver.get("https://demoqa.com/");
@@ -16,6 +19,7 @@ public class UnderdogsGroupTest {
         driver.findElement(By.xpath("//div[@class='category-cards']/div[1]")).click();
         driver.findElement(By.xpath("//span[text()='Text Box']")).click();
         String name = "test";
+
         driver.findElement(By.id("userName")).sendKeys(name);
         driver.findElement(By.id("submit")).click();
         String result = driver.findElement(By.id("name")).getText();
@@ -23,5 +27,65 @@ public class UnderdogsGroupTest {
         Assert.assertEquals(result, "Name:" + name);
 
         driver.quit();
+    }
+
+    @Test
+    public void testElementsTextBox() {
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://demoqa.com/");
+        driver.findElement(By.xpath("//*[@id=\"app\"]/div/div/div[2]/div/div[1]")).click();
+        driver.findElement(By.xpath("(//*[@id=\"item-0\"])[1]")).click();
+        String email = "test@gmail.com";
+
+        driver.findElement(By.id("userEmail")).sendKeys(email);
+        driver.findElement(By.id("submit")).click();
+        String result = driver.findElement(By.id("email")).getText();
+
+        Assert.assertEquals(result, "Email:" + email);
+
+        driver.quit();
+    }
+    @Test
+    public void testCheckTheQuantityInTheCart() {
+        WebDriver driver = new ChromeDriver();
+
+        driver.get("https://natr.com.tr/en/");
+        driver.findElement(By.xpath("//li[@class='search']")).click();
+
+        WebElement searchField = driver.findElement(By.xpath("//input[@id='dgwt-wcas-search-input-2']"));
+        searchField.sendKeys("Vitamin");
+
+        Actions actions = new Actions(driver);
+        actions.moveToElement(searchField).sendKeys(org.openqa.selenium.Keys.ENTER).perform();
+
+        driver.findElement(By.xpath("//span[@class='onsale']/following-sibling::img[@src='https://natr.com.tr/wp-content/uploads/Витамин-C1.jpg-300x300.png']")).click();
+        driver.findElement(By.xpath("//button[@name='add-to-cart']")).click();
+        driver.findElement(By.xpath("//a[@title='View your shopping cart']")).click();
+
+        String quantity = driver.findElement(By.xpath("//div[@class='quantity']//input[@value='1']")).getAttribute("value");
+        Assert.assertEquals(quantity, "1");
+
+        driver.quit();
+    }
+    @Test
+    public void testCheckBox() {
+        WebDriver driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://demoqa.com/checkbox");
+
+        driver
+                .findElement(By.xpath("//div[@id='tree-node']/ol/li/span/button"))
+                .click();
+        driver.findElement(By.xpath("//*[@id='tree-node']//li[2]//button"))
+                .click();
+        driver.findElement(By.xpath("//*[@for='tree-node-workspace']/span"))
+                .click();
+        try {
+            Assert.assertEquals(driver.findElement(By.id("result")).getText(),
+                    "You have selected :\nworkspace\nreact\nangular\nveu");
+        } finally {
+            driver.quit();
+        }
     }
 }
