@@ -15,12 +15,10 @@ public class LookingForTheSummerTest {
     public void testLookingForTheSummer() {
         WebDriver driver = new ChromeDriver();
         WebDriverWait webDriverWait = new WebDriverWait(driver, Duration.ofSeconds(5));
-
         driver.get("https://www.onlinetrade.ru/");
         webDriverWait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//input[@name = 'query']"))).sendKeys("лето");
         driver.findElement(By.xpath("//input[@type = 'submit']")).click();
         Assert.assertTrue((driver.findElement(By.xpath("//h1[contains(text(), 'Найденные товары')]")).isDisplayed()));
-
         driver.quit();
     }
 }
