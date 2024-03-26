@@ -127,16 +127,20 @@ public class JavAngryTest {
     }
 
     @Test
-    public void testBuyBracelet() {
+    public void testInputAndPagination() {
         WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(2));
-        driver.manage().window().maximize();
-        driver.get("https://askomdch.com/");
-        driver.findElement(By.xpath("//a[contains(text(), 'Check Out')]")).click();
-        driver.findElement(By.xpath("//a[contains(@aria-label,'Bangle Bracelet')]")).click();
-        driver.findElement(By.xpath("//a[@class='added_to_cart wc-forward']")).click();
-        String subtotal = driver.findElement(By.xpath("//td[@class='product-subtotal']")).getText();
-        Assert.assertEquals(subtotal, "$25.00");
+        driver.get("https://portal.311.nyc.gov/");
+        driver.findElement(By.xpath("//input[@aria-label='Search']")).sendKeys("concerts");
+        driver.findElement(By.className("search-magnify")).click();
+        WebElement widgets = driver.findElement(By.xpath("//ul[@class='pagination']"));
+        int deltaY = widgets.getRect().y;
+        new Actions(driver)
+                .scrollByAmount(0, deltaY)
+                .perform();
+        driver.findElement(By.xpath("//ul[@class='pagination']"));
+        driver.findElement(By.linkText("2")).click();
+
+        Assert.assertEquals(driver.getCurrentUrl(),"https://portal.311.nyc.gov/search/?q=concerts&page=2");
         driver.quit();
     }
 }
