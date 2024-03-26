@@ -10,7 +10,7 @@ import static org.testng.Assert.assertEquals;
 
 public class GoogleTest {
     @Test
-    public void testGoogle() throws InterruptedException{
+    public void testGoogle () throws InterruptedException{
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.google.com");
 
@@ -27,6 +27,6 @@ public class GoogleTest {
 
         assertEquals(resultText, "Selenium");
 
-        driver.quit();
+        driver.quit(); // comment
     }
 }
