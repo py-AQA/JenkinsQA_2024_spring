@@ -1,12 +1,18 @@
 package school.redrover;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.time.Duration;
+import java.util.List;
 
 public class UnderdogsGroupTest {
     @Test
@@ -87,5 +93,19 @@ public class UnderdogsGroupTest {
         } finally {
             driver.quit();
         }
+    }
+
+    @Test
+    public void numberOfTheCarsPresented() {
+
+        WebDriver driver = new ChromeDriver();
+        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(10));
+        driver.get("https://av.by/");
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//button[@class='button button--default button--block button--large']"))));
+        driver.findElement(By.xpath("//button[@class='button button--default button--block button--large']")).click();
+        ((JavascriptExecutor) driver).executeScript("javascript:window.scrollBy(0,500)");
+        List<WebElement> carsModels = driver.findElements(By.xpath("//span[@class='catalog__title']"));
+        Assert.assertEquals(carsModels.size(), 30);
+        driver.quit();
     }
 }
