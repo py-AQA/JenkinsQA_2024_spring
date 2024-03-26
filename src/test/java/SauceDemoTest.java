@@ -14,7 +14,7 @@ public class SauceDemoTest {
 
         driver.get("https://www.saucedemo.com/");
         WebElement name = driver.findElement(By.xpath("//input[@id='user-name']"));
-        name.sendKeys("standard_user");
+        name.sendKeys("not_standard_user");
         WebElement passcode = driver.findElement(By.xpath("//input[@id='password']"));
         passcode.sendKeys("secret_sauce");
         driver.findElement(By.id("login-button")).click();
