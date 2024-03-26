@@ -24,6 +24,7 @@ public class SauceDemoTest {
         Assert.assertEquals(actualResult, expectedResult);
 
         driver.quit();
+
     }
 
 }
