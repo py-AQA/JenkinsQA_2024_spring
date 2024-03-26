@@ -9,7 +9,7 @@ import java.time.Duration;
 
 public class AjTest {
     @Test
-    public void testTest2(){
+    public void testTest22(){
 
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
