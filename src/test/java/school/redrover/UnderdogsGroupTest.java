@@ -112,7 +112,6 @@ public class UnderdogsGroupTest {
     @Test
     public void testRightSideAdvertisement() {
         WebDriver driver = new ChromeDriver();
-
         driver.get("https://demoqa.com/");
         driver.findElement(By.xpath("//h5[contains(text(),'Elements')]")).click();
 
