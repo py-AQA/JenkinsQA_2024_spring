@@ -25,6 +25,7 @@ public class KIATest2 {
         String pageTitle = driver.getTitle();
         Assert.assertEquals(pageTitle, "kia-club.com.ua. | Личный раздел •");
 
-
+        driver.quit();
         driver.quit();
     }
+}
