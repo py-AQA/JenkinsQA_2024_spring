@@ -20,13 +20,13 @@ public class SaucedDemoTest {
 
         WebElement userName = driver.findElement(By.id("user-name"));
         WebElement userPassword = driver.findElement(By.id("password"));
-        WebElement buttonLogin = driver.findElement(By.id("login-button"));
+        WebElement loginButton = driver.findElement(By.id("login-button"));
 
         userName.sendKeys(STANDARD_USER_LOGIN);
         userPassword.sendKeys(STANDARD_USER_PASSWORD);
-        buttonLogin.click();
-        WebElement buttonAddCart = driver.findElement(By.name("add-to-cart-sauce-labs-backpack"));
-        buttonAddCart.click();
+        loginButton.click();
+        WebElement addCartButton = driver.findElement(By.name("add-to-cart-sauce-labs-backpack"));
+        addCartButton.click();
         WebElement shoppingCart = driver.findElement(By.className("shopping_cart_link"));
         shoppingCart.click();
         WebElement cartList = driver.findElement(By.id("item_4_title_link"));
