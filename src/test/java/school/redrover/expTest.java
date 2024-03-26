@@ -7,7 +7,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class exp86Test {
+public class expTest {
     @Test
     public void testExp86() {
         WebDriver driver = new ChromeDriver();
