@@ -1,3 +1,5 @@
+package school.redrover;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -5,7 +7,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class SauceDemoTest {
+public class NaumovichTest {
+
     @Test
     public void testSauceDemo() {
         String expectedResult = "https://www.saucedemo.com/inventory.html";
@@ -26,5 +29,4 @@ public class SauceDemoTest {
         driver.quit();
 
     }
-
 }
