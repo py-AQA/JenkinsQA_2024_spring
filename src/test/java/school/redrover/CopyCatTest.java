@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 
 public class CopyCatTest {
     @Test
-    public void testCopyCat() throws InterruptedException {
+    public void testGoogle() throws InterruptedException {
         WebDriver driver = new ChromeDriver();
         driver.get("https://google.com");
 
@@ -26,6 +26,6 @@ public class CopyCatTest {
 
         Assert.assertEquals(resultText, "Selenium");
 
-        //driver.quit();
+        driver.quit();
     }
 }
