@@ -12,7 +12,6 @@ public class QaDemoFirstTest {
     @Test
     public void findElementsOnMainPageAndCheck() {
 
-
         WebDriver driver = new ChromeDriver();
         driver.get("https://demoqa.com/");
 

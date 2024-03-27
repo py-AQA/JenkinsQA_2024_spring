@@ -17,13 +17,13 @@ public class DatikaTest {
         WebElement textBox = driver.findElement(By.id("search"));
         textBox.sendKeys("Акция");
 
-        WebElement submitButton = driver.findElement(By.xpath("//*[@id=\"header\"]/div/div[2]/form/button"));
+        WebElement submitButton = driver.findElement(By.xpath("//*[@id='header']/div/div[2]/form/button"));
         submitButton.click();
 
-        WebElement message = driver.findElement(By.xpath("//*[@id=\"page-content\"]/h1"));
+        WebElement message = driver.findElement(By.xpath("//*[@id='page-content']/h1"));
         String value = message.getText();
 
-        Assert.assertEquals("По запросу «Акция»", value);
+        Assert.assertEquals(value, "По запросу «Акция»");
 
         driver.quit();
     }
