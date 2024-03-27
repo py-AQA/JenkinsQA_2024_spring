@@ -10,7 +10,7 @@ import org.testng.annotations.Test;
 public class QaDemoFirstTest {
 
     @Test
-    public void findElementsOnMainPageAndCheck() {
+    public void testfindElementsOnMainPageAndCheck() {
 
         WebDriver driver = new ChromeDriver();
         driver.get("https://demoqa.com/");
