@@ -12,6 +12,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
+import java.util.ArrayList;
 import java.util.List;
 
 public class UnderdogsGroupTest {
@@ -52,6 +53,7 @@ public class UnderdogsGroupTest {
 
         driver.quit();
     }
+
     @Test
     public void testCheckTheQuantityInTheCart() {
         WebDriver driver = new ChromeDriver();
@@ -74,6 +76,7 @@ public class UnderdogsGroupTest {
 
         driver.quit();
     }
+
     @Test
     public void testCheckBox() {
         WebDriver driver = new ChromeDriver();
@@ -99,7 +102,7 @@ public class UnderdogsGroupTest {
     public void numberOfTheCarsPresented() {
 
         WebDriver driver = new ChromeDriver();
-        WebDriverWait wait=new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.get("https://av.by/");
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath("//button[@class='button button--default button--block button--large']"))));
         driver.findElement(By.xpath("//button[@class='button button--default button--block button--large']")).click();
@@ -115,7 +118,31 @@ public class UnderdogsGroupTest {
         driver.get("https://demoqa.com/");
         driver.findElement(By.xpath("//h5[contains(text(),'Elements')]")).click();
 
-        Assert.assertTrue( driver.findElement(By.id("RightSide_Advertisement")).isDisplayed());
+        Assert.assertTrue(driver.findElement(By.id("RightSide_Advertisement")).isDisplayed());
+
+        driver.quit();
+    }
+
+    @Test
+    public void testAddToCartButton() throws InterruptedException {
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://natr.com.tr/shop/?s=Vitamin&post_type=product&dgwt_wcas=1");
+
+        WebElement buttonAddToСart = driver.findElement(By.xpath("(//a[@class ='button product_type_simple add_to_cart_button ajax_add_to_cart'])[1]"));
+
+        Actions actions = new Actions(driver);
+        actions.moveToElement(buttonAddToСart).click(buttonAddToСart).perform();
+
+        String order = buttonAddToСart.getAttribute("aria-label").replaceAll(".*“(.*)”.*", "$1");
+
+        WebElement buttonShoppingBag = driver.findElement(By.xpath("(//span[@class = 'cart-items-count count header-icon-counter'])[1]"));
+        buttonShoppingBag.click();
+
+        Thread.sleep(4000);
+
+        String element = driver.findElement(By.xpath("(//li[@class='woocommerce-mini-cart-item mini_cart_item']/a)[2]")).getText();
+
+        Assert.assertEquals(element.trim(), order);
 
         driver.quit();
     }
