@@ -19,8 +19,8 @@ public class PositiveLoginTest {
         WebElement passwordField = driver.findElement(By.id("password"));
         passwordField.sendKeys("secret_sauce");
 
-        WebElement button = driver.findElement(By.id("login-button"));
-        button.click();
+        WebElement buttonLogIn = driver.findElement(By.id("login-button"));
+        buttonLogIn.click();
         String actualUrl="https://www.saucedemo.com/inventory.html";
         String expectedUrl= driver.getCurrentUrl();
         Assert.assertEquals(actualUrl, expectedUrl);
