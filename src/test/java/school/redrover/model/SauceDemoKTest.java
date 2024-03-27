@@ -10,6 +10,7 @@ import org.testng.annotations.Test;
 public class SauceDemoKTest {
     @Test
     public void testTools() throws InterruptedException {
+
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.saucedemo.com/");
 
