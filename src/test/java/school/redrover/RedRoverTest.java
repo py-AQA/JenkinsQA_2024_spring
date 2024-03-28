@@ -24,6 +24,7 @@ public class RedRoverTest {
         WebElement submitButton = driver.findElement(By.className("btn"));
         submitButton.click();
 
+
         WebElement message = driver.findElement(By.id("message"));
         String value = message.getText();
 
