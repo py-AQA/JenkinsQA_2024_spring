@@ -80,4 +80,36 @@ public class GroupCarlthefogTest {
 
         return stringList;
     }
+
+    @Test
+    public void testElementsButtonMenuList() {
+        int expectedMenuListQuantity = 9;
+        List<String> expectedItemName = new ArrayList<>(Arrays.asList(
+                "Text Box",
+                "Check Box",
+                "Radio Button",
+                "Web Tables",
+                "Buttons",
+                "Links",
+                "Broken Links - Images",
+                "Upload and Download",
+                "Dynamic Properties"));
+
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://demoqa.com/");
+
+        driver.findElement(By.xpath("//div[@id='app']/div/div/div[2]/div/div[1]/div/div[1]")).click();
+        String currentURL = driver.getCurrentUrl();
+
+        int actualMenuListQuantity = driver.findElements(By.xpath("//div[@class='element-list collapse show']//li"))
+                .size();
+        List<WebElement> elementsHeaderList = driver.findElements(By.xpath("//div[@class='element-list collapse show']//li"));
+        List<String> actualItemName = WebElementsToString(elementsHeaderList);
+
+        Assert.assertTrue(currentURL.contains("elements"));
+        Assert.assertEquals(expectedMenuListQuantity, actualMenuListQuantity);
+        Assert.assertEquals(expectedItemName, actualItemName);
+
+        driver.quit();
+    }
 }
