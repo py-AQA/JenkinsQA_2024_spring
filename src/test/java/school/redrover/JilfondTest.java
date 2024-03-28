@@ -14,7 +14,7 @@ public class JilfondTest {
         driver.get("https://jilfond.ru/");
 
         WebElement text = driver.findElement(By.name("price[to]"));
-        text.sendKeys("3000");
+        text.sendKeys("5000");
 
         WebElement button = driver.findElement(By.id("js-search-map"));
         button.click();
