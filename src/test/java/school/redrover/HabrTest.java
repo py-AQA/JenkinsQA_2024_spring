@@ -14,27 +14,25 @@ public class HabrTest {
 
     private final static String TEST_TEXT = "RedRover School";
 
+    private final static String expectedResult = "Большая подборка ресурсов и сообществ для тестировщика";
 
     @Test
     public void testFindArticle () throws InterruptedException {
 
-        final String expectedResult = "Большая подборка ресурсов и сообществ для тестировщика";
-
         WebDriver driver = new ChromeDriver();
         driver.get(HABR_URL);
-
         driver.manage().window().maximize();
 
         WebElement textArea = driver.findElement(By.xpath("//input[@name='q']"));
         textArea.sendKeys(TEST_TEXT);
         textArea.sendKeys(Keys.RETURN);
         Thread.sleep(2000);
-        WebElement firstArticle = driver.findElement(By.xpath("//article[@id='720526']/div[1]/h2/a[@href ='/ru/articles/720526/'][@class='tm-title__link']"));
+        String hrefXpath = "//article[@id='720526']/div[1]/h2/a[@href ='/ru/articles/720526/'][@class='tm-title__link']";
+        WebElement firstArticle = driver.findElement(By.xpath(hrefXpath));
         String actualResult = firstArticle.getText();
 
         Assert.assertEquals(actualResult, expectedResult);
 
         driver.quit();
     }
-
 }
