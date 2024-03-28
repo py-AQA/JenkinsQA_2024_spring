@@ -9,29 +9,23 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class RedRoverTest {
-
+public class SimpleTest {
     @Test
     public void testTest() {
         WebDriver driver = new ChromeDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        driver.get("https://www.saucedemo.com/");
 
-        driver.get("https://www.selenium.dev/selenium/web/web-form.html");
 
-        WebElement textBox = driver.findElement(By.name("my-text"));
+        WebElement textBox = driver.findElement(By.name("user-name"));
         textBox.sendKeys("Selenium");
 
-        WebElement textArea = driver.findElement(By.name("my-textarea"));
-        textArea.sendKeys("Sashha");
+        WebElement login = driver.findElement(By.id("login-button"));
+        login.click();
 
-        WebElement submitButton = driver.findElement(By.className("btn"));//find button
-        submitButton.click();
-
-
-        WebElement message = driver.findElement(By.id("message"));
+        WebElement message = driver.findElement(By.cssSelector("h3"));
         String value = message.getText();
-
-        Assert.assertEquals(value, "Received!");
+        Assert.assertEquals("Epic sadface: Password is required", value);
 
         driver.quit();
     }
