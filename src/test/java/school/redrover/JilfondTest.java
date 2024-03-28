@@ -9,7 +9,7 @@ import org.testng.annotations.Test;
 public class JilfondTest {
 
     @Test
-    public void TestTest() throws InterruptedException {
+    public void testTest() throws InterruptedException {
         WebDriver driver = new ChromeDriver();
         driver.get("https://jilfond.ru/");
 
