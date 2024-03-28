@@ -8,10 +8,8 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
-import java.util.Arrays;
-import java.util.List;
 
-import static org.testng.Assert.assertEquals;
+
 
 public class AmazonTest {
 
@@ -31,7 +29,7 @@ public class AmazonTest {
 
             WebElement message = driver.findElement(By.xpath("//div[@class='a-section a-spacing-small a-spacing-top-small']"));
             String value = message.getText();
-           String[] arr = value.split("\"");
+            String[] arr = value.split("\"");
             Assert.assertEquals(arr[1], "Raised Garden Beds");
 
             driver.quit();
