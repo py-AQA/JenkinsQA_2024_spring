@@ -4,29 +4,20 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class JilfondTest {
 
     @Test
-    public void testTest() {
+    public void TestTest() throws InterruptedException {
         WebDriver driver = new ChromeDriver();
-        driver.get("https://www.kia-club.com.ua//ucp.php?mode=login");
-        WebElement username = driver.findElement(By.id("username"));
-        username.sendKeys("standard_user");
+        driver.get("https://jilfond.ru/");
 
-        WebElement password = driver.findElement(By.id("password"));
-        password.sendKeys("Superuser2");
+        WebElement text = driver.findElement(By.name("price[to]"));
+        text.sendKeys("3000");
 
-        WebElement submitButton = driver.findElement(By.xpath("//*[@id=\"login\"]/div[1]/div/div/fieldset/dl[4]/dd/input[3]"));
+        WebElement button = driver.findElement(By.id("js-search-map"));
+        button.click();
 
-        submitButton.click();
-
-        String pageTitle = driver.getTitle();
-        Assert.assertEquals(pageTitle, "kia-club.com.ua. | Личный раздел •");
-
-
-        driver.quit();
     }
 }
