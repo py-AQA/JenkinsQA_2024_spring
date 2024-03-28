@@ -14,8 +14,8 @@ public class PositiveLoginTest {
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.saucedemo.com/");
         driver.manage().window().maximize();
-        WebElement usernameField = driver.findElement(By.id("user-name"));
-        usernameField.sendKeys("standard_user");
+        WebElement usernameField1 = driver.findElement(By.id("user-name"));
+        usernameField1.sendKeys("standard_user");
         WebElement passwordField = driver.findElement(By.id("password"));
         passwordField.sendKeys("secret_sauce");
 
