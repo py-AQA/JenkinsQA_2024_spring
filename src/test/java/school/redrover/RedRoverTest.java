@@ -22,7 +22,7 @@ public class RedRoverTest {
         textBox.sendKeys("Selenium");
 
         WebElement textArea = driver.findElement(By.name("my-textarea"));
-        textArea.sendKeys("Sashh");
+        textArea.sendKeys("Sashha");
 
         WebElement submitButton = driver.findElement(By.className("btn"));//find button
         submitButton.click();
