@@ -32,5 +32,7 @@ public class SwagLabsTest {
         WebElement title2 = driver.findElement (By.className("app_logo"));
 //        title.getText();
         Assert.assertEquals ("Swag Labs", title2.getText());
+
+        driver.quit();
     }
 }
