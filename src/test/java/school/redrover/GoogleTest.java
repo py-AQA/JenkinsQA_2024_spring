@@ -8,8 +8,6 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import static org.testng.Assert.assertEquals;
-
 public class GoogleTest {
     @Test
     public void testGoogle() throws InterruptedException{
@@ -20,7 +18,7 @@ public class GoogleTest {
         WebElement text = driver.findElement(By.id("APjFqb"));
         text.sendKeys("Selenium");
 
-        Thread.sleep(1000);
+        Thread.sleep(1000); // do not use sleep!
 
 
         WebElement button = driver.findElement(By.className("gNO89b"));
