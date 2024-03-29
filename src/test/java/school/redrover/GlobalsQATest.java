@@ -10,8 +10,8 @@ import school.redrover.runner.BaseTest;
 
 public class GlobalsQATest extends BaseTest {
 
-    private final String GLOBALS_QA_LOGIN_LINKS = "https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login";
-    private final String GLOBALS_QA_STRING_VALUE = "testPV";
+    private static final String GLOBALS_QA_LOGIN_LINKS = "https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login";
+    private static final String GLOBALS_QA_STRING_VALUE = "testPV";
 
     @Test
     public void testCreateUser() {
