@@ -18,7 +18,7 @@ public class GoogleTest {
         WebElement text = driver.findElement(By.id("APjFqb"));
         text.sendKeys("Selenium");
 
-        Thread.sleep(1000);
+        Thread.sleep(1000); // do not use sleep!
 
 
         WebElement button = driver.findElement(By.className("gNO89b"));
