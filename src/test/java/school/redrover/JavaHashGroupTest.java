@@ -13,6 +13,8 @@ public class JavaHashGroupTest extends BaseTest {
     @Test
     public void mainPageTitleTest() {
 
+        final String expectedTitle = "Swag Labs";
+
         getDriver().manage().timeouts().implicitlyWait(Duration.ofMillis(500));
 
         getDriver().get("https://www.saucedemo.com");
@@ -25,11 +27,8 @@ public class JavaHashGroupTest extends BaseTest {
         passField.sendKeys("secret_sauce");
         submitButton.click();
 
-        String expectedTitle = "Swag Labs";
-
         String actualTitle = getDriver().findElement(By.xpath("//div[contains(text(),'Swag Labs')]")).getText();
 
         Assert.assertEquals(actualTitle,expectedTitle);
-
     }
 }
