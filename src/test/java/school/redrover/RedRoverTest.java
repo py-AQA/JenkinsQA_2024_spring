@@ -18,7 +18,11 @@ public class RedRoverTest {
 
         driver.get("https://www.selenium.dev/selenium/web/web-form.html");
 
+        WebElement textBox = driver.findElement(By.name("my-text"));
+        textBox.sendKeys("Selenium");
 
+        WebElement textArea = driver.findElement(By.name("my-textarea"));
+        textArea.sendKeys("Sashha");
 
         WebElement submitButton = driver.findElement(By.className("btn"));//find button
         submitButton.click();
@@ -27,7 +31,6 @@ public class RedRoverTest {
         String value = message.getText();
 
         Assert.assertEquals(value, "Received!");
-
 
         driver.quit();
     }
