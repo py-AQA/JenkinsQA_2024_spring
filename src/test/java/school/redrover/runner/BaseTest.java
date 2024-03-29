@@ -17,10 +17,8 @@ public abstract class BaseTest {
     }
 
     @AfterMethod
-    protected void afterMethod(Method method, ITestResult testResult) {
-        if (driver != null) {
-            driver.quit();
-        }
+    protected void afterMethod(Method method) {
+        driver.quit();
     }
 
     protected WebDriver getDriver() {
