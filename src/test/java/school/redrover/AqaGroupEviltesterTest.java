@@ -2,196 +2,138 @@ package school.redrover;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
-import java.time.Duration;
+import java.util.Map;
 
-public class AqaGroupEviltesterTest {
+public class AqaGroupEviltesterTest extends AqaGroupBaseTest {
+
+    private static final String BUTTONS_URL = "https://testpages.eviltester.com/styled/dynamic-buttons-disabled.html";
+    private static final String ALERTS_URL = "https://testpages.eviltester.com/styled/alerts/alert-test.html";
+    private static final String FAKE_ALERTS_URL = "https://testpages.eviltester.com/styled/alerts/fake-alert-test.html";
+
     @Test
-    public void testDisabledDynamicButtonsVersionOne() {
-        String link = "https://testpages.eviltester.com/styled/dynamic-buttons-disabled.html";
-        WebDriver driver = new ChromeDriver();
+    public void testDisabledDynamicButtons() {
+        getDriver().get(BUTTONS_URL);
 
-        try {
-            driver.get(link);
+        getWait15().until(ExpectedConditions.elementToBeClickable(By.id("button00"))).click();
+        getWait15().until(ExpectedConditions.elementToBeClickable(By.id("button01"))).click();
+        getWait15().until(ExpectedConditions.elementToBeClickable(By.id("button02"))).click();
+        getWait15().until(ExpectedConditions.elementToBeClickable(By.id("button03"))).click();
 
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-            wait.until(ExpectedConditions.elementToBeClickable(By.id("button00"))).click();
-            wait.until(ExpectedConditions.elementToBeClickable(By.id("button01"))).click();
-            wait.until(ExpectedConditions.elementToBeClickable(By.id("button02"))).click();
-            wait.until(ExpectedConditions.elementToBeClickable(By.id("button03"))).click();
-
-            Boolean found = wait.until(ExpectedConditions.textToBePresentInElementLocated(
-                            By.id("buttonmessage"),
-                            "All Buttons Clicked"));
-            Assert.assertTrue(found, "Text \"All Buttons Clicked\" not found");
-        } finally {
-            driver.quit();
-        }
+        Boolean found = getWait15().until(ExpectedConditions.textToBePresentInElementLocated(By.id("buttonmessage"),
+                "All Buttons Clicked"));
+        Assert.assertTrue(found, "Text \"All Buttons Clicked\" not found");
     }
 
-    @Test
-    public void testDisabledDynamicButtonsVersionTwo() {
-        String link = "https://testpages.eviltester.com/styled/dynamic-buttons-disabled.html";
-        WebDriver driver = new ChromeDriver();
-
-        try {
-            driver.get(link);
-
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-            wait.until(ExpectedConditions.elementToBeClickable(By.id("button00"))).click();
-            wait.until(ExpectedConditions.elementToBeClickable(By.id("button01"))).click();
-            wait.until(ExpectedConditions.elementToBeClickable(By.id("button02"))).click();
-            wait.until(ExpectedConditions.elementToBeClickable(By.id("button03"))).click();
-
-            WebElement message = driver.findElement(By.id("buttonmessage"));
-            wait.until(ExpectedConditions.textToBePresentInElement(message, "All Buttons Clicked"));
-
-            Assert.assertEquals(message.getText(), "All Buttons Clicked");
-        } finally {
-            driver.quit();
-        }
+    @DataProvider(name = "alertDataProvider")
+    public Object[][] alertDataProvider() {
+        return new Object[][]{
+                {"alertexamples", "alertexplanation", "You triggered and handled the alert dialog", null, true},
+                {"confirmexample", "confirmexplanation", "You clicked OK, confirm returned true.", null, true},
+                {"confirmexample", "confirmexplanation", "You clicked Cancel, confirm returned false.", null, false},
+                {"promptexample", "promptexplanation", "You clicked OK. 'prompt' returned some random input", "some random input", true},
+                {"promptexample", "promptexplanation", "You clicked Cancel. 'prompt' returned null", "some random input", false}
+        };
     }
 
-    @Test
-    public void testSimpleAlert() {
-        String link = "https://testpages.eviltester.com/styled/alerts/alert-test.html";
-        WebDriver driver = new ChromeDriver();
+    @Test(dataProvider = "alertDataProvider")
+    public void testAlerts(String buttonId, String messageId, String expected, String keys, boolean accept) {
+        getDriver().get(ALERTS_URL);
 
-        try {
-            driver.get(link);
+        getDriver().findElement(By.id(buttonId)).click();
 
-            driver.findElement(By.id("alertexamples")).click();
+        Alert alert = getWait15().until(ExpectedConditions.alertIsPresent());
 
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-            Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        if (keys != null) {
+            alert.sendKeys(keys);
+        }
+
+        if (accept) {
             alert.accept();
-
-            Assert.assertEquals(
-                    driver.findElement(By.id("alertexplanation")).getText(),
-                    "You triggered and handled the alert dialog");
-        } finally {
-            driver.quit();
-        }
-    }
-
-    @Test
-    public void testAcceptConfirmAlert() {
-        String link = "https://testpages.eviltester.com/styled/alerts/alert-test.html";
-        WebDriver driver = new ChromeDriver();
-
-        try {
-            driver.get(link);
-
-            driver.findElement(By.id("confirmexample")).click();
-
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-            Alert alert = wait.until(ExpectedConditions.alertIsPresent());
-            alert.accept();
-
-            Assert.assertEquals(
-                    driver.findElement(By.id("confirmexplanation")).getText(),
-                    "You clicked OK, confirm returned true.");
-        } finally {
-            driver.quit();
-        }
-    }
-
-    @Test
-    public void testDismissConfirmAlert() {
-        String link = "https://testpages.eviltester.com/styled/alerts/alert-test.html";
-        WebDriver driver = new ChromeDriver();
-
-        try {
-            driver.get(link);
-
-            driver.findElement(By.id("confirmexample")).click();
-
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-            Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        } else {
             alert.dismiss();
-
-            Assert.assertEquals(
-                    driver.findElement(By.id("confirmexplanation")).getText(),
-                    "You clicked Cancel, confirm returned false.");
-        } finally {
-            driver.quit();
         }
-    }
 
-
-    @Test
-    public void testAcceptPromptAlert() {
-        String link = "https://testpages.eviltester.com/styled/alerts/alert-test.html";
-        WebDriver driver = new ChromeDriver();
-
-        try {
-            driver.get(link);
-
-            driver.findElement(By.id("promptexample")).click();
-
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-            Alert alert = wait.until(ExpectedConditions.alertIsPresent());
-            String myKeys = "some random input";
-            alert.sendKeys(myKeys);
-            alert.accept();
-
-            Assert.assertEquals(
-                    driver.findElement(By.id("promptexplanation")).getText(),
-                    String.format("You clicked OK. 'prompt' returned %s", myKeys));
-        } finally {
-            driver.quit();
-        }
-    }
-
-    @Test
-    public void testDismissPromptAlert() {
-        String link = "https://testpages.eviltester.com/styled/alerts/alert-test.html";
-        WebDriver driver = new ChromeDriver();
-
-        try {
-            driver.get(link);
-
-            driver.findElement(By.id("promptexample")).click();
-
-            WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-            Alert alert = wait.until(ExpectedConditions.alertIsPresent());
-            alert.dismiss();
-
-            Assert.assertEquals(
-                    driver.findElement(By.id("promptexplanation")).getText(),
-                    "You clicked Cancel. 'prompt' returned null");
-        } finally {
-            driver.quit();
-        }
+        Assert.assertEquals(
+                getDriver().findElement(By.id(messageId)).getText(),
+                expected);
     }
 
     @Test
     public void testExpandingDivWithClickableLink() {
-        String link = "https://testpages.eviltester.com/styled/expandingdiv.html";
-        WebDriver driver = new ChromeDriver();
+        getDriver().get("https://testpages.eviltester.com/styled/expandingdiv.html");
 
-        try {
-            driver.get(link);
-            new Actions(driver)
-                    .moveToElement(driver.findElement(By.className("expand")))
-                    .pause(500)
-                    .moveToElement(driver.findElement(By.cssSelector(".expand p a")))
-                    .click()
-                    .pause(500)
-                    .perform();
+        new Actions(getDriver())
+                .moveToElement(getDriver().findElement(By.className("expand")))
+                .pause(500)
+                .moveToElement(getDriver().findElement(By.cssSelector(".expand p a")))
+                .click()
+                .pause(500)
+                .perform();
 
-            Assert.assertTrue(driver.getCurrentUrl().contains("expandeddiv"), "Unexpected URL.");
-        } finally {
-            driver.quit();
-        }
+        Assert.assertTrue(getDriver().getCurrentUrl().contains("expandeddiv"), "Unexpected URL.");
+    }
+
+    @Test
+    public void fakeAlertTest() {
+        getDriver().get(FAKE_ALERTS_URL);
+
+        getDriver().findElement(By.id("fakealert")).click();
+        WebElement message = getDriver().findElement(By.id("dialog-text"));
+        getDriver().findElement(By.id("dialog-ok")).click();
+
+        Assert.assertFalse(
+                message.isDisplayed(),
+                "fake alert box is active");
+    }
+
+    @Test
+    public void fakeModalAlertCloseOkTest() {
+        getDriver().get(FAKE_ALERTS_URL);
+
+        getDriver().findElement(By.id("modaldialog")).click();
+        WebElement message = getDriver().findElement(By.id("dialog-text"));
+        getDriver().findElement(By.id("dialog-ok")).click();
+
+        Assert.assertFalse(
+                message.isDisplayed(),
+                "fake modal alert box is active");
+    }
+
+    @Ignore
+    @Test
+    public void fakeModalAlertCloseBackgroundTest() {
+        getDriver().get(FAKE_ALERTS_URL);
+
+        getDriver().findElement(By.id("modaldialog")).click();
+        WebElement message = getDriver().findElement(By.id("dialog-text"));
+        getDriver().findElement(By.cssSelector(".faded-background.active")).click();
+
+        Assert.assertFalse(
+                message.isDisplayed(),
+                "fake modal alert box is active");
+    }
+
+    @Test
+    public void testCDPUserAgentChange() {
+        final String pixelSeven = "Mozilla/5.0 (Linux; Android 13; Pixel 7) " +
+                "AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Mobile Safari/537.36";
+
+        ((ChromeDriver) getDriver()).executeCdpCommand("Network.setUserAgentOverride", Map.of("userAgent", pixelSeven));
+
+        getDriver().get("https://testpages.eviltester.com/styled/redirect/user-agent-redirect-test");
+
+        Assert.assertTrue(
+                getDriver().findElement(By.className("explanation")).getText().startsWith("You probably"),
+                "UserAgent change failed");
     }
 }
 
