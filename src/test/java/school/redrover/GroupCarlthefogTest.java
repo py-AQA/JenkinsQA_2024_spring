@@ -7,13 +7,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import school.redrover.runner.BaseTest;
 
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class GroupCarlthefogTest {
+public class GroupCarlthefogTest extends BaseTest {
 
     @Test
     public void testSaucedemo() {
@@ -143,20 +144,6 @@ public class GroupCarlthefogTest {
         String actualHeader2 = header2.getText();
 
         Assert.assertEquals(actualHeader2, expectedHeader2);
-
-        driver.quit();
-    }
-
-    @Test
-    public void testMortgagePage() {
-
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://www.bankofamerica.com/");
-
-        driver.findElement(By.xpath("//a[@id='navHomeLoans']")).click();
-        driver.findElement(By.xpath("//a[@id='mortgage']")).click();
-
-        Assert.assertTrue(driver.findElement(By.xpath("//h1[@id='skip-to-h1']")).getText().contains("Mortgage"));
 
         driver.quit();
     }
