@@ -14,7 +14,6 @@ public class SwagLabsTest {
         driver.get("https://www.saucedemo.com/");
 
         WebElement title = driver.findElement (By.className("login_logo"));
-//        title.getText();
         Assert.assertEquals ("Swag Labs", title.getText());
 
 
@@ -30,7 +29,6 @@ public class SwagLabsTest {
         Thread.sleep(1000);
 
         WebElement title2 = driver.findElement (By.className("app_logo"));
-//        title.getText();
         Assert.assertEquals ("Swag Labs", title2.getText());
 
         driver.quit();
