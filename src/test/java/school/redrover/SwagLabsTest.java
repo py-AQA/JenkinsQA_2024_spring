@@ -7,35 +7,30 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-
 public class SwagLabsTest {
     @Test
-    public void testUsps() throws InterruptedException {
+    public void testSeleniumPractice() throws InterruptedException {
         WebDriver driver = new ChromeDriver();
-        driver.get("https://www.saucedemo.com/v1/");
+        driver.get("https://www.saucedemo.com/");
+
+        WebElement title = driver.findElement (By.className("login_logo"));
+        Assert.assertEquals ("Swag Labs", title.getText());
 
 
-        WebElement userNameField = driver.findElement(By.id("user-name"));
-        userNameField.sendKeys("standard_user");
+        WebElement loginBtn = driver.findElement(By.id("user-name"));
+        WebElement passwordBtn = driver.findElement(By.id("password"));
+        WebElement submitBtn = driver.findElement(By.id("login-button"));
 
 
-        WebElement passwordField = driver.findElement(By.id("password"));
-        passwordField.sendKeys("secret_sauce");
+        loginBtn.sendKeys("standard_user");
+        passwordBtn.sendKeys("secret_sauce");
+        submitBtn.click();
 
+        Thread.sleep(1000);
 
-        WebElement buttonLogin = driver.findElement(By.id("login-button"));
-        buttonLogin.click();
-
-
-        WebElement findText = driver.findElement(By.xpath("//div[@class='product_label']"));
-        String textString = findText.getText();
-        Assert.assertEquals(textString, "Products");
-
+        WebElement title2 = driver.findElement (By.className("app_logo"));
+        Assert.assertEquals ("Swag Labs", title2.getText());
 
         driver.quit();
     }
 }
-
-
-
-
