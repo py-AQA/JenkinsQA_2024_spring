@@ -1,28 +1,25 @@
 package school.redrover;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import school.redrover.runner.BaseTest;
 
 import java.time.Duration;
 
-public class JavaHashGroupTest {
+public class JavaHashGroupTest extends BaseTest {
 
     @Test
-    public void mainPafeTitleTest() {
+    public void mainPageTitleTest() {
 
-        WebDriver driver = new ChromeDriver();
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofMillis(500));
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        getDriver().get("https://www.saucedemo.com");
 
-        driver.get("https://www.saucedemo.com");
-
-        WebElement loginField = driver.findElement(By.xpath("//input[@id='user-name']"));
-        WebElement passField = driver.findElement(By.xpath("//input[@id='password']"));
-        WebElement submitButton = driver.findElement(By.xpath("//input[@id='login-button']"));
+        WebElement loginField = getDriver().findElement(By.xpath("//input[@id='user-name']"));
+        WebElement passField = getDriver().findElement(By.xpath("//input[@id='password']"));
+        WebElement submitButton = getDriver().findElement(By.xpath("//input[@id='login-button']"));
 
         loginField.sendKeys("standard_user");
         passField.sendKeys("secret_sauce");
@@ -30,10 +27,9 @@ public class JavaHashGroupTest {
 
         String expectedTitle = "Swag Labs";
 
-        String actualTitle = driver.findElement(By.xpath("//div[contains(text(),'Swag Labs')]")).getText();
+        String actualTitle = getDriver().findElement(By.xpath("//div[contains(text(),'Swag Labs')]")).getText();
 
         Assert.assertEquals(actualTitle,expectedTitle);
 
-        driver.quit();
     }
 }
