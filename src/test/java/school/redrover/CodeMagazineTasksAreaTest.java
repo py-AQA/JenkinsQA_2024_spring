@@ -24,7 +24,7 @@ public class CodeMagazineTasksAreaTest {
         WebElement found_text = driver.findElement(By.xpath("(//h1[@class='search__title'])"));
         String found_search_title = found_text.getText();
 
-        Assert.assertEquals("Как решить", found_search_title);
+        Assert.assertEquals(found_search_title, "Как решить");
 
         driver.quit();
 
