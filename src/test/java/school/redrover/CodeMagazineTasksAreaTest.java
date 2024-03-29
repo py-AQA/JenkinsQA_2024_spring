@@ -16,15 +16,15 @@ public class CodeMagazineTasksAreaTest {
         WebDriver driver = new ChromeDriver();
         driver.get("https://thecode.media/");
 
-        WebElement search_area = driver.findElement(By.className("tab-questions"));
+        WebElement searchArea = driver.findElement(By.className("tab-questions"));
 
-        Action myAction = new Actions(driver).doubleClick(search_area).build();
+        Action myAction = new Actions(driver).doubleClick(searchArea).build();
         myAction.perform();
 
-        WebElement found_text = driver.findElement(By.xpath("(//h1[@class='search__title'])"));
-        String found_search_title = found_text.getText();
+        WebElement foundText = driver.findElement(By.xpath("(//h1[@class='search__title'])"));
+        String foundSearchTitle = foundText.getText();
 
-        Assert.assertEquals(found_search_title, "Как решить");
+        Assert.assertEquals(foundSearchTitle, "Как решить");
 
         driver.quit();
 
