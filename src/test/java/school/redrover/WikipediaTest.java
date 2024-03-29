@@ -33,6 +33,7 @@ public class WikipediaTest {
 
         driver.quit();
     }
+
     @Test
     public void testTest() {
         WebDriver driver = new ChromeDriver();
