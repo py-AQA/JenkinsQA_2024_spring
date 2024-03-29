@@ -12,7 +12,8 @@ import org.testng.annotations.BeforeMethod;
 
 import java.time.Duration;
 
-public class AqaGroupBaseTest {
+public abstract class AqaGroupBaseTest {
+
     protected WebDriver driver;
     private WebDriverWait wait5;
     private WebDriverWait wait15;
@@ -35,6 +36,10 @@ public class AqaGroupBaseTest {
     protected WebElement scrollIntoView(WebElement element) {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", element);
         return element;
+    }
+
+    protected WebDriverWait getWait(int seconds) {
+        return new WebDriverWait(driver, Duration.ofSeconds(seconds));
     }
 
     protected WebDriverWait getWait5() {
