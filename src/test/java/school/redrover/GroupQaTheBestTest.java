@@ -2,8 +2,9 @@ package school.redrover;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import school.redrover.runner.BaseTest;
 import java.time.Duration;
+
+import school.redrover.runner.BaseTest;
 
 
 public class GroupQaTheBestTest extends BaseTest {
