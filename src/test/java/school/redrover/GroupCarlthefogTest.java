@@ -147,4 +147,31 @@ public class GroupCarlthefogTest extends BaseTest {
 
         driver.quit();
     }
+
+    @Test
+    public void testMortgagePage() {
+
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://www.bankofamerica.com/");
+
+        driver.findElement(By.xpath("//a[@id='navHomeLoans']")).click();
+        driver.findElement(By.xpath("//a[@id='mortgage']")).click();
+
+        Assert.assertTrue(driver.findElement(By.xpath("//h1[@id='skip-to-h1']")).getText().contains("Mortgage"));
+
+        driver.quit();
+    }
+
+    @Test
+    public void purchaseItemTest() {
+
+        getDriver().get("https://qa-practice.netlify.app");
+
+        getDriver().findElement( By.id("products-list") ).click();
+        getDriver().findElement(By.xpath("//div[@class='shop-item-details']/button")).click();
+        getDriver().findElement(By.xpath("//button[text()='PURCHASE']")).click();
+        String value = getDriver().findElement(By.id("message")).getText();
+
+        Assert.assertEquals(value, "Congrats! Your order of $905.99 has been registered!");
+    }
 }
