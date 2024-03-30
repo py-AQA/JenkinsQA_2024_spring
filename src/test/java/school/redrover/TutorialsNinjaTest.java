@@ -16,9 +16,9 @@ public class TutorialsNinjaTest extends BaseTest {
 
     @Test
     public void thisMainPageTest(){
-        WebDriver driver = initialization(URL);
 
-        String featered = driver.findElement(By.xpath("//h3")).getText();
+        String featered = initialization(URL).findElement(By.xpath("//h3")).getText();
+
         Assert.assertEquals(featered, "Featured");
     }
 
