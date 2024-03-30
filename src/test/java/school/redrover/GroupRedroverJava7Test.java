@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
+import java.time.Duration;
 
 public class GroupRedroverJava7Test extends BaseTest {
     @Test
@@ -47,5 +48,18 @@ public class GroupRedroverJava7Test extends BaseTest {
         WebElement header = getDriver().findElement(By.xpath("//h3"));
 
         Assert.assertEquals(header.getText(), "Dinesh's Pizza House");
+    }
+
+    @Test
+    public void linkTest() {
+        getDriver().get("https://the-internet.herokuapp.com/redirector");
+        getDriver().manage().window().maximize();
+
+        getDriver().findElement(By.id("redirect")).click();
+        getDriver().findElement(By.xpath("//*[@id=\"content\"]/div/ul/li[3]/a")).click();
+        String textStatusCode = getDriver().findElement(By.xpath("//*[@id=\"content\"]/div/p")).getText();
+        boolean isStatus = textStatusCode.contains("404 status code");
+
+        Assert.assertTrue(isStatus);
     }
 }
