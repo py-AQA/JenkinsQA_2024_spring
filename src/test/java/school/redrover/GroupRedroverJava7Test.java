@@ -2,7 +2,9 @@ package school.redrover;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
@@ -53,6 +55,32 @@ public class GroupRedroverJava7Test extends BaseTest {
         WebElement header = getDriver().findElement(By.xpath("//h3"));
 
         Assert.assertEquals(header.getText(), "Dinesh's Pizza House");
+    }
+
+    @Test
+    public void testApplitoolsDemo() {
+
+        //pass on the target URL
+        getDriver().get("https://demo.applitools.com/");
+
+        //find username field and send over an input
+        WebElement userNameField = getDriver().findElement(By.id("username"));
+        userNameField.sendKeys("standard_user");
+
+        // find password field and send over an input
+        WebElement passwordField = getDriver().findElement(By.id("password"));
+        passwordField.sendKeys("12345qwera");
+
+        // find log-in button and do the click
+        getDriver().findElement(By.id("log-in")).click();
+
+        //find the static text visible after the user is logged in
+        WebElement h6FindText = getDriver().findElement(By.xpath(("(//h6[@class='element-header'])[1]")));
+        String h6String = h6FindText.getText();
+
+        //check if the "Financial Overview" text exists
+        Assert.assertEquals(h6String, "Financial Overview");
+
     }
 
     @Test

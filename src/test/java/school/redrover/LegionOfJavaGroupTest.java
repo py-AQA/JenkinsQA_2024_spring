@@ -2,6 +2,8 @@ package school.redrover;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
@@ -51,7 +53,7 @@ public class LegionOfJavaGroupTest extends BaseTest {
 
     @Ignore
     @Test
-    public void searchTest() {
+    public void testSearch() {
 
         getDriver().get("https://www.amazon.com");
 
@@ -82,4 +84,20 @@ public class LegionOfJavaGroupTest extends BaseTest {
         Assert.assertEquals(text.getText(),"Java HOME");
     }
 
+    @Test
+    public void testSeleniumTrainingButton() {
+
+        getDriver().get("https://www.toolsqa.com/");
+
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[@href = '/selenium-training?q=headers']")));
+
+        WebElement button = getDriver().findElement(By.xpath("//a[@href = '/selenium-training?q=headers']"));
+        button.click();
+
+        WebElement text = getDriver().findElement(By.xpath("//div[@class='enroll__heading']"));
+        String value = text.getText();
+
+        Assert.assertEquals(value, "Selenium Certification Training | Enroll Now | Study Online");
+    }
 }
