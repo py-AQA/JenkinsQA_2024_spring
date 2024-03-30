@@ -84,4 +84,5 @@ public class ByteBustersGroupTest extends BaseTest {
         Assert.assertEquals(getDriver().findElement(By.className("searchResults__noResult"))
                 .getText(), "За Вашим запитом нічого не знайдено.");
     }
+
 }
