@@ -80,7 +80,6 @@ public class GroupRedroverJava7Test extends BaseTest {
     @Test
     public void testLocationList() {
         List<String> actualLocationNames = List.of("Bensalem", "Doylestown", "Langhorne", "Levittown", "Perkasie", "Quakertown", "Yardley-Makefield");
-
         List<String> expectedLocationNames = new ArrayList<>();
 
         getDriver().get("https://buckslib.org/");
