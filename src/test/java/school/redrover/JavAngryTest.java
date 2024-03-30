@@ -204,5 +204,23 @@ public class JavAngryTest extends BaseTest {
 
         Assert.assertTrue(webDriver.findElement(By.id("noEdit")).isDisplayed());
     }
+
+    @Test
+    public void testDatika() {
+        WebDriver driver = getDriver();
+        driver.get("https://datika.me/ru/");
+
+        WebElement textBox = driver.findElement(By.id("search"));
+        textBox.sendKeys("Акция");
+
+        WebElement submitButton = driver.findElement(By.xpath("//*[@id='header']/div/div[2]/form/button"));
+        submitButton.click();
+
+        WebElement message = driver.findElement(By.xpath("//*[@id='page-content']/h1"));
+        String value = message.getText();
+
+        Assert.assertEquals(value, "По запросу «Акция»");
+    }
+
 }
 
