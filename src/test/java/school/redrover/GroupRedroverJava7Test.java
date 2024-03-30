@@ -13,9 +13,6 @@ import java.util.List;
 
 public class GroupRedroverJava7Test extends BaseTest {
 
-    private static final List<String> ACTUAL_LOCATION_NAMES =
-            List.of("Bensalem", "Doylestown", "Langhorne", "Levittown", "Perkasie", "Quakertown", "Yardley-Makefield");
-
     @Test
     public void testSearch() {
         getDriver().get("https://www.selenium.dev/selenium/web/web-form.html");
@@ -59,12 +56,11 @@ public class GroupRedroverJava7Test extends BaseTest {
     }
 
     @Test
-    public void testItemSearch() throws InterruptedException {
+    public void testItemSearch() {
         getDriver().get("https://www.applebees.com/en");
         getDriver().manage().timeouts().implicitlyWait(Duration.ofMillis(500));
 
         getDriver().manage().window().maximize();
-        Thread.sleep(1000);
 
         WebElement menuButton = getDriver().findElement(By.xpath("//ul/li/a[@href='/en/menu'][1]"));
         menuButton.click();
@@ -83,6 +79,8 @@ public class GroupRedroverJava7Test extends BaseTest {
 
     @Test
     public void testLocationList() {
+        List<String> actualLocationNames = List.of("Bensalem", "Doylestown", "Langhorne", "Levittown", "Perkasie", "Quakertown", "Yardley-Makefield");
+
         List<String> expectedLocationNames = new ArrayList<>();
 
         getDriver().get("https://buckslib.org/");
@@ -90,13 +88,13 @@ public class GroupRedroverJava7Test extends BaseTest {
 
         getDriver().findElement(By.xpath("//*[contains(text(),' Locations')]")).click();
 
-        for (String locationName : ACTUAL_LOCATION_NAMES) {
+        for (String locationName : actualLocationNames) {
             String locationText = getDriver()
                     .findElement(By.xpath("//div[@id='wp-faqp-accordion-1']/div/div[@class='faq-title']/h4[text()='" + locationName + "']")).getText();
             expectedLocationNames.add(locationText);
         }
 
-        Assert.assertEquals(ACTUAL_LOCATION_NAMES, expectedLocationNames);
+        Assert.assertEquals(actualLocationNames, expectedLocationNames);
     }
 }
 
