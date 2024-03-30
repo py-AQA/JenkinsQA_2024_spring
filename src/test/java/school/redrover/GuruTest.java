@@ -26,6 +26,5 @@ public class GuruTest {
         login.click();
 
         driver.quit();
-
     }
 }
