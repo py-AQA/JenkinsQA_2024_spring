@@ -7,10 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
-
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
-
 import static org.openqa.selenium.By.className;
 
 public class LegionOfJavaGroupTest extends BaseTest {
@@ -19,11 +16,11 @@ public class LegionOfJavaGroupTest extends BaseTest {
     public void testFerosorSearch() {
 
         getDriver().get("https://ferosor.cl");
-        getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        getDriver().manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
         WebElement textBox =  getDriver().findElement(By.name("s"));
         textBox.sendKeys("alimento");
         getDriver().findElement(By.cssSelector("[type='submit']")).click();
-        getDriver().manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        getDriver().manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
         getDriver().get("https://ferosor.cl/jardin-y-mascotas/262-alimento-para-perro-cachorro-fit-formula-saco-10-kg-130622000123.html");
         String result = String.valueOf( getDriver().findElement(By.className("h1")).getText());
         Assert.assertEquals(result, "Alimento para Perro cachorro FIT FORMULA Saco 10 kg");
