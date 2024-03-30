@@ -2,7 +2,9 @@ package school.redrover;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
@@ -146,4 +148,20 @@ public class GroupRedroverJava7Test extends BaseTest {
         Assert.assertEquals(text,"Su");
     }
 
+    @Test
+    public void testSwagLogin() {
+        getDriver().get("https://www.saucedemo.com/?ref=hackernoon.com");
+
+        WebElement usernameInput = getDriver().findElement(By.id("user-name"));
+        usernameInput.sendKeys("standard_user");
+
+        WebElement passwordInput = getDriver().findElement(By.id("password"));
+        passwordInput.sendKeys("secret_sauce");
+
+        WebElement loginButton = getDriver().findElement(By.id("login-button"));
+        loginButton.click();
+        WebElement shopCartButton = getDriver().findElement(By.id("shopping_cart_container"));
+
+        Assert.assertTrue(shopCartButton.isDisplayed(), "Shop cart doesn't displayed");
+    }
 }
