@@ -1,61 +1,48 @@
 package school.redrover;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class TeaPartyGroupTest {
 
     @Test
-    public void ivansTest() {
-
-    }
-
-
- @Test
-    public void natashaTest(){
-
-        WebDriver driver =new ChromeDriver();
+    public void idDemoTest() {
+        WebDriver driver = new ChromeDriver();
         driver.get("https://www.saucedemo.com/");
 
         WebElement login = driver.findElement(By.id("user-name"));
         login.sendKeys("standard_user");
-
-        WebElement loginPassword= driver.findElement(By.name("password"));
+        WebElement loginPassword = driver.findElement(By.name("password"));
         loginPassword.sendKeys("secret_sauce");
-
-        WebElement loginButton=driver.findElement(By.id("login-button"));
+        WebElement loginButton = driver.findElement(By.id("login-button"));
         loginButton.click();
+        WebElement menu = driver.findElement(By.id("react-burger-menu-btn"));
+        menu.click();
 
-//        WebElement menu = driver.findElement(By.id("react-burger-menu-btn"));
-//        String nMenu = menu.getText();
-//
-//        assert menu.getText().equals(nMenu) : "All Items";
-//        menu.click();
+    }
+    @Test
+    public void testTest (){
 
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://www.saucedemo.com/");
 
+        WebElement textBox = driver.findElement(By.id("user-name"));
+        textBox.sendKeys("visual_user");
 
- }
+        WebElement textBox2 = driver.findElement(By.id("password"));
+        textBox2.sendKeys("secret_sauce");
 
- @Test
-    public void natashaFarfetchTest () {
+        WebElement login = driver.findElement(By.id("login-button"));
+        login.click();
 
-     WebDriver driver = new ChromeDriver();
-     driver.get("https://www.farfetch.com/designers/women");
+        WebElement button = driver.findElement(By.xpath("//*[@id=\"header_container\"]/div[1]/div[2]/div"));
+        button.getText();
 
-     driver.findElement(By.xpath("//input[@data-testid='search-input']")).sendKeys("Valentino");
-     driver.findElement(By.xpath("//input[@data-testid='search-input']")).click();
+//        WebElement menu = driver.findElement(By.xpath("//*[@id=\"inventory_sidebar_link\"]"));
+//        String result = menu.;
+        Assert.assertEquals(button,"Swag Labs");
 
-     driver.get("https://www.farfetch.com/shopping/women/items.aspx");
+        driver.quit();
+    }
 
-     driver.findElement(By.xpath("//input[@data-component='SearchInputControlled']")).sendKeys("YSL Heels");
-     driver.findElement(By.xpath("//input[@data-testid='search-input']")).click();
-
-
-     driver.quit();
- }
 
 }
