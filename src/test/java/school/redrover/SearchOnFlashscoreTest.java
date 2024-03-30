@@ -15,14 +15,11 @@ public class SearchOnFlashscoreTest {
         driver.get("https://www.flashscore.ua/");
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
 
-        driver.findElement(By.id("search-window"))
-                .click();
+        driver.findElement(By.id("search-window")).click();
 
-        driver.findElement(By.cssSelector("input"))
-                .sendKeys("aaaaaaaaa");
+        driver.findElement(By.cssSelector("input")).sendKeys("aaaaaaaaa");
 
-        Assert.assertEquals(driver
-                .findElement(By.className("searchResults__noResult"))
+        Assert.assertEquals(driver.findElement(By.className("searchResults__noResult"))
                 .getText(), "За Вашим запитом нічого не знайдено.");
 
         driver.quit();
