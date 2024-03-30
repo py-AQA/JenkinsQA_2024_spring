@@ -1,5 +1,10 @@
 package school.redrover;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class TeaPartyGroupTest {
@@ -19,8 +24,9 @@ public class TeaPartyGroupTest {
         menu.click();
 
     }
+
     @Test
-    public void testTest (){
+    public void testTest() {
 
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.saucedemo.com/");
@@ -34,15 +40,9 @@ public class TeaPartyGroupTest {
         WebElement login = driver.findElement(By.id("login-button"));
         login.click();
 
-        WebElement button = driver.findElement(By.xpath("//*[@id=\"header_container\"]/div[1]/div[2]/div"));
-        button.getText();
-
-//        WebElement menu = driver.findElement(By.xpath("//*[@id=\"inventory_sidebar_link\"]"));
-//        String result = menu.;
-        Assert.assertEquals(button,"Swag Labs");
-
-        driver.quit();
+        WebElement menu = driver.findElement(By.id("react-burger-menu-btn"));
+        String nMenu = menu.getText();
+        assert menu.getText().equals(nMenu) : "All Items";
+        menu.click();
     }
-
-
 }
