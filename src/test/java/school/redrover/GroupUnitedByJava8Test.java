@@ -81,4 +81,22 @@ public class GroupUnitedByJava8Test extends BaseTest {
         WebElement searchResultsTable = driver.findElement(By.xpath("//tbody/tr[last()]/td[1]"));
         Assert.assertEquals(searchResultsTable.getText(), GLOBALS_QA_STRING_VALUE);
     }
+
+    @Test
+    public void happyPathLogin() {
+        getDriver().get("https://www.saucedemo.com/");
+
+        WebElement name = getDriver().findElement(By.xpath("//input[@id='user-name']"));
+        name.sendKeys("visual_user");
+
+        WebElement password = getDriver().findElement(By.xpath("//input[@id='password']"));
+        password.sendKeys("secret_sauce");
+
+        getDriver().findElement(By.id("login-button")).click();
+
+        String expectedResult = getDriver().getCurrentUrl();
+
+        Assert.assertEquals("https://www.saucedemo.com/inventory.html", expectedResult);
+
+    }
 }
