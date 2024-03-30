@@ -1,15 +1,16 @@
+package school.redrover;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class SauceDemoTest {
+public class GoogleTestAP {
     @Test
-    public void testSauceDemo() {
-        String expectedResult = "https://www.saucedemo.com/";
+    public void GoogleTestAP() {
+        String expectedResult = "https://www.saucedemo.com/inventory.html";
 
         WebDriver driver = new FirefoxDriver();
 
@@ -27,5 +28,4 @@ public class SauceDemoTest {
         driver.quit();
 
     }
-
 }
