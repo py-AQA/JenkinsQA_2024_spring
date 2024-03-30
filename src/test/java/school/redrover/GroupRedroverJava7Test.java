@@ -1,4 +1,5 @@
 package school.redrover;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -6,7 +7,15 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
 
+import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
+
 public class GroupRedroverJava7Test extends BaseTest {
+
+    private static final List<String> ACTUAL_LOCATION_NAMES =
+            List.of("Bensalem", "Doylestown", "Langhorne", "Levittown", "Perkasie", "Quakertown", "Yardley-Makefield");
+
     @Test
     public void testSearch() {
         getDriver().get("https://www.selenium.dev/selenium/web/web-form.html");
@@ -20,11 +29,11 @@ public class GroupRedroverJava7Test extends BaseTest {
         WebElement message = getDriver().findElement(By.id("message"));
         String value = message.getText();
 
-        Assert.assertEquals(value,"Received!");
+        Assert.assertEquals(value, "Received!");
     }
 
     @Test
-    public void testSubmitOrder(){
+    public void testSubmitOrder() {
         getDriver().get("https://play1.automationcamp.ir/");
 
         JavascriptExecutor js = (JavascriptExecutor) getDriver();
@@ -48,4 +57,47 @@ public class GroupRedroverJava7Test extends BaseTest {
 
         Assert.assertEquals(header.getText(), "Dinesh's Pizza House");
     }
+
+    @Test
+    public void testItemSearch() throws InterruptedException {
+        getDriver().get("https://www.applebees.com/en");
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+
+        getDriver().manage().window().maximize();
+        Thread.sleep(1000);
+
+        WebElement menuButton = getDriver().findElement(By.xpath("//ul/li/a[@href='/en/menu'][1]"));
+        menuButton.click();
+
+        WebElement searchMenu = getDriver().findElement(By.xpath("//a[@class='btn btn-lg btn-text']"));
+        searchMenu.click();
+
+        WebElement textBox = getDriver().findElement(By.xpath("//input[contains(@class,'menu-search')]"));
+        textBox.sendKeys("salmon");
+
+        WebElement massage = getDriver().findElement(By.xpath("//a[@href='/en/menu/seafood/blackened-cajun-salmon']"));
+        String value = massage.getText();
+
+        Assert.assertEquals("Blackened Cajun Salmon", value);
+    }
+
+    @Test
+    public void testLocationList() {
+        List<String> expectedLocationNames = new ArrayList<>();
+
+        getDriver().get("https://buckslib.org/");
+        getDriver().manage().window().maximize();
+
+        getDriver().findElement(By.xpath("//*[contains(text(),' Locations')]")).click();
+
+        for (String locationName : ACTUAL_LOCATION_NAMES) {
+            String locationText = getDriver()
+                    .findElement(By.xpath("//div[@id='wp-faqp-accordion-1']/div/div[@class='faq-title']/h4[text()='" + locationName + "']")).getText();
+            expectedLocationNames.add(locationText);
+        }
+
+        Assert.assertEquals(ACTUAL_LOCATION_NAMES, expectedLocationNames);
+    }
 }
+
+
