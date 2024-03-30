@@ -157,7 +157,7 @@ public class UnderdogsGroupTest {
     }
 
     @Test
-    public void searchByName() throws InterruptedException {
+    public void testSearchByName() throws InterruptedException {
         WebDriver driver = new ChromeDriver();
         driver.get("https://uk.coach.com/");
 
