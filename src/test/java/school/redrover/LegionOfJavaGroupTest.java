@@ -17,12 +17,16 @@ public class LegionOfJavaGroupTest extends BaseTest {
 
         getDriver().get("https://ferosor.cl");
         getDriver().manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
+
         WebElement textBox =  getDriver().findElement(By.name("s"));
         textBox.sendKeys("alimento");
+
         getDriver().findElement(By.cssSelector("[type='submit']")).click();
         getDriver().manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
+
         getDriver().get("https://ferosor.cl/jardin-y-mascotas/262-alimento-para-perro-cachorro-fit-formula-saco-10-kg-130622000123.html");
-        String result = String.valueOf( getDriver().findElement(By.className("h1")).getText());
+        String result = String.valueOf(getDriver().findElement(By.className("h1")).getText());
+
         Assert.assertEquals(result, "Alimento para Perro cachorro FIT FORMULA Saco 10 kg");
         }
 
@@ -31,12 +35,16 @@ public class LegionOfJavaGroupTest extends BaseTest {
 
             getDriver().get("https://ferosor.cl");
             getDriver().findElement(className("login")).click();
+
             WebElement email =  getDriver().findElement(By.className("form-control"));
             email.sendKeys("test@test.com");
+
             WebElement password =  getDriver().findElement(By.className("js-child-focus"));
             password.sendKeys("12345");
+
             getDriver().findElement(By.id("submit-login")).click();
             String result = String.valueOf( getDriver().findElement(By.className("page-header")).getText());
+
             Assert.assertEquals(result, "Su cuenta");
     }
 
