@@ -2,9 +2,7 @@ package school.redrover;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
@@ -80,7 +78,6 @@ public class GroupRedroverJava7Test extends BaseTest {
 
         //check if the "Financial Overview" text exists
         Assert.assertEquals(h6String, "Financial Overview");
-
     }
 
     @Test
