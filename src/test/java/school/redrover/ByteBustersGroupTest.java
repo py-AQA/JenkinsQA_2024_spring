@@ -2,7 +2,9 @@ package school.redrover;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -33,4 +35,29 @@ public class ByteBustersGroupTest extends BaseTest {
             WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"IT\"]")));
 
         }
+
+    @Test
+    public void testSite() {
+
+        getDriver().get("https://www.saucedemo.com/");
+
+        String title = getDriver().getTitle();
+        Assert.assertEquals("Swag Labs", title);
+
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+
+        WebElement userName = getDriver().findElement(By.id("user-name"));
+        userName.sendKeys("visual_user");
+
+        WebElement passw = getDriver().findElement(By.id("password"));
+        passw.sendKeys("secret_sauce");
+
+        WebElement submitButton = getDriver().findElement(By.name("login-button"));
+        submitButton.click();
+
+        WebElement page = getDriver().findElement(By.className("title"));
+        String value = page.getText();
+
+        Assert.assertEquals("Products", value);
+    }
     }
