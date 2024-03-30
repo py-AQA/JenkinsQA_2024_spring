@@ -16,25 +16,25 @@ import java.time.Duration;
 
 public class ByteBustersGroupTest extends BaseTest {
 
-        @Test
-        public void CoreTest() {
+    @Test
+    public void CoreTest() {
 
-            WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(15));
-            getDriver().get("https://explorer.globe.engineer/");
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(15));
+        getDriver().get("https://explorer.globe.engineer/");
 
-            wait.until((ExpectedCondition<Boolean>) webDriver ->
-                    ((org.openqa.selenium.JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
+        wait.until((ExpectedCondition<Boolean>) webDriver ->
+                ((org.openqa.selenium.JavascriptExecutor) webDriver).executeScript("return document.readyState").equals("complete"));
 
-            WebElement textBox = getDriver().findElement(By.name("q"));
-            String placeholder = getDriver().findElement(By.name("q")).getAttribute("placeholder");
+        WebElement textBox = getDriver().findElement(By.name("q"));
+        String placeholder = getDriver().findElement(By.name("q")).getAttribute("placeholder");
 
-            Assert.assertEquals(placeholder, "I want to discover...");
-            textBox.sendKeys("IT");
-            textBox.sendKeys(Keys.ENTER);
+        Assert.assertEquals(placeholder, "I want to discover...");
+        textBox.sendKeys("IT");
+        textBox.sendKeys(Keys.ENTER);
 
-            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"IT\"]")));
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=\"IT\"]")));
 
-        }
+    }
 
     @Test
     public void testSite() {
@@ -60,4 +60,22 @@ public class ByteBustersGroupTest extends BaseTest {
 
         Assert.assertEquals("Products", value);
     }
+
+    @Test
+    public void testLogin() {
+
+        getDriver().get("https://www.saucedemo.com/");
+
+        WebElement login = getDriver().findElement(By.id("user-name"));
+        WebElement psw = getDriver().findElement(By.id("password"));
+        WebElement signInButton = getDriver().findElement(By.id("login-button"));
+
+        login.sendKeys("standard_user");
+        psw.sendKeys("secret_sauce");
+        signInButton.submit();
+
+        WebElement displayedPage = getDriver().findElement(By.className("title"));
+        String targetText = displayedPage.getText();
+        Assert.assertEquals(targetText, "Products");
     }
+}
