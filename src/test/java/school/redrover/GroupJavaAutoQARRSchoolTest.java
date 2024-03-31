@@ -3,6 +3,9 @@ package school.redrover;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+//import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
@@ -30,4 +33,40 @@ public class GroupJavaAutoQARRSchoolTest extends BaseTest {
 
         Assert.assertEquals(value, "Products");
     }
+
+    @Test
+    public void testTasksAreaWithDoubleclick() {
+
+        getDriver().get("https://thecode.media/");
+
+        WebElement searchArea = getDriver().findElement(By.className("tab-questions"));
+
+        Action myAction = new Actions(getDriver()).doubleClick(searchArea).build();
+        myAction.perform();
+
+        WebElement foundText = getDriver().findElement(By.xpath("(//h1[@class='search__title'])"));
+        String foundSearchTitle = foundText.getText();
+
+        Assert.assertEquals(foundSearchTitle, "Как решить");
+    }
+
+    @Test
+    public void testCheckTextField() {
+
+        getDriver().get("https://thecode.media/");
+
+        WebElement searchButton = getDriver().findElement(By.className("heading-search__open"));
+        searchButton.click();
+
+        WebElement searchText = getDriver().findElement(By.className("heading-search__input"));
+        searchText.sendKeys("Api");
+
+        searchButton.click();
+
+        WebElement foundText = getDriver().findElement(By.className("search__title"));
+        String resultSearch = foundText.getText();
+
+        Assert.assertEquals(resultSearch,"api");
+    }
+
 }
