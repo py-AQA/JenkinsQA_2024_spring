@@ -19,7 +19,7 @@ import static org.testng.Assert.assertTrue;
 public class PinterestLogInTest extends BaseTest {
 
     @Test
-    public void testMyPinterest() throws InterruptedException {
+    public void testMyPinterest() {
         WebDriver driver = getDriver();
 
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
