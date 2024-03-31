@@ -28,20 +28,13 @@ public class GroupCompanionsTest extends BaseTest {
     }
 
     @Test
-    public void Firsttest() throws InterruptedException {
+    public void testFindElement() {
 
         WebDriver driver = getDriver();
         driver.get("https://exp86.ru");
 
-        Thread.sleep(1000); //добавила для себя, чтобы было видно на тесте
-
         WebElement test = driver.findElement(By.xpath("//input[@type='text']"));
         test.sendKeys("Привет, мир!");
-
-        WebElement buttonSearch = driver.findElement(By.name("Поиск"));
-        buttonSearch.click();
-
-        Thread.sleep(1000);
 
         WebElement button = driver.findElement(By.xpath("//a[@href='/user/']"));
         button.click();
