@@ -98,7 +98,8 @@ public class UnderdogsGroupTest extends BaseTest {
     public void testHomeCheckbox() {
         getDriver().manage().timeouts().implicitlyWait(Duration.ofMillis(500));
         getDriver().get("https://demoqa.com/checkbox");
-        getDriver().findElement(new By.ByCssSelector("[class='rct-icon rct-icon-uncheck']")).click();
+//        getDriver().findElement(new By.ByCssSelector("[class='rct-icon rct-icon-uncheck']")).click();
+        getDriver().findElement(By.xpath("//*[@for='tree-node-home']")).click();
 
         WebElement results = getDriver().findElement(By.id("result"));
         String textHome = """
