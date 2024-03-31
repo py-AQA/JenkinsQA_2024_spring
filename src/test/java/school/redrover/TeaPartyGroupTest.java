@@ -8,10 +8,11 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import school.redrover.runner.BaseTest;
 
 import java.time.Duration;
 
-public class TeaPartyGroupTest {
+public class TeaPartyGroupTest extends BaseTest {
 
     @Test
     public void idDemoTest() {
@@ -28,6 +29,7 @@ public class TeaPartyGroupTest {
         menu.click();
 
     }
+
     @Test
     public void tgSprinkleSystemTest() throws InterruptedException {
         WebDriver driver = new ChromeDriver();
@@ -44,15 +46,16 @@ public class TeaPartyGroupTest {
         button = driver.findElement(By.xpath("//button[@type='submit']"));
         button.click();
 
-        WebDriverWait wait = new WebDriverWait(driver,  Duration.ofSeconds(10));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@role='status']")));
         String resultText = element.getText();
-        Assert.assertEquals(resultText, "server_errors.UserNotFound");
+        Assert.assertEquals(resultText,"server_errors.UserNotFound");
 
         driver.quit();
     }
     @Test
     public void tgDemoTest() {
+
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.saucedemo.com/");
 
@@ -68,7 +71,25 @@ public class TeaPartyGroupTest {
         String allItemsText = menu.getText();
         Assert.assertEquals(allItemsText, "Open Menu");
         driver.quit();
-
         }
 
+    @Test
+    public void testTest() {
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://www.saucedemo.com/");
+
+        WebElement textBox = driver.findElement(By.id("user-name"));
+        textBox.sendKeys("visual_user");
+
+        WebElement textBox2 = driver.findElement(By.id("password"));
+        textBox2.sendKeys("secret_sauce");
+
+        WebElement login = driver.findElement(By.id("login-button"));
+        login.click();
+
+        WebElement menu = driver.findElement(By.id("react-burger-menu-btn"));
+        String nMenu = menu.getText();
+        assert menu.getText().equals(nMenu) : "All Items";
+        menu.click();
     }
+}
