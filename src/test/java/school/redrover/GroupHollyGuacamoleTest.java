@@ -62,4 +62,17 @@ public class GroupHollyGuacamoleTest extends BaseTest {
 
         Assert.assertTrue(yestCho);
     }
+
+    @Test
+    private void testLoginSaucedemo () {
+        getDriver().get(BASE_URL);
+
+        getDriver().findElement(By.xpath("//input[@data-test='username']")).sendKeys("standard_user");
+        getDriver().findElement(By.xpath("//input[@data-test='password']")).sendKeys("secret_sauce");
+        getDriver().findElement(By.xpath("//input[@data-test='login-button']")).click();
+
+        String actual = getDriver().findElement(By.xpath("//span[@class='title']")).getText();
+
+        Assert.assertEquals(actual, "Products");
+    }
 }
