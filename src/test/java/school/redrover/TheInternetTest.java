@@ -8,13 +8,14 @@ import school.redrover.runner.BaseTest;
 
 public class TheInternetTest extends BaseTest {
     @Test
-    public void loginTheInternetTest() {
+    public void testLoginAndLogout() {
         WebDriver driver = getDriver();
         driver.get("https://the-internet.herokuapp.com/");
 
         Assert.assertEquals(driver.getTitle(), "The Internet");
 
         driver.findElement(By.linkText("Form Authentication")).click();
+
         driver.findElement(By.id("username")).sendKeys("tomsmith");
         driver.findElement(By.id("password")).sendKeys("SuperSecretPassword!");
         driver.findElement(By.cssSelector("button")).click();
