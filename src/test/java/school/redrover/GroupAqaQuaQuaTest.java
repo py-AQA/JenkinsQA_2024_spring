@@ -11,8 +11,9 @@ import school.redrover.runner.BaseTest;
 import java.time.Duration;
 
 public class GroupAqaQuaQuaTest extends BaseTest {
-   @Test
-    public void testAddingBookToCart() {
+
+    @Test
+    public void testyAddingBookToCart() {
         getDriver().get("https://demowebshop.tricentis.com/");
 
 
@@ -29,8 +30,9 @@ public class GroupAqaQuaQuaTest extends BaseTest {
         shoppingСart.click();
 
 
-       Assert.assertEquals(getDriver().findElement(By.className("product-name")), "Computing and Internet");
+        Assert.assertEquals(getDriver().findElement(By.className("product-name")).getText(), "Computing and Internet");
 
     }
-
 }
+
+
