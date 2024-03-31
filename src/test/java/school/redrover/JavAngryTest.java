@@ -241,7 +241,6 @@ public class JavAngryTest extends BaseTest {
         Assert.assertEquals(curName, "Irina");
 
         driver.quit();
-
     }
 }
 
