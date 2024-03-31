@@ -26,8 +26,8 @@ public class GroupAqaQuaQuaTest extends BaseTest {
         WebElement addMyBook = getDriver().findElement(By.id("add-to-cart-button-13"));
         addMyBook.click();
 
-        WebElement shoppingсart = getDriver().findElement(By.className("cart-label"));
-        shoppingсart.click();
+        WebElement shoppingCart = getDriver().findElement(By.className("cart-label"));
+        shoppingCart.click();
 
 
         Assert.assertEquals(getDriver().findElement(By.className("product-name")).getText(), "Computing and Internet");
