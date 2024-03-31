@@ -1,11 +1,16 @@
 package school.redrover;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
+
+import java.time.Duration;
 
 public class GroupJavaAutoQARRSchoolTest extends BaseTest {
 
@@ -29,5 +34,30 @@ public class GroupJavaAutoQARRSchoolTest extends BaseTest {
         String value = headerProductsOnTheHomePage.getText();
 
         Assert.assertEquals(value, "Products");
+    }
+    @Test
+    public void testDemoQAPracticeForm(){
+        WebDriver driver = getDriver();
+        driver.get("https://demoqa.com/automation-practice-form");
+
+        WebElement firstName = (new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.presenceOfElementLocated(By.xpath("//input[@id='firstName']"))));
+        firstName.sendKeys("Bob");
+
+        driver.findElement(By.xpath("//input[@id='lastName']")).sendKeys("Boboc");
+
+        driver.findElement(By.xpath("//input[@id='userEmail']")).sendKeys("test@gmail.com");
+
+        driver.findElement(By.xpath("//input[@id='userNumber']")).sendKeys("1234567890");
+
+        driver.findElement(By.xpath("//input[@id='gender-radio-1']/following-sibling::label['::after']")).click();
+
+        ((JavascriptExecutor) driver).executeScript("window.scrollTo(0, 1600)");
+        driver.findElement(By.id("submit")).click();
+
+        WebElement title = (new WebDriverWait(driver, Duration.ofSeconds(10))
+                .until(ExpectedConditions.presenceOfElementLocated(By.id("example-modal-sizes-title-lg"))));
+        String value = title.getText();
+        Assert.assertEquals(value, "Thanks for submitting the form");
     }
 }
