@@ -28,6 +28,7 @@ public class TeaPartyGroupTest {
         String nMenu = menu.getText();
         assert menu.getText().equals(nMenu) : "All Items";
         menu.click();
+
     }
 
 }
