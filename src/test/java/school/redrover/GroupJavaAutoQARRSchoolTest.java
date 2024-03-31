@@ -3,7 +3,7 @@ package school.redrover;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-//import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
@@ -45,9 +45,8 @@ public class GroupJavaAutoQARRSchoolTest extends BaseTest {
         myAction.perform();
 
         WebElement foundText = getDriver().findElement(By.xpath("(//h1[@class='search__title'])"));
-        String foundSearchTitle = foundText.getText();
 
-        Assert.assertEquals(foundSearchTitle, "Как решить");
+        Assert.assertEquals(foundText.getText(), "Как решить");
     }
 
     @Test
@@ -64,9 +63,8 @@ public class GroupJavaAutoQARRSchoolTest extends BaseTest {
         searchButton.click();
 
         WebElement foundText = getDriver().findElement(By.className("search__title"));
-        String resultSearch = foundText.getText();
 
-        Assert.assertEquals(resultSearch,"api");
+        Assert.assertEquals(foundText.getText(),"api");
     }
 
 }
