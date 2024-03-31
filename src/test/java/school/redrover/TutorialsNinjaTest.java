@@ -20,7 +20,6 @@ public class TutorialsNinjaTest extends BaseTest {
         String featered = initialization(URL).findElement(By.xpath("//h3")).getText();
 
         Assert.assertEquals(featered, "Featured");
-        Assert.assert;
     }
 
     public WebDriver initialization(String url){
