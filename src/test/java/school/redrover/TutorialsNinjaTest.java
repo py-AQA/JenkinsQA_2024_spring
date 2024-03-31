@@ -15,11 +15,12 @@ public class TutorialsNinjaTest extends BaseTest {
     private final static String URL = "https://tutorialsninja.com/demo/";
 
     @Test
-    public void thisMainPageTest(){
+    public void testMainPageView(){
 
         String featered = initialization(URL).findElement(By.xpath("//h3")).getText();
 
         Assert.assertEquals(featered, "Featured");
+        Assert.assert;
     }
 
     public WebDriver initialization(String url){
