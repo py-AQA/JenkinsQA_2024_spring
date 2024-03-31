@@ -1,11 +1,9 @@
 package school.redrover;
 
-import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
@@ -179,6 +177,7 @@ public class GroupRedroverJava7Test extends BaseTest {
 
         WebElement text = getDriver().findElement(By.xpath("//h2[text()='Find Your Store']"));
         String value = text.getText();
+
         Assert.assertEquals("FIND YOUR STORE", value);
     }
 
