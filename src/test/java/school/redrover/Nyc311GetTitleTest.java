@@ -6,19 +6,18 @@ import org.testng.annotations.Test;
 
 public class Nyc311GetTitleTest {
 
-        @Test
-        public static void main(String[] args) {
-            WebDriver driver = new ChromeDriver();
-            String baseUrl = "https://portal.311.nyc.gov/";
-            String expectedResult = "Home &nbsp;· NYC311";
-            String actualTitleResult = " ";
+    @Test
+    public static void main(String[] args) {
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://portal.311.nyc.gov/");
 
-            driver.get(baseUrl);
-            driver.getTitle();
+        String expectedResult = "Home  · NYC311";
+        String actualTitleResult = driver.getTitle();
 
-            Assert.assertEquals(actualTitleResult, expectedResult);
+        System.out.println("Title of the website is: " + actualTitleResult);
 
-            driver.quit();
-        }
+        Assert.assertEquals(actualTitleResult, expectedResult);
+
+        driver.quit();
     }
-
+}
