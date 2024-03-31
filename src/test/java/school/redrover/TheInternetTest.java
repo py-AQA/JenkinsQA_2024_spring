@@ -8,7 +8,7 @@ import school.redrover.runner.BaseTest;
 
 public class TheInternetTest extends BaseTest {
     @Test
-    public void loginPage() {
+    public void loginTheInternetTest() {
         WebDriver driver = getDriver();
         driver.get("https://the-internet.herokuapp.com/");
 
