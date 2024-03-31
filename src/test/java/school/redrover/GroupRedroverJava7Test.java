@@ -6,7 +6,6 @@ import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
-
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -120,6 +119,47 @@ public class GroupRedroverJava7Test extends BaseTest {
 
         Assert.assertEquals(actualLocationNames, expectedLocationNames);
     }
+
+    @Test
+    public void linkTest() {
+        getDriver().get("https://the-internet.herokuapp.com/redirector");
+        getDriver().manage().window().maximize();
+
+        getDriver().findElement(By.id("redirect")).click();
+        getDriver().findElement(By.xpath("//*[@id=\"content\"]/div/ul/li[3]/a")).click();
+        String textStatusCode = getDriver().findElement(By.xpath("//*[@id=\"content\"]/div/p")).getText();
+        boolean isStatus = textStatusCode.contains("404 status code");
+
+        Assert.assertTrue(isStatus);
+    }
+
+    @Test
+    public void datePicker() {
+        getDriver().get("https://www.selenium.dev/selenium/web/web-form.html");
+
+        WebElement myDate = getDriver().findElement(By.name("my-date"));
+        myDate.click();
+
+        WebElement weekDay = getDriver().findElement(By.xpath("//thead/tr[3]/th[1]"));
+        String text = weekDay.getText();
+
+        Assert.assertEquals(text,"Su");
+    }
+
+    @Test
+    public void testSwagLogin() {
+        getDriver().get("https://www.saucedemo.com/?ref=hackernoon.com");
+
+        WebElement usernameInput = getDriver().findElement(By.id("user-name"));
+        usernameInput.sendKeys("standard_user");
+
+        WebElement passwordInput = getDriver().findElement(By.id("password"));
+        passwordInput.sendKeys("secret_sauce");
+
+        WebElement loginButton = getDriver().findElement(By.id("login-button"));
+        loginButton.click();
+        WebElement shopCartButton = getDriver().findElement(By.id("shopping_cart_container"));
+
+        Assert.assertTrue(shopCartButton.isDisplayed(), "Shop cart doesn't displayed");
+    }
 }
-
-
