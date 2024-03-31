@@ -15,6 +15,9 @@ import java.time.Duration;
 public class GroupUnitedByJava8Test extends BaseTest {
     private static final String GLOBALS_QA_LOGIN_LINKS = "https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login";
     private static final String GLOBALS_QA_STRING_VALUE = "testPV";
+    private static final String STANDARD_USER_LOGIN = "standard_user";
+    private static final String STANDARD_USER_PASSWORD = "secret_sauce";
+    private static final String EXPECTED_TEXT = "Sauce Labs Backpack";
 
     @Test
     public void testDemoQADoubleClick() {
@@ -130,5 +133,80 @@ public class GroupUnitedByJava8Test extends BaseTest {
 
         Assert.assertTrue(alertShoppingCart.isDisplayed());
         Assert.assertEquals(alertShoppingCart.getText(), "You added Cronus Yoga Pant to your shopping cart.");
+    }
+
+    @Test
+    public void testCheckingAddingCart() {
+        WebDriver driver = getDriver();
+
+        driver.get("https://www.saucedemo.com/");
+
+        WebElement userName = driver.findElement(By.id("user-name"));
+        userName.sendKeys(STANDARD_USER_LOGIN);
+        WebElement userPassword = driver.findElement(By.id("password"));
+        userPassword.sendKeys(STANDARD_USER_PASSWORD);
+        WebElement loginButton = driver.findElement(By.id("login-button"));
+        loginButton.click();
+
+        WebElement addCartButton = driver.findElement(By.name("add-to-cart-sauce-labs-backpack"));
+        addCartButton.click();
+        WebElement shoppingCart = driver.findElement(By.className("shopping_cart_link"));
+        shoppingCart.click();
+
+        WebElement cartList = driver.findElement(By.id("item_4_title_link"));
+
+        Assert.assertEquals(cartList.getText(), EXPECTED_TEXT);
+    }
+    @Test
+    public void testAddingItemToCart() {
+
+        WebDriver driver = getDriver();
+        driver.get("https://www.saucedemo.com/");
+
+        WebElement login = driver.findElement(By.id("user-name"));
+        login.sendKeys("standard_user");
+
+        WebElement pass = driver.findElement(By.id("password"));
+        pass.sendKeys("secret_sauce");
+
+        WebElement loginButton = driver.findElement(By.id("login-button"));
+        loginButton.click();
+
+        WebElement addButton = driver.findElement(By.id("add-to-cart-sauce-labs-bike-light"));
+        addButton.click();
+
+        WebElement shoppingCart = driver.findElement(By.id("shopping_cart_container"));
+        shoppingCart.click();
+
+        WebElement labsBikeText = driver.findElement(By.id("item_0_title_link"));
+        String resultText = labsBikeText.getText();
+
+        Assert.assertEquals(resultText, "Sauce Labs Bike Light");
+    }
+    @Test
+    public void testLogoutUser() throws InterruptedException {
+
+        WebDriver driver = getDriver();
+        driver.get("https://www.saucedemo.com/");
+
+        WebElement login = driver.findElement(By.id("user-name"));
+        login.sendKeys("visual_user");
+
+        WebElement pass = driver.findElement(By.id("password"));
+        pass.sendKeys("secret_sauce");
+
+        WebElement loginButton = driver.findElement(By.id("login-button"));
+        loginButton.click();
+
+        WebElement burgerButton = driver.findElement(By.id("react-burger-menu-btn"));
+        burgerButton.click();
+
+        Thread.sleep(1000);
+
+        WebElement logoutButton = driver.findElement(By.id("logout_sidebar_link"));
+        logoutButton.click();
+
+        String textTitle = driver.getTitle();
+        Assert.assertEquals(textTitle, "Swag Labs");
     }
 }
