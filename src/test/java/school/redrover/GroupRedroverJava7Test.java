@@ -1,5 +1,7 @@
 package school.redrover;
 
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebElement;
@@ -163,6 +165,21 @@ public class GroupRedroverJava7Test extends BaseTest {
         WebElement shopCartButton = getDriver().findElement(By.id("shopping_cart_container"));
 
         Assert.assertTrue(shopCartButton.isDisplayed(), "Shop cart doesn't displayed");
+    }
+
+    @Test
+    public void testPlaceAnOrder() {
+        getDriver().get("https://www.papajohns.com/");
+        getDriver().manage().window().maximize();
+
+        getDriver().findElement(By.xpath("//*[@href=' /order/menu']")).click();
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofMillis(2000));
+
+        getDriver().findElement(By.cssSelector("[aria-label=\"Order Now Pepperoni Pizza\"]")).click();
+
+        WebElement text = getDriver().findElement(By.xpath("//h2[text()='Find Your Store']"));
+        String value = text.getText();
+        Assert.assertEquals("FIND YOUR STORE", value);
     }
 
     @Test
