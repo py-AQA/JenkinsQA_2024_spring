@@ -1,7 +1,9 @@
 package school.redrover;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
@@ -30,5 +32,29 @@ public class JavaHashGroupTest extends BaseTest {
         String actualTitle = getDriver().findElement(By.xpath("//div[contains(text(),'Swag Labs')]")).getText();
 
         Assert.assertEquals(actualTitle,expectedTitle);
+    }
+
+    private static final String BAD_USERNAME = "username@gmail.com";
+    private static final String BAD_PASSWORD = "Password123";
+    @Test
+    public void testBadLogin() throws InterruptedException {
+        WebDriver driver = getDriver();
+
+        driver.get("https://www.sofa.com/gb");
+
+        WebElement loginButton = driver.findElement(By.xpath("//a[@href=\"/gb/login\"]"));
+        loginButton.click();
+        Thread.sleep(500);
+
+        WebElement inputEmail = driver.findElement(By.id("j_username"));
+        inputEmail.sendKeys(BAD_USERNAME);
+        WebElement inputPassword = driver.findElement(By.id("j_password"));
+        inputPassword.sendKeys(BAD_PASSWORD);
+        driver.findElement(By.id("loginBtn")).click();
+        Thread.sleep(500);
+
+        WebElement errorText = driver.findElement(By.xpath("//div[@class=\"alert alert-danger alert-dismissable\"]"));
+
+        Assert.assertEquals(errorText.getText(), "×\n" + "Your username or password was incorrect.");
     }
 }
