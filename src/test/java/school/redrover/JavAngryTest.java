@@ -228,7 +228,7 @@ public class JavAngryTest extends BaseTest {
 
         WebElement salary = driver.findElement(By.id("salary"));
         salary.sendKeys("180");
-        
+
         WebElement department = driver.findElement(By.id("department"));
         department.sendKeys("IT");
 
