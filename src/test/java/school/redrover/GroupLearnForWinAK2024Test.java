@@ -14,26 +14,26 @@ import org.openqa.selenium.WebElement;
 import school.redrover.runner.BaseTest;
 import static org.testng.Assert.assertTrue;
 
-public class GroupLearnForWinAK2024 extends BaseTest {
-    private static final String login = "academic198405@gmail.com";
-    private static final String myAccount = "[aria-label='person']";
-    private static final String password = "StateOf2024!";
-    private static final String url = "https://www.trekbikes.com/us/en_US/";
-    private static final String secondUrl = "https://demoqa.com/";
+public class GroupLearnForWinAK2024Test extends BaseTest {
+    private static final String LOGIN = "academic198405@gmail.com";
+    private static final String MY_ACCOUNT = "[aria-label='person']";
+    private static final String PASSWORD = "StateOf2024!";
+    private static final String URL = "https://www.trekbikes.com/us/en_US/";
+    private static final String SECOND_URL = "https://demoqa.com/";
 
     @Test
     public void testLoginSuccessful()  {
         WebDriver driver = getDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
 
-        driver.get(url);
+        driver.get(URL);
         driver.manage().window().maximize();
-        driver.findElement(By.cssSelector(myAccount)).click();
+        driver.findElement(By.cssSelector(MY_ACCOUNT)).click();
         driver.findElement(By.cssSelector("span[data-v-27f1dc12]")).click();
-        driver.findElement(By.id("j_username")).sendKeys(login);
-        driver.findElement(By.id("j_password")).sendKeys(password);
+        driver.findElement(By.id("j_username")).sendKeys(LOGIN);
+        driver.findElement(By.id("j_password")).sendKeys(PASSWORD);
         driver.findElement(By.xpath("//span[text()='Log in']")).click();
-        driver.findElement(By.cssSelector(myAccount)).click();
+        driver.findElement(By.cssSelector(MY_ACCOUNT)).click();
 
         driver.findElement
                 (By.xpath("//button[@class='nav-utility-bar-control__button tippy-active']")).click();
@@ -44,16 +44,16 @@ public class GroupLearnForWinAK2024 extends BaseTest {
     }
 
     @Test
-    public void testVisiableSupercaliberSLR982() throws AWTException, InterruptedException {
+    public void testVisibleSuperCaliberSLR982() throws AWTException, InterruptedException {
         WebDriver driver = getDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
 
-        driver.get(url);
+        driver.get(URL);
         driver.manage().window().maximize();
-        driver.findElement(By.cssSelector(myAccount)).click();
+        driver.findElement(By.cssSelector(MY_ACCOUNT)).click();
         driver.findElement(By.cssSelector("span[data-v-27f1dc12]")).click();
-        driver.findElement(By.id("j_username")).sendKeys(login);
-        driver.findElement(By.id("j_password")).sendKeys(password);
+        driver.findElement(By.id("j_username")).sendKeys(LOGIN);
+        driver.findElement(By.id("j_password")).sendKeys(PASSWORD);
         driver.findElement(By.xpath("//span[text()='Log in']")).click();
 
         driver.findElement(By.xpath("//a[@id='expandMountainBikesMainMenu-large']")).click();
@@ -73,15 +73,14 @@ public class GroupLearnForWinAK2024 extends BaseTest {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });", element);
         Assert.assertEquals(fuelExeText, "Fuel EXe 8 GX AXS T-Type");
-        driver.quit();
     }
 
     @Test
-    public void CheckMenuElement() {
+    public void testCheckMenuElement() {
         WebDriver driver = getDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
 
-        driver.get(secondUrl);
+        driver.get(SECOND_URL);
         driver.manage().window().maximize();
 
         WebElement element = driver.findElement(By.xpath("//*[text()='Book Store Application']"));
@@ -104,15 +103,14 @@ public class GroupLearnForWinAK2024 extends BaseTest {
         for (String expectedItem : expectedMenuItems) {
             assertTrue(menuItemsText.contains(expectedItem), "Меню не содержит элемент: " + expectedItem);
         }
-        driver.quit();
     }
 
     @Test
-    public void CheckWeAreOnPracticeFormPage() {
+    public void testCheckWeAreOnPracticeFormPage() {
         WebDriver driver = getDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
 
-        driver.get(secondUrl);
+        driver.get(SECOND_URL);
         driver.manage().window().maximize();
 
         driver.findElement(By.xpath("//h5[text()='Forms']")).click();
@@ -121,14 +119,15 @@ public class GroupLearnForWinAK2024 extends BaseTest {
         WebElement practiceFormTitle = driver.findElement(By.xpath("//span[text()='Practice Form']"));
 
         assertTrue( practiceFormTitle.isDisplayed());
-        driver.quit();
     }
+
     @Test
-    public void CheckDataInput() throws InterruptedException {
+    public void testCheckDataInput() throws InterruptedException {
         WebDriver driver = getDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
+        String expectedText ="Thanks for submitting the form";
 
-        driver.get(secondUrl);
+        driver.get(SECOND_URL);
         driver.manage().window().maximize();
 
         driver.findElement(By.xpath("//h5[text()='Forms']")).click();
@@ -160,13 +159,12 @@ public class GroupLearnForWinAK2024 extends BaseTest {
         WebElement thanks = driver.findElement(By.xpath("//div[text()='Thanks for submitting the form']"));
         thanks.getText();
         assertTrue( thanks.isDisplayed());
-        String expectedText ="Thanks for submitting the form";
 
-        Assert.assertEquals(expectedText, thanks.getText());
-        driver.quit();
+        Assert.assertEquals(thanks.getText(), expectedText);
     }
+
     @Test
-    public void testChamplainValeyTrailisMenu() throws InterruptedException {
+    public void testChamplainValleyTrailIsMenu() throws InterruptedException {
         WebDriver driver = getDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(5000));
 
