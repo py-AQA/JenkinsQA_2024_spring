@@ -15,14 +15,14 @@ public class TutorialsNinjaTest extends BaseTest {
     private final static String URL = "https://tutorialsninja.com/demo/";
 
     @Test
-    public void testMainPageView(){
+    public void testMainPageView() {
 
         String featered = initialization(URL).findElement(By.xpath("//h3")).getText();
 
         Assert.assertEquals(featered, "Featured");
     }
 
-    public WebDriver initialization(String url){
+    public WebDriver initialization(String url) {
         WebDriver driver = getDriver();
         driver.manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
