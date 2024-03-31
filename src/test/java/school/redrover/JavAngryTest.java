@@ -207,20 +207,18 @@ public class JavAngryTest extends BaseTest {
 
     @Test
     public void testDatika() {
-        WebDriver driver = getDriver();
-        driver.get("https://datika.me/ru/");
+        getDriver().get("https://datika.me/ru/");
 
-        WebElement textBox = driver.findElement(By.id("search"));
+        WebElement textBox = getDriver().findElement(By.id("search"));
         textBox.sendKeys("Акция");
 
-        WebElement submitButton = driver.findElement(By.xpath("//*[@id='header']/div/div[2]/form/button"));
+        WebElement submitButton = getDriver().findElement(By.xpath("//*[@id='header']/div/div[2]/form/button"));
         submitButton.click();
 
-        WebElement message = driver.findElement(By.xpath("//*[@id='page-content']/h1"));
+        WebElement message = getDriver().findElement(By.xpath("//*[@id='page-content']/h1"));
         String value = message.getText();
 
         Assert.assertEquals(value, "По запросу «Акция»");
     }
-
 }
 
