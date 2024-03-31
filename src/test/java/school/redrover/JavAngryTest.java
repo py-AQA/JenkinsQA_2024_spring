@@ -242,5 +242,21 @@ public class JavAngryTest extends BaseTest {
 
         driver.quit();
     }
+
+    @Test
+    public void testDatika() {
+        getDriver().get("https://datika.me/ru/");
+
+        WebElement textBox = getDriver().findElement(By.id("search"));
+        textBox.sendKeys("Акция");
+
+        WebElement submitButton = getDriver().findElement(By.xpath("//*[@id='header']/div/div[2]/form/button"));
+        submitButton.click();
+
+        WebElement message = getDriver().findElement(By.xpath("//*[@id='page-content']/h1"));
+        String value = message.getText();
+
+        Assert.assertEquals(value, "По запросу «Акция»");
+    }
 }
 
