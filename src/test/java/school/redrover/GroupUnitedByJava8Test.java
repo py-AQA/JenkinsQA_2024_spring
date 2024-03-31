@@ -93,10 +93,8 @@ public class GroupUnitedByJava8Test extends BaseTest {
         password.sendKeys("secret_sauce");
 
         getDriver().findElement(By.id("login-button")).click();
+        String actualResult = getDriver().getCurrentUrl();
 
-        String actualResult = "https://www.saucedemo.com/inventory.html";
-
-        Assert.assertEquals(actualResult, getDriver().getCurrentUrl());
-
+        Assert.assertEquals(actualResult, "https://www.saucedemo.com/inventory.html" );
     }
 }
