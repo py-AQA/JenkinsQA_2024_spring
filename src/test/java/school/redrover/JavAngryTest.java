@@ -206,9 +206,8 @@ public class JavAngryTest extends BaseTest {
     }
 
     @Test
-    public void registrationTest() {
-
-        WebDriver driver = new ChromeDriver();
+    public void registrationTest(){
+        WebDriver driver = getDriver();
         driver.get("https://demoqa.com/webtables");
         driver.manage().window().maximize();
 
@@ -229,7 +228,7 @@ public class JavAngryTest extends BaseTest {
 
         WebElement salary = driver.findElement(By.id("salary"));
         salary.sendKeys("180");
-
+        
         WebElement department = driver.findElement(By.id("department"));
         department.sendKeys("IT");
 
@@ -239,8 +238,6 @@ public class JavAngryTest extends BaseTest {
         WebElement currentName = driver.findElement(By.xpath("//div[contains(text(),'Irina')]"));
         String curName = currentName.getText();
         Assert.assertEquals(curName, "Irina");
-
-        driver.quit();
     }
 
     @Test
