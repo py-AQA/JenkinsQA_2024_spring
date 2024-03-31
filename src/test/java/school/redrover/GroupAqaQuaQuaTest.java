@@ -1,14 +1,14 @@
 package school.redrover;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
 
-import java.time.Duration;
+
 
 public class GroupAqaQuaQuaTest extends BaseTest {
 
@@ -26,8 +26,8 @@ public class GroupAqaQuaQuaTest extends BaseTest {
         WebElement addMyBook = getDriver().findElement(By.id("add-to-cart-button-13"));
         addMyBook.click();
 
-        WebElement shoppingСart = getDriver().findElement(By.className("cart-label"));
-        shoppingСart.click();
+        WebElement shoppingсart = getDriver().findElement(By.className("cart-label"));
+        shoppingсart.click();
 
 
         Assert.assertEquals(getDriver().findElement(By.className("product-name")).getText(), "Computing and Internet");
