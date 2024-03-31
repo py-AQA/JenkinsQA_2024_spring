@@ -279,8 +279,10 @@ public class AqaGroupTest extends AqaGroupBaseTest {
 
         scrollIntoView(getDriver().findElement(By.id("no-content"))).click();
 
+        WebElement link = getWait15().until(ExpectedConditions.visibilityOfElementLocated(By.id("linkResponse")));
+
         Assert.assertEquals(
-                getDriver().findElement(By.id("linkResponse")).getText(),
+                link.getText(),
                 "Link has responded with staus 204 and status text No Content",
                 "wrong answer");
     }
@@ -593,6 +595,9 @@ public class AqaGroupTest extends AqaGroupBaseTest {
         getDriver().get("https://the-internet.herokuapp.com/broken_images");
 
         LogEntries logs = getDriver().manage().logs().get(LogType.BROWSER);
+
+        Assert.assertFalse(logs.getAll().isEmpty());
+
         for (LogEntry entry : logs) {
             Assert.assertTrue(
                     entry.getMessage().contains("Failed to load resource: the server responded with a status of 404"),
