@@ -7,13 +7,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import school.redrover.runner.BaseTest;
 
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class JavAngryTest {
+public class JavAngryTest extends BaseTest {
 
     @Test
     void testPriceCheckMainPageShoppingPage() {
@@ -189,6 +190,70 @@ public class JavAngryTest {
         driver.findElement(By.xpath("//input[@id='payment_method_cod']")).click();
         driver.findElement(By.xpath("//button[@name='woocommerce_checkout_place_order']")).click();
         driver.quit();
+    }
+
+    @Test
+    void testFields() {
+        WebDriver webDriver = getDriver();
+        webDriver.get("https://letcode.in/test");
+
+        webDriver.findElement(By.xpath("//a[contains(text(),'Edit')]")).click();
+        webDriver.findElement(By.id("fullName")).sendKeys("Ali Ian");
+        webDriver.findElement(By.id("join")).sendKeys(" and happy \t");
+        webDriver.findElement(By.id("clearMe")).clear();
+
+        Assert.assertTrue(webDriver.findElement(By.id("noEdit")).isDisplayed());
+    }
+
+    @Test
+    public void registrationTest(){
+        WebDriver driver = getDriver();
+        driver.get("https://demoqa.com/webtables");
+        driver.manage().window().maximize();
+
+        WebElement addBtn = driver.findElement(By.cssSelector("#addNewRecordButton"));
+        addBtn.click();
+
+        WebElement firstName = driver.findElement(By.id("firstName"));
+        firstName.sendKeys("Irina");
+
+        WebElement lastName = driver.findElement(By.id("lastName"));
+        lastName.sendKeys("Romanova");
+
+        WebElement email = driver.findElement(By.id("userEmail"));
+        email.sendKeys("test@test.ru");
+
+        WebElement age = driver.findElement(By.id("age"));
+        age.sendKeys("18");
+
+        WebElement salary = driver.findElement(By.id("salary"));
+        salary.sendKeys("180");
+
+        WebElement department = driver.findElement(By.id("department"));
+        department.sendKeys("IT");
+
+        WebElement btnSubmit = driver.findElement(By.id("submit"));
+        btnSubmit.click();
+
+        WebElement currentName = driver.findElement(By.xpath("//div[contains(text(),'Irina')]"));
+        String curName = currentName.getText();
+        Assert.assertEquals(curName, "Irina");
+    }
+
+    @Test
+    public void testDatika() {
+        getDriver().get("https://datika.me/ru/");
+
+        WebElement textBox = getDriver().findElement(By.id("search"));
+        textBox.sendKeys("Акция");
+
+        WebElement submitButton = getDriver().findElement(By.xpath("//*[@id='header']/div/div[2]/form/button"));
+        submitButton.click();
+
+        WebElement message = getDriver().findElement(By.xpath("//*[@id='page-content']/h1"));
+        String value = message.getText();
+
+        Assert.assertEquals(value, "По запросу «Акция»");
     }
 }
 
