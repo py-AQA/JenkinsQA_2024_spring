@@ -47,7 +47,7 @@ public class JavaHashGroupTest extends BaseTest {
         WebElement inputPassword = getDriver().findElement(By.id("j_password"));
         inputPassword.sendKeys(BAD_PASSWORD);
         getDriver().findElement(By.id("loginBtn")).click();
-        Thread.sleep(500);
+        Thread.sleep(600);
 
         WebElement errorText = getDriver().findElement(By.xpath("//div[@class=\"alert alert-danger alert-dismissable\"]"));
 
