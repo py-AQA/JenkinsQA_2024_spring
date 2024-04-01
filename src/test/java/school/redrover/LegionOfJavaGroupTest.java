@@ -133,18 +133,16 @@ public class LegionOfJavaGroupTest extends BaseTest {
     @Test
 
     public void testLogin(){
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://practicetestautomation.com/practice-test-login/");
-        WebElement userName = driver.findElement(By.name("username"));
+        getDriver().get("https://practicetestautomation.com/practice-test-login/");
+        WebElement userName = getDriver().findElement(By.name("username"));
         userName.sendKeys("student");
-        WebElement password = driver.findElement(By.name("password"));
+        WebElement password = getDriver().findElement(By.name("password"));
         password.sendKeys("Password123");
-        WebElement submitButton = driver.findElement(By.id("submit"));
+        WebElement submitButton = getDriver().findElement(By.id("submit"));
         submitButton.click();
-        WebElement result = driver.findElement(By.xpath("//h1"));
+        WebElement result = getDriver().findElement(By.xpath("//h1"));
         String resultText = result.getText();
         Assert.assertEquals("Logged In Successfully", resultText);
-        driver.quit();
     }
 
 }
