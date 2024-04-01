@@ -178,7 +178,22 @@ public class GroupRedroverJava7Test extends BaseTest {
         WebElement text = getDriver().findElement(By.xpath("//h2[text()='Find Your Store']"));
         String value = text.getText();
 
-        Assert.assertEquals("FIND YOUR STORE", value);
+        Assert.assertEquals(value,"FIND YOUR STORE");
+    }
+    @Test
+    public void testYMCA() {
+        getDriver().get("https://ymcacapecod.org/");
+
+        WebElement textBox = getDriver().findElement(By.className("field"));
+        WebElement searchButton = getDriver().findElement(By.className("submit"));
+        textBox.sendKeys("pool");
+        searchButton.click();
+
+        getDriver().findElement(By.xpath("//footer//a[@href='/programs/swimming/']")).click();
+
+        WebElement text = getDriver().findElement(By.xpath("//h1[@class='program-hero__title']"));
+        String value = text.getText();
+        Assert.assertEquals(value, "SWIM LESSONS");
     }
     @Test
     public void TestYMCA() {
