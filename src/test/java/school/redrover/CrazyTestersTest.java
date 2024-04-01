@@ -28,8 +28,6 @@ public class CrazyTestersTest extends BaseTest {
 
         Assert.assertEquals(columnB.getText(), "A");
 
-        System.out.println("Тест пройден! Конфликта нет :-P");
-
         driver.quit();
     }
 
