@@ -2,7 +2,9 @@ package school.redrover;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -260,5 +262,34 @@ public class CodeQAGroupTest extends BaseTest {
                 By.xpath("//div [@id = 'menu']")).isDisplayed();
 
         Assert.assertTrue(menuIsDisplayed);
+    }
+    @Test
+    public void testFieldValidation() throws InterruptedException {
+
+        getDriver().get("http://allolosos.com.ua/ru/menu/pizza");
+
+        WebElement button = getDriver().findElement(By.xpath("//a[@href='/ru/director']"));
+        button.click();
+        Thread.sleep(1000);
+
+        WebElement textName = getDriver().findElement(By.id("feedbackdirector-name"));
+        textName.sendKeys("Miroslav");
+        String actualName = textName.getAttribute("value");
+        String expectedName = "Miroslav";
+        Assert.assertEquals(actualName, expectedName);
+
+        WebElement textPhone = getDriver().findElement(By.id("feedbackdirector-phone"));
+        textPhone.sendKeys("0502380088");
+        String actualPhone = textPhone.getAttribute("value");
+        String expectedPhone = "+38 (050) 238-00-88";
+        Assert.assertEquals(actualPhone, expectedPhone);
+
+        WebElement textMessage = getDriver().findElement(By.id("feedbackdirector-message"));
+        textMessage.sendKeys("Thank you very much");
+        String actualMessage = textMessage.getAttribute("value");
+        String expectedMessage = "Thank you very much";
+        Assert.assertEquals(actualMessage, expectedMessage);
+
+
     }
 }
