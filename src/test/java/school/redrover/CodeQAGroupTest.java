@@ -7,7 +7,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
 
-public class CodeQAGroup extends BaseTest {
+public class CodeQAGroupTest extends BaseTest {
 
     @Test
     public void testSlider() {
@@ -48,25 +48,17 @@ public class CodeQAGroup extends BaseTest {
         WebElement newItemButton = getDriver().findElement(By.linkText("New Item"));
         newItemButton.click();
     }
-
     @Test
-    public void freestyleProjectTest() {
-        preconditions();
+    public void testDropDownMenu() {
+        getDriver().get("https://the-internet.herokuapp.com");
 
-        WebElement itemNameField = getDriver().findElement(By.id("name"));
-        itemNameField.sendKeys("freestylePrTest33");
+        WebElement dropDown = getDriver().findElement(By.linkText("Dropdown"));
+        dropDown.click();
+        WebElement dropDownMenu = getDriver().findElement(By.id("dropdown"));
+        dropDownMenu.click();
+        WebElement dropDownOption1 = getDriver().findElement(By.xpath("//*[@id='dropdown']/option[2]"));
+        dropDownOption1.click();
 
-        WebElement freestyleProjSelect = getDriver().findElement(By.className("hudson_model_FreeStyleProject"));
-        freestyleProjSelect.click();
-
-        WebElement buttonOK = getDriver().findElement(By.id("ok-button"));
-        buttonOK.click();
-        WebElement buttonSave = getDriver().findElement(By.name("Submit"));
-        buttonSave.click();
-
-        String actualRes = getDriver().findElement(By.tagName("h1")).getText();
-        Assert.assertEquals(actualRes, "Project freestylePrTest33");
-
-        getDriver().quit();
+        Assert.assertTrue(dropDownOption1.isDisplayed());
     }
 }
