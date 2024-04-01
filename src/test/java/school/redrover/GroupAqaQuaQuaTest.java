@@ -128,15 +128,15 @@ public class GroupAqaQuaQuaTest extends BaseTest {
                 By.cssSelector("div.breadcrumb>ul>li>strong.current-item")).getText(), "$5 VIRTUAL GIFT CARD");
 
         getDriver().findElement(
-                By.cssSelector("div.giftcard>div>input.recipient-name")).sendKeys("Ippolit");
+                By.cssSelector("input#giftcard_1_RecipientName")).sendKeys("Ippolit");
         getDriver().findElement(
-                By.cssSelector("div.giftcard>div>input.recipient-email")).sendKeys("ippolit@mail.ru");
+                By.cssSelector("input#giftcard_1_RecipientEmail")).sendKeys("ippolit@mail.ru");
         getDriver().findElement(
-                By.cssSelector("div.giftcard>div>input.sender-name")).sendKeys("Barbara");
+                By.cssSelector("input#giftcard_1_SenderName")).sendKeys("Barbara");
         getDriver().findElement(
-                By.cssSelector("div.giftcard>div>input.sender-email")).sendKeys("barbara@mail.com");
+                By.cssSelector("input#giftcard_1_SenderEmail")).sendKeys("barbara@mail.com");
         getDriver().findElement(
-                By.cssSelector("div.giftcard>div>textarea.message")).sendKeys("Тебе от меня! :)");
+                By.cssSelector("textarea#giftcard_1_Message")).sendKeys("Тебе от меня! :)");
         getDriver().findElement(
                 By.cssSelector("input[type='button']#add-to-cart-button-1")).click();
         getDriver().findElement(
@@ -157,10 +157,10 @@ public class GroupAqaQuaQuaTest extends BaseTest {
         Assert.assertEquals(getDriver().findElement(
                         By.cssSelector("td.cart-total-right>span.nobr>span.product-price")).getText(), "5.00");
         Assert.assertEquals(getDriver().findElement(
-                        By.cssSelector("td.cart-total-right>span.nobr>span.product-price.order-total>strong")).getText(), "5.00");
+                                By.cssSelector("td.cart-total-right>span.nobr>span.product-price.order-total>strong"))
+                        .getText(), "5.00");
 
-
-        getDriver().findElement(By.cssSelector("input[type='checkbox']#termsofservice")).click();
+        getDriver().findElement(By.id("termsofservice")).click();
         getDriver().findElement(By.id("checkout")).click();
 
         Assert.assertEquals(getDriver().findElement(
