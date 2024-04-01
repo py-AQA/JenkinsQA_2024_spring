@@ -1,4 +1,5 @@
 package school.redrover;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,8 +9,11 @@ import org.testng.Assert;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
+
 import java.time.Duration;
+
 import static org.openqa.selenium.By.className;
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertTrue;
 
 public class LegionOfJavaGroupTest extends BaseTest {
@@ -20,7 +24,7 @@ public class LegionOfJavaGroupTest extends BaseTest {
         getDriver().get("https://ferosor.cl");
         getDriver().manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
 
-        WebElement textBox =  getDriver().findElement(By.name("s"));
+        WebElement textBox = getDriver().findElement(By.name("s"));
         textBox.sendKeys("alimento");
 
         getDriver().findElement(By.cssSelector("[type='submit']")).click();
@@ -30,24 +34,24 @@ public class LegionOfJavaGroupTest extends BaseTest {
         String result = String.valueOf(getDriver().findElement(By.className("h1")).getText());
 
         Assert.assertEquals(result, "Alimento para Perro cachorro FIT FORMULA Saco 10 kg");
-        }
+    }
 
     @Test
     public void testFerosorLogin() {
 
-            getDriver().get("https://ferosor.cl");
-            getDriver().findElement(className("login")).click();
+        getDriver().get("https://ferosor.cl");
+        getDriver().findElement(className("login")).click();
 
-            WebElement email =  getDriver().findElement(By.className("form-control"));
-            email.sendKeys("test@test.com");
+        WebElement email = getDriver().findElement(By.className("form-control"));
+        email.sendKeys("test@test.com");
 
-            WebElement password =  getDriver().findElement(By.className("js-child-focus"));
-            password.sendKeys("12345");
+        WebElement password = getDriver().findElement(By.className("js-child-focus"));
+        password.sendKeys("12345");
 
-            getDriver().findElement(By.id("submit-login")).click();
-            String result = String.valueOf( getDriver().findElement(By.className("page-header")).getText());
+        getDriver().findElement(By.id("submit-login")).click();
+        String result = String.valueOf(getDriver().findElement(By.className("page-header")).getText());
 
-            Assert.assertEquals(result, "Su cuenta");
+        Assert.assertEquals(result, "Su cuenta");
     }
 
     @Ignore
@@ -70,17 +74,18 @@ public class LegionOfJavaGroupTest extends BaseTest {
         Assert.assertEquals(arr[1], "RaisedGardenBeds");
 
     }
+
     @Test
-    public void testFindElement(){
+    public void testFindElement() {
         getDriver().get("https://www.w3schools.com/");
 
-        WebElement textBox=getDriver().findElement(By.id("search2"));
+        WebElement textBox = getDriver().findElement(By.id("search2"));
         textBox.sendKeys("Java Tutorial");
-        WebElement button=getDriver().findElement(By.id("learntocode_searchbtn"));
+        WebElement button = getDriver().findElement(By.id("learntocode_searchbtn"));
         button.click();
-        WebElement text=getDriver().findElement(By.xpath("//*[@id=\"leftmenuinnerinner\"]/a[1]"));
+        WebElement text = getDriver().findElement(By.xpath("//*[@id=\"leftmenuinnerinner\"]/a[1]"));
 
-        Assert.assertEquals(text.getText(),"Java HOME");
+        Assert.assertEquals(text.getText(), "Java HOME");
     }
 
     @Test
@@ -102,14 +107,13 @@ public class LegionOfJavaGroupTest extends BaseTest {
 
     @Test
     public void testMyPinterest() {
-        WebDriver driver = getDriver();
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        getDriver().get("https://www.pinterest.com/");
 
-        driver.get("https://www.pinterest.com/");
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
 
-        String title = driver.getTitle();
-        Assert.assertEquals("Pinterest", title);
+        String title = getDriver().getTitle();
+        assertEquals("Pinterest", title);
 
         WebElement buttonLogIn = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[contains(text(),'Log in')]")));
         buttonLogIn.click();
@@ -124,9 +128,30 @@ public class LegionOfJavaGroupTest extends BaseTest {
         buttonSubmit.click();
 
         WebElement homeWebElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Home")));
-
         assertTrue(homeWebElement.isDisplayed());
         assertTrue(homeWebElement.isEnabled());
     }
 
+    @Test
+    public void testAnimalplanetShows() {
+
+        getDriver().get("https://www.animalplanet.com/");
+        getDriver().manage().window().maximize();
+
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(5));
+
+        WebElement aria_labelElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//li[@class='siteLogo-Sz8OyJHj']")));
+        assertTrue(aria_labelElement.isDisplayed());
+        assertTrue(aria_labelElement.isEnabled());
+
+        WebElement shows = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//p[contains(text(),'Shows')]")));
+        shows.click();
+
+        WebElement ClickWildLife = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Wildlife')]")));
+        ClickWildLife.click();
+
+        WebElement lisOfShows = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='subtabsWrapper-TXB_Y6RY']")));
+        assertTrue(lisOfShows.isDisplayed());
+        assertTrue(lisOfShows.isEnabled());
+    }
 }
