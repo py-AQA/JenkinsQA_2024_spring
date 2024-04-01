@@ -230,6 +230,5 @@ public class GroupRedroverJava7Test extends BaseTest {
         Assert.assertEquals(optionValue,"New York");
 
     }
-
 }
 
