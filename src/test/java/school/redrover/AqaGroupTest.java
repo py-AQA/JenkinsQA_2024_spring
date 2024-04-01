@@ -13,9 +13,12 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 public class AqaGroupTest extends AqaGroupBaseTest {
     private static final String URL = "https://demoqa.com/alerts";
@@ -810,5 +813,84 @@ public class AqaGroupTest extends AqaGroupBaseTest {
                 name.getAttribute("value"),
                 myName,
                 "input field contains wrong value");
+    }
+
+    @Test
+    public void testHoverParagraph() {
+        getDriver().get("https://testpages.eviltester.com/styled/csspseudo/css-hover.html");
+
+        new Actions(getDriver())
+                .moveToElement(getDriver().findElement(By.id("hoverpara")))
+                .perform();
+
+        Assert.assertEquals(
+                getDriver().findElement(By.id("hoverparaeffect")).getText(),
+                "You can see this paragraph now that you hovered on the above 'button'.");
+    }
+
+    @Test
+    public void testModalWindow() {
+        getDriver().get("https://tympanus.net/Development/ModalWindowEffects/");
+
+        getDriver().findElement(By.cssSelector("[data-modal = 'modal-1']")).click();
+        getDriver().findElement(By.className("md-close")).click();
+
+        Assert.assertTrue(getDriver().findElement(By.cssSelector("[data-modal = 'modal-1']")).isEnabled());
+    }
+
+    @Test
+    public void testDragDrop(){
+        getDriver().get("https://testpages.eviltester.com/styled/drag-drop-javascript.html");
+
+        WebElement draggable = getDriver().findElement(By.id("draggable1"));
+        WebElement droppable = getDriver().findElement(By.id("droppable1"));
+
+        new Actions(getDriver())
+                .dragAndDrop(draggable, droppable)
+                .perform();
+
+        Assert.assertEquals(
+                getDriver().findElement(By.id("droppable1")).getText(),
+                "Dropped!",
+                "Не удалось перетащить элемент");
+    }
+
+    @Test
+    public void testRefreshPage() {
+        getDriver().get("https://testpages.eviltester.com/styled/refresh");
+
+        String text = getDriver().findElement(By.id("embeddedrefreshdatevalue")).getText();
+        getDriver().findElement(By.id("button")).click();
+
+        Assert.assertNotEquals(
+                getDriver().findElement(By.id("embeddedrefreshdatevalue")).getText(),
+                text);
+    }
+
+    @Test
+    public void testHoverDiv() {
+        getDriver().get("https://testpages.eviltester.com/styled/csspseudo/css-hover.html");
+
+        new Actions(getDriver())
+                .moveToElement(getDriver().findElement(By.id("hoverdivpara")))
+                .perform();
+
+        Assert.assertEquals(
+                getDriver().findElement(By.id("hoverdivparaeffect")).getText(),
+                "You can see this child div content now that you hovered on the above 'button'.");
+    }
+
+    @Test
+    public void testUploadFile() throws URISyntaxException {
+        getDriver().get("https://testpages.eviltester.com/styled/file-upload-test.html");
+
+        getDriver().findElement(By.id("fileinput")).sendKeys(
+                Paths.get(Objects.requireNonNull(getClass().getClassLoader().getResource("1.jpg"))
+                        .toURI()).toFile().getAbsolutePath());
+
+        getDriver().findElement(By.id("itsanimage")).click();
+        getDriver().findElement(By.className("styled-click-button")).click();
+
+        Assert.assertEquals(getDriver().findElement(By.id("uploadedfilename")).getText(), "1.jpg");
     }
 }

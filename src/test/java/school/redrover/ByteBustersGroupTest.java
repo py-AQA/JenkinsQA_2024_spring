@@ -135,17 +135,13 @@ public class ByteBustersGroupTest extends BaseTest {
     public void googleTranslatorTest() throws InterruptedException {
 
         getDriver().get("https://translate.google.com/#");
-
-        Thread.sleep(2000);
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofMillis(2000));
 
         WebElement textField = getDriver().findElement(By.className("er8xn"));
         textField.sendKeys("Hello World");
 
-        Thread.sleep(2000);
-
         WebElement translationFieldText = getDriver().findElement(By.
-                xpath("//*[@id=\"yDmH0d\"]/c-wiz/div/div[2]/c-wiz/div" +
-                        "[2]/c-wiz/div[1]/div[2]/div[2]/c-wiz[2]/div/div[6]/div/div[1]/span[1]/span/span"));
+                xpath("(//span[@class='ryNqvb'])[1]"));
 
         Assert.assertEquals(translationFieldText.getText(), "Привет, мир");
 
