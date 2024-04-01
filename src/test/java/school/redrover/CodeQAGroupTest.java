@@ -289,7 +289,5 @@ public class CodeQAGroupTest extends BaseTest {
         String actualMessage = textMessage.getAttribute("value");
         String expectedMessage = "Thank you very much";
         Assert.assertEquals(actualMessage, expectedMessage);
-
-
     }
 }
