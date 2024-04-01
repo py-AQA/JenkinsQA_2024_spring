@@ -72,26 +72,52 @@ public class UnderdogsGroupTest extends BaseTest {
         driver.quit();
     }
 
-    @Ignore
     @Test
     public void testCheckBox() {
-        WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get("https://demoqa.com/checkbox");
+        getDriver().get("https://demoqa.com/checkbox");
+        getDriver().manage().window().maximize();
 
-        driver
+        getDriver()
                 .findElement(By.xpath("//div[@id='tree-node']/ol/li/span/button"))
                 .click();
-        driver.findElement(By.xpath("//*[@id='tree-node']//li[2]//button"))
+        getDriver().findElement(By.xpath("//*[@id='tree-node']//li[2]//button"))
                 .click();
-        driver.findElement(By.xpath("//*[@for='tree-node-workspace']/span"))
+        getDriver().findElement(By.xpath("//*[@for='tree-node-workspace']/span"))
                 .click();
-        try {
-            Assert.assertEquals(driver.findElement(By.id("result")).getText(),
-                    "You have selected :\nworkspace\nreact\nangular\nveu");
-        } finally {
-            driver.quit();
-        }
+
+        Assert.assertEquals(getDriver().findElement(By.id("result")).getText(),
+                "You have selected :\nworkspace\nreact\nangular\nveu");
+    }
+
+    @Test
+    public void testHomeCheckbox() {
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        getDriver().get("https://demoqa.com/checkbox");
+//        getDriver().findElement(new By.ByCssSelector("[class='rct-icon rct-icon-uncheck']")).click();
+        getDriver().findElement(By.xpath("//*[@for='tree-node-home']")).click();
+
+        WebElement results = getDriver().findElement(By.id("result"));
+        String textHome = """
+                You have selected :
+                home
+                desktop
+                notes
+                commands
+                documents
+                workspace
+                react
+                angular
+                veu
+                office
+                public
+                private
+                classified
+                general
+                downloads
+                wordFile
+                excelFile""";
+
+        Assert.assertEquals(results.getText(), textHome);
     }
 
     @Ignore
@@ -172,40 +198,67 @@ public class UnderdogsGroupTest extends BaseTest {
         Assert.assertEquals(actualText.getText(), "WOMEN'S BACKPACKS");
     }
 
-    @Ignore
     @Test
     public void testAutomationTestingOnline() throws InterruptedException {
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://automationintesting.online/");
+        getDriver().get("https://automationintesting.online/");
 
         String name = "Anhelina";
-        WebElement fieldName = driver.findElement(By.xpath("//*[@id=\"name\"]"));
+        WebElement fieldName = getDriver().findElement(By.xpath("//*[@id=\"name\"]"));
         fieldName.sendKeys(name);
 
-        WebElement fieldEmail = driver.findElement(By.xpath("//*[@id=\"email\"]"));
+        WebElement fieldEmail = getDriver().findElement(By.xpath("//*[@id=\"email\"]"));
         fieldEmail.sendKeys("qa@mail.com");
 
-        WebElement fieldPhone = driver.findElement(By.xpath("//*[@id=\"phone\"]"));
+        WebElement fieldPhone = getDriver().findElement(By.xpath("//*[@id=\"phone\"]"));
         fieldPhone.sendKeys("01234567890");
 
         String subject = "rooms";
-        WebElement fieldSubject = driver.findElement(By.xpath("//*[@id=\"subject\"]"));
+        WebElement fieldSubject = getDriver().findElement(By.xpath("//*[@id=\"subject\"]"));
         fieldSubject.sendKeys(subject);
 
-        WebElement fieldMessage = driver.findElement(By.xpath("//*[@id=\"description\"]"));
+        WebElement fieldMessage = getDriver().findElement(By.xpath("//*[@id=\"description\"]"));
         fieldMessage.sendKeys("Hello. I'm Anhelina.");
 
-        WebElement buttonSubmit = driver.findElement(By.xpath("//*[@id=\"submitContact\"]"));
+        WebElement buttonSubmit = getDriver().findElement(By.xpath("//*[@id=\"submitContact\"]"));
         buttonSubmit.click();
 
         Thread.sleep(500);
-        WebElement actualText = driver.findElement(By.xpath("//div[@class = \"row contact\"]/div[2]"));
+        WebElement actualText = getDriver().findElement(By.xpath("//div[@class = \"row contact\"]/div[2]"));
 
         Assert.assertEquals(actualText.getText(), "Thanks for getting in touch " + name + "!" + "\n"
-                                                         + "We'll get back to you about" + "\n"
-                                                         + subject + "\n"
-                                                         + "as soon as possible.");
+                                                        + "We'll get back to you about" + "\n"
+                                                        + subject + "\n"
+                                                        + "as soon as possible.");
 
-        driver.quit();
+    }
+
+    @Test
+    public void testMainTest() throws InterruptedException {
+        getDriver().get("https://art-complex.ru/brand/kl-acoustics/");
+        Thread.sleep(2000);
+        getDriver().findElement(By.id("mod_search_searchword")).sendKeys("INVOTONE H829");
+        Thread.sleep(3000);
+        getDriver().findElement(By.id("sr0")).click();
+        getDriver().findElement(By.id("tocart_3341")).click();
+        getDriver().findElement(By.id("count_3341")).sendKeys("2");
+        String resultText = getDriver().findElement(By.className("shop-cart-div-1")).getText();
+
+        Assert.assertEquals(resultText, "Минимальный заказ в нашем магазине 10 000 руб.");
+    }
+
+    @Test
+    public void testSauceDemo() throws InterruptedException {
+        getDriver().get("https://www.saucedemo.com/");
+        getDriver().manage().window().maximize();
+
+        Assert.assertEquals ("Swag Labs", getDriver().findElement (By.className("login_logo")).getText());
+
+        getDriver().findElement(By.id("user-name")).sendKeys("standard_user");
+        getDriver().findElement(By.id("password")).sendKeys("secret_sauce");
+        getDriver().findElement(By.id("login-button")).click();
+
+        Thread.sleep(1000);
+
+        Assert.assertEquals ("Swag Labs", getDriver().findElement (By.className("app_logo")).getText());
     }
 }
