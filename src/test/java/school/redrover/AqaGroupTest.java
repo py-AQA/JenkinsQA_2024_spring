@@ -853,6 +853,18 @@ public class AqaGroupTest extends AqaGroupBaseTest {
     }
 
     @Test
+    public void testRefreshPage() {
+        getDriver().get("https://testpages.eviltester.com/styled/refresh");
+
+        String text = getDriver().findElement(By.id("embeddedrefreshdatevalue")).getText();
+        getDriver().findElement(By.id("button")).click();
+
+        Assert.assertNotEquals(
+                getDriver().findElement(By.id("embeddedrefreshdatevalue")).getText(),
+                text);
+    }
+
+    @Test
     public void testHoverDiv() {
         getDriver().get("https://testpages.eviltester.com/styled/csspseudo/css-hover.html");
 
