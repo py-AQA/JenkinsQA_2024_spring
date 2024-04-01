@@ -32,7 +32,6 @@ public class CodeQAGroupTest extends BaseTest {
         for (int i = 0; i < 10; i++) {
             slider.sendKeys(Keys.ARROW_RIGHT);
             expectedValue += step;
-
             Assert.assertEquals(Double.parseDouble(text.getText()), expectedValue);
         }
         for (int i = 0; i < 11; i++) {
