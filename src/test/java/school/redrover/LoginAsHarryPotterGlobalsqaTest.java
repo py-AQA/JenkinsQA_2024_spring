@@ -15,12 +15,12 @@ public class LoginAsHarryPotterGlobalsqaTest {
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login");
 
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
         WebElement customerLoginButton = driver.findElement(By.xpath("//button[@ng-click='customer()']"));
         customerLoginButton.click();
 
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
         Select select = new Select(driver.findElement(By.id("userSelect")));
         select.selectByIndex(2);
@@ -28,7 +28,7 @@ public class LoginAsHarryPotterGlobalsqaTest {
         WebElement loginButton = driver.findElement(By.xpath("//button[@type = 'submit']"));
         loginButton.click();
 
-        Thread.sleep(1000);
+        Thread.sleep(2000);
 
         WebElement welcomeText = driver.findElement(By.xpath("//strong[text() = ' Welcome ']"));
         String s = welcomeText.getText();
