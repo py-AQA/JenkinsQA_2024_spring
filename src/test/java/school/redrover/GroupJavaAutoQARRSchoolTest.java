@@ -6,6 +6,9 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Action;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
@@ -59,4 +62,38 @@ public class GroupJavaAutoQARRSchoolTest extends BaseTest {
         String value = title.getText();
         Assert.assertEquals(value, "Thanks for submitting the form");
     }
+
+    @Test
+    public void testTasksAreaWithDoubleclick() {
+
+        getDriver().get("https://thecode.media/");
+
+        WebElement searchArea = getDriver().findElement(By.className("tab-questions"));
+
+        Action myAction = new Actions(getDriver()).doubleClick(searchArea).build();
+        myAction.perform();
+
+        WebElement foundText = getDriver().findElement(By.xpath("(//h1[@class='search__title'])"));
+
+        Assert.assertEquals(foundText.getText(), "Как решить");
+    }
+
+    @Test
+    public void testCheckTextField() {
+
+        getDriver().get("https://thecode.media/");
+
+        WebElement searchButton = getDriver().findElement(By.className("heading-search__open"));
+        searchButton.click();
+
+        WebElement searchText = getDriver().findElement(By.className("heading-search__input"));
+        searchText.sendKeys("Api");
+
+        searchButton.click();
+
+        WebElement foundText = getDriver().findElement(By.className("search__title"));
+
+        Assert.assertEquals(foundText.getText(),"api");
+    }
+
 }
