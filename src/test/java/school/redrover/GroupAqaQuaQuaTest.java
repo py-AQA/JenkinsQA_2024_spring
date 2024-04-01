@@ -8,6 +8,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
 
+import static java.lang.Thread.sleep;
 
 
 public class GroupAqaQuaQuaTest extends BaseTest {
@@ -38,15 +39,15 @@ public class GroupAqaQuaQuaTest extends BaseTest {
         getDriver().get("https://demowebshop.tricentis.com/");
 
         WebElement elementDropDownMenu = getDriver().findElement(
-                By.cssSelector("div.header-menu>ul.top-menu>li>a[href=\"/gift-cards\"]"));
+                By.xpath("//a[@href='/gift-cards']"));
         elementDropDownMenu.click();
 
         Assert.assertEquals(getDriver().getTitle(), "Demo Web Shop. Gift Cards");
 
-        WebElement menuOnPageComputers = getDriver().findElement((
+        WebElement menuOnPageGiftCards = getDriver().findElement((
                 By.cssSelector("div.page.category-page>div.page-title>h1")
                 ));
-        Assert.assertEquals(menuOnPageComputers.getText(), "Gift Cards");
+        Assert.assertEquals(menuOnPageGiftCards.getText(), "Gift Cards");
     }
 }
 
