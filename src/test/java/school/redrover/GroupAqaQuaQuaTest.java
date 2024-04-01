@@ -2,6 +2,7 @@ package school.redrover;
 
 import org.openqa.selenium.By;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
 import org.testng.Assert;
@@ -48,6 +49,20 @@ public class GroupAqaQuaQuaTest extends BaseTest {
                 By.cssSelector("div.page.category-page>div.page-title>h1")
                 ));
         Assert.assertEquals(menuOnPageGiftCards.getText(), "Gift Cards");
+    }
+    @Test
+    public void testLoginTheInternet() {
+        getDriver().get("https://the-internet.herokuapp.com/");
+
+        Assert.assertEquals(getDriver().getTitle(), "The Internet");
+
+        getDriver().findElement(By.linkText("Form Authentication")).click();
+
+        getDriver().findElement(By.id("username")).sendKeys("tomsmith");
+        getDriver().findElement(By.id("password")).sendKeys("SuperSecretPassword!");
+        getDriver().findElement(By.cssSelector("button")).click();
+
+        Assert.assertEquals(getDriver().findElement(By.tagName("h2")).getText(), "Secure Area");
     }
 }
 
