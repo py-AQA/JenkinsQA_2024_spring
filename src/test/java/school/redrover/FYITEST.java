@@ -12,13 +12,16 @@ public class FYITEST {
         public void download()  {
             WebDriver driver = new ChromeDriver();
             driver.get("https://fyi.fyi/");
+
             WebElement link = driver.findElement(By.xpath("//a[@href='https://fyi.me/app'] "));
             link.click();
+
             WebElement Appstore = driver.findElement(By.className("we-localnav__title__product"));
             String value = Appstore.getText();
             Assert.assertEquals(value,"Mac App Store" );
             String currentURL = driver.getCurrentUrl();
             Assert.assertEquals(currentURL, "https://apps.apple.com/us/app/fyi-ai-focus-your-ideas/id1554341467");
+
             driver.quit();}
 
     }
