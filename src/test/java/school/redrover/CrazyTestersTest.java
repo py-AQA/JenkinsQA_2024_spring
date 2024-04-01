@@ -26,6 +26,8 @@ public class CrazyTestersTest {
 
         Assert.assertEquals(columnB.getText(), "A");
 
+        System.out.println("Тест пройден!");
+
         driver.quit();
     }
 }
