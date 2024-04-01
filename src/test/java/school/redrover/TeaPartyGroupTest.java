@@ -143,7 +143,6 @@ public class TeaPartyGroupTest extends BaseTest {
         String currentURL = getDriver().getCurrentUrl();
         Assert.assertEquals(currentURL, "https://apps.apple.com/us/app/fyi-ai-focus-your-ideas/id1554341467");
 
-
     }
 
     }
