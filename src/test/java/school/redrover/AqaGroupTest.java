@@ -13,9 +13,13 @@ import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
+import java.net.URISyntaxException;
+import java.nio.file.Paths;
 import java.time.Duration;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class AqaGroupTest extends AqaGroupBaseTest {
     private static final String URL = "https://demoqa.com/alerts";
@@ -29,8 +33,20 @@ public class AqaGroupTest extends AqaGroupBaseTest {
     private static final By MODAL_DIALOG_OK_BUTTON = By.id("dialog-ok");
     private static final By MODAL_DIALOG_TEXT = By.id("dialog-text");
     private static final String URL_LETCODE = "https://letcode.in/edit";
+    private static final String URL_MOB = "http://23.105.246.172:5000/login";
+    private static final String INPUT_EMAIL = "//input[@class='ant-input primaryInput  not-entered']";
+    private static final String BTN_PASSWORD = "//button[@class='ant-btn ant-btn-default authButton big colorPrimary ']";
+    private static final By GET_ERROR = By.xpath("//div[@style='text-align: center; margin-bottom: 20px; color: rgb(255, 0, 0);']");
+
     private String calc(String x) {
         return String.valueOf(Math.log(Math.abs(12 * Math.sin(Integer.parseInt(x)))));
+    }
+
+    private void url() {
+        getDriver().get(URL_MOB);
+        getDriver().manage().window().setSize(new Dimension(1920, 1080));
+        getDriver().manage().timeouts().pageLoadTimeout(25, TimeUnit.SECONDS);
+        getDriver().manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
     }
 
     @Test
@@ -221,7 +237,7 @@ public class AqaGroupTest extends AqaGroupBaseTest {
 
     @DataProvider(name = "windowDataProvider")
     public Object[][] windowDataProvider() {
-        return new Object[][] {{"tabButton"}, {"windowButton"}};
+        return new Object[][]{{"tabButton"}, {"windowButton"}};
     }
 
     @Test(dataProvider = "windowDataProvider")
@@ -704,6 +720,7 @@ public class AqaGroupTest extends AqaGroupBaseTest {
                 getDriver().findElement(By.id("event1")).getText(),
                 "down a 65");
     }
+
     @Test
     public void testSendKeys() {
         getDriver().get(URL_LETCODE);
@@ -836,7 +853,7 @@ public class AqaGroupTest extends AqaGroupBaseTest {
     }
 
     @Test
-    public void testDragDrop(){
+    public void testDragDrop() {
         getDriver().get("https://testpages.eviltester.com/styled/drag-drop-javascript.html");
 
         WebElement draggable = getDriver().findElement(By.id("draggable1"));
@@ -875,5 +892,30 @@ public class AqaGroupTest extends AqaGroupBaseTest {
         Assert.assertEquals(
                 getDriver().findElement(By.id("hoverdivparaeffect")).getText(),
                 "You can see this child div content now that you hovered on the above 'button'.");
+    }
+
+    @Test
+    public void testUploadFile() throws URISyntaxException {
+        getDriver().get("https://testpages.eviltester.com/styled/file-upload-test.html");
+
+        getDriver().findElement(By.id("fileinput")).sendKeys(
+                Paths.get(Objects.requireNonNull(getClass().getClassLoader().getResource("1.jpg"))
+                        .toURI()).toFile().getAbsolutePath());
+
+        getDriver().findElement(By.id("itsanimage")).click();
+        getDriver().findElement(By.className("styled-click-button")).click();
+
+        Assert.assertEquals(getDriver().findElement(By.id("uploadedfilename")).getText(), "1.jpg");
+    }
+
+    @Test
+    public void testRemovesPasword() {
+        url();
+        getDriver().findElement(By.xpath(INPUT_EMAIL)).sendKeys("yyyyyyyyyy@mail.xx");
+        getDriver().findElement(By.xpath(BTN_PASSWORD)).click();
+
+        String getError = getDriver().findElement(GET_ERROR).getText();
+
+        Assert.assertEquals(getError, "Неправильный логин или пароль");
     }
 }
