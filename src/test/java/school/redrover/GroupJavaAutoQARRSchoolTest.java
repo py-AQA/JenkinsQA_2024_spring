@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Action;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
@@ -209,5 +210,19 @@ public class GroupJavaAutoQARRSchoolTest extends BaseTest {
         checkTable(STUDENT_ADDRESS, currentAddress);
         checkTable(STUDENT_STATE_AND_CITY, state);
         checkTable(STUDENT_STATE_AND_CITY, city);
+    }
+
+    @Test
+    public void testAuthorizationVprokat() {
+        getDriver().get("https://vprokat.online/");
+
+        getDriver().findElement(By.cssSelector("a[aria-label=\"Профиль\"]")).click();
+
+        getDriver().findElement(By.cssSelector("[autocomplete=email]")).sendKeys("1716.06+111@gmail.com");
+        getDriver().findElement(By.cssSelector("[autocomplete=current-password]")).sendKeys("parol123");
+        getDriver().findElement(By.xpath("//div//form//div//button[contains(text(), \"Войти\")]")).click();
+
+        getDriver().findElement(By.cssSelector("a[aria-label=\"Профиль\"]")).click();
+        getDriver().findElement(By.xpath("//body//div//main//div//button[contains(text(), \"Выйти\")]")).click();
     }
 }
