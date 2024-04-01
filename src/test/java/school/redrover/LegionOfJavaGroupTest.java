@@ -150,8 +150,8 @@ public class LegionOfJavaGroupTest extends BaseTest {
         WebElement ClickWildLife = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(),'Wildlife')]")));
         ClickWildLife.click();
 
-        WebElement lisOfShows = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='subtabsWrapper-TXB_Y6RY']")));
-        assertTrue(lisOfShows.isDisplayed());
-        assertTrue(lisOfShows.isEnabled());
+        WebElement listOfShows = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='subtabsWrapper-TXB_Y6RY']")));
+        assertTrue(listOfShows.isDisplayed());
+        assertTrue(listOfShows.isEnabled());
     }
 }
