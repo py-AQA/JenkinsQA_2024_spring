@@ -37,22 +37,20 @@ public class JavaHashGroupTest extends BaseTest {
     private static final String BAD_PASSWORD = "Password123";
     @Test
     public void testBadLogin() throws InterruptedException {
-        WebDriver driver = getDriver();
+        getDriver().get("https://www.sofa.com/gb");
 
-        driver.get("https://www.sofa.com/gb");
-
-        WebElement loginButton = driver.findElement(By.xpath("//a[@href=\"/gb/login\"]"));
+        WebElement loginButton = getDriver().findElement(By.xpath("//a[@href=\"/gb/login\"]"));
         loginButton.click();
         Thread.sleep(500);
 
-        WebElement inputEmail = driver.findElement(By.id("j_username"));
+        WebElement inputEmail = getDriver().findElement(By.id("j_username"));
         inputEmail.sendKeys(BAD_USERNAME);
-        WebElement inputPassword = driver.findElement(By.id("j_password"));
+        WebElement inputPassword = getDriver().findElement(By.id("j_password"));
         inputPassword.sendKeys(BAD_PASSWORD);
-        driver.findElement(By.id("loginBtn")).click();
+        getDriver().findElement(By.id("loginBtn")).click();
         Thread.sleep(500);
 
-        WebElement errorText = driver.findElement(By.xpath("//div[@class=\"alert alert-danger alert-dismissable\"]"));
+        WebElement errorText = getDriver().findElement(By.xpath("//div[@class=\"alert alert-danger alert-dismissable\"]"));
 
         Assert.assertEquals(errorText.getText(), "×\n" + "Your username or password was incorrect.");
     }
