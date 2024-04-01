@@ -34,19 +34,19 @@ public class GroupAqaQuaQuaTest extends BaseTest {
 
     }
     @Test
-    public void testDropDownMenuComputers() {
+    public void testDropDownMenuGiftCards() {
         getDriver().get("https://demowebshop.tricentis.com/");
 
         WebElement elementDropDownMenu = getDriver().findElement(
-                By.cssSelector("div.header-menu>ul.top-menu>li>a[href=\"/computers\"]"));
+                By.cssSelector("div.header-menu>ul.top-menu>li>a[href=\"/gift-cards\"]"));
         elementDropDownMenu.click();
 
-        Assert.assertEquals(getDriver().getTitle(), "Demo Web Shop. Computers");
+        Assert.assertEquals(getDriver().getTitle(), "Demo Web Shop. Gift Cards");
 
         WebElement menuOnPageComputers = getDriver().findElement((
                 By.cssSelector("div.page.category-page>div.page-title>h1")
                 ));
-        Assert.assertEquals(menuOnPageComputers.getText(), "Computers");
+        Assert.assertEquals(menuOnPageComputers.getText(), "Gift Cards");
     }
 }
 
