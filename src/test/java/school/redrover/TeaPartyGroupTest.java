@@ -130,7 +130,7 @@ public class TeaPartyGroupTest extends BaseTest {
 
 
     @Test // Testing that download button redirects user to App store preview, Lena's Test
-    public void download()  {
+    public void downloadButtonTest()  {
 
         getDriver().get("https://fyi.fyi/");
 
