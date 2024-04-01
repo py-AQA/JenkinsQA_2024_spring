@@ -33,6 +33,21 @@ public class GroupAqaQuaQuaTest extends BaseTest {
         Assert.assertEquals(getDriver().findElement(By.className("product-name")).getText(), "Computing and Internet");
 
     }
+    @Test
+    public void testDropDownMenuComputers() {
+        getDriver().get("https://demowebshop.tricentis.com/");
+
+        WebElement elementDropDownMenu = getDriver().findElement(
+                By.cssSelector("div.header-menu>ul.top-menu>li>a[href=\"/computers\"]"));
+        elementDropDownMenu.click();
+
+        Assert.assertEquals(getDriver().getTitle(), "Demo Web Shop. Computers");
+
+        WebElement menuOnPageComputers = getDriver().findElement((
+                By.cssSelector("div.page.category-page>div.page-title>h1")
+                ));
+        Assert.assertEquals(menuOnPageComputers.getText(), "Computers");
+    }
 }
 
 
