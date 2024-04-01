@@ -33,20 +33,63 @@ public class GroupAqaQuaQuaTest extends BaseTest {
         Assert.assertEquals(getDriver().findElement(By.className("product-name")).getText(), "Computing and Internet");
 
     }
+
     @Test
-    public void testDropDownMenuGiftCards() {
+    public void testAddGiftCardToCart() {
         getDriver().get("https://demowebshop.tricentis.com/");
 
-        WebElement elementDropDownMenu = getDriver().findElement(
-                By.cssSelector("div.header-menu>ul.top-menu>li>a[href=\"/gift-cards\"]"));
-        elementDropDownMenu.click();
+        WebElement selectSortBy = getDriver().findElement(
+                By.cssSelector("div.header-menu>ul.top-menu>li>a[href='/gift-cards']"));
+        selectSortBy.click();
 
-        Assert.assertEquals(getDriver().getTitle(), "Demo Web Shop. Gift Cards");
+        getDriver().findElement(
+                        By.cssSelector("div.product-grid>div.item-box>div.product-item[data-productid='1']>div.picture"))
+                .click();
+        getDriver().findElement(
+                By.cssSelector("div.breadcrumb>ul>li>strong.current-item"));
 
-        WebElement menuOnPageComputers = getDriver().findElement((
-                By.cssSelector("div.page.category-page>div.page-title>h1")
-                ));
-        Assert.assertEquals(menuOnPageComputers.getText(), "Gift Cards");
+        Assert.assertEquals(getDriver().findElement(
+                By.cssSelector("div.breadcrumb>ul>li>strong.current-item")).getText(), "$5 VIRTUAL GIFT CARD");
+
+        getDriver().findElement(
+                By.cssSelector("div.giftcard>div>input.recipient-name")).sendKeys("Ippolit");
+        getDriver().findElement(
+                By.cssSelector("div.giftcard>div>input.recipient-email")).sendKeys("ippolit@mail.ru");
+        getDriver().findElement(
+                By.cssSelector("div.giftcard>div>input.sender-name")).sendKeys("Barbara");
+        getDriver().findElement(
+                By.cssSelector("div.giftcard>div>input.sender-email")).sendKeys("barbara@mail.com");
+        getDriver().findElement(
+                By.cssSelector("div.giftcard>div>textarea.message")).sendKeys("Тебе от меня! :)");
+        getDriver().findElement(
+                By.cssSelector("input[type='button']#add-to-cart-button-1")).click();
+        getDriver().findElement(
+                By.cssSelector("div.header-links>ul>li#topcartlink")).click();
+
+        Assert.assertEquals(getDriver().getCurrentUrl(), "https://demowebshop.tricentis.com/cart");
+        Assert.assertEquals(getDriver().findElement(
+                        By.cssSelector("div.page-title>h1")).getText(), "Shopping cart");
+        Assert.assertEquals(getDriver().findElement(
+                        By.cssSelector("td.product>a.product-name")).getText(), "$5 Virtual Gift Card");
+        // как подцепить эл.адреса?
+        Assert.assertEquals(getDriver().findElement(
+                        By.cssSelector("td.unit-price.nobr>span.product-unit-price")).getText(), "5.00");
+        Assert.assertEquals(getDriver().findElement(
+                        By.cssSelector("td.qty.nobr>input.qty-input")).getAttribute("value"), "1");
+        Assert.assertEquals(getDriver().findElement(
+                        By.cssSelector("td.subtotal.nobr.end>span.product-subtotal")).getText(), "5.00");
+        Assert.assertEquals(getDriver().findElement(
+                        By.cssSelector("td.cart-total-right>span.nobr>span.product-price")).getText(), "5.00");
+        Assert.assertEquals(getDriver().findElement(
+                        By.cssSelector("td.cart-total-right>span.nobr>span.product-price.order-total>strong")).getText(), "5.00");
+
+
+        getDriver().findElement(By.cssSelector("input[type='checkbox']#termsofservice")).click();
+        getDriver().findElement(By.id("checkout")).click();
+
+        Assert.assertEquals(getDriver().findElement(
+                By.cssSelector("div.page-title>h1")).getText(), "Welcome, Please Sign In!");
+
     }
 }
 
