@@ -25,6 +25,7 @@ public class CodeQAGroupTest extends BaseTest {
         WebElement text = getDriver().findElement(By.xpath("//*[@id='range']"));
 
         double expectedValue = 0;
+
         Assert.assertEquals(Double.parseDouble(text.getText()), expectedValue);
 
         final double step = 0.5;
@@ -276,20 +277,21 @@ public class CodeQAGroupTest extends BaseTest {
         textName.sendKeys("Miroslav");
         String actualName = textName.getAttribute("value");
         String expectedName = "Miroslav";
+
         Assert.assertEquals(actualName, expectedName);
 
         WebElement textPhone = getDriver().findElement(By.id("feedbackdirector-phone"));
         textPhone.sendKeys("0502380088");
         String actualPhone = textPhone.getAttribute("value");
         String expectedPhone = "+38 (050) 238-00-88";
+
         Assert.assertEquals(actualPhone, expectedPhone);
 
         WebElement textMessage = getDriver().findElement(By.id("feedbackdirector-message"));
         textMessage.sendKeys("Thank you very much");
         String actualMessage = textMessage.getAttribute("value");
         String expectedMessage = "Thank you very much";
+
         Assert.assertEquals(actualMessage, expectedMessage);
-
-
     }
 }
