@@ -149,6 +149,7 @@ public class ByteBustersGroupTest extends BaseTest {
 
     @Test
     public void testMarvel() throws InterruptedException {
+
         WebDriver driver = new ChromeDriver();
         driver.get("https://www.marvel.com/");
 
@@ -162,7 +163,6 @@ public class ByteBustersGroupTest extends BaseTest {
 
         WebElement text = driver.findElement(By.className("typeahead__input"));
         text.sendKeys("Deadpool");
-
         text.sendKeys(Keys.ENTER);
 
         Thread.sleep(1000);
