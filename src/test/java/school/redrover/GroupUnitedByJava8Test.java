@@ -86,7 +86,7 @@ public class GroupUnitedByJava8Test extends BaseTest {
     }
 
     @Test
-    public void happyPathLogin() {
+    public void testHappyPathLogin() {
         getDriver().get("https://www.saucedemo.com/");
 
         WebElement name = getDriver().findElement(By.xpath("//input[@id='user-name']"));
@@ -96,11 +96,9 @@ public class GroupUnitedByJava8Test extends BaseTest {
         password.sendKeys("secret_sauce");
 
         getDriver().findElement(By.id("login-button")).click();
+        String actualResult = getDriver().getCurrentUrl();
 
-        String expectedResult = getDriver().getCurrentUrl();
-
-        Assert.assertEquals("https://www.saucedemo.com/inventory.html", expectedResult);
-
+        Assert.assertEquals(actualResult, "https://www.saucedemo.com/inventory.html" );
     }
     @Test
     public void testAlertAppearsAfterItemIsAddedToCart() {
