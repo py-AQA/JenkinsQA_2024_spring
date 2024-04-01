@@ -3,18 +3,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.testng.internal.BaseTestMethod;
 
-public class Nyc311GetTitleTest {
+public class Nyc311GetTitleTest extends AqaGroupBaseTest {
 
     @Test
-    public static void main(String[] args) {
+    public void testGetNYC311Title(String[] args) {
         WebDriver driver = new ChromeDriver();
         driver.get("https://portal.311.nyc.gov/");
 
         String expectedResult = "Home  · NYC311";
         String actualTitleResult = driver.getTitle();
-
-        System.out.println("Title of the website is: " + actualTitleResult);
 
         Assert.assertEquals(actualTitleResult, expectedResult);
 
