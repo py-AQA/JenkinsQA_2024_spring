@@ -117,17 +117,14 @@ public class GroupAqaQuaQuaTest extends BaseTest {
         getDriver().findElement(By.cssSelector("[id= 'Q']")).sendKeys("corel");
 
         getDriver().findElement(By.id("As")).click();
-        Select category = new Select(getDriver().findElement(By.id("Cid")));
-        category.selectByVisibleText("All");
-
+        new Select(getDriver().findElement(By.id("Cid"))).selectByVisibleText("All");
         getDriver().findElement(By.id("Isc")).click();
-        Select Manufacturer = new Select(getDriver().findElement(By.id("Mid")));
-        Manufacturer.selectByVisibleText("All");
+        new Select(getDriver().findElement(By.id("Mid"))).selectByVisibleText("All");
 
         getDriver().findElement(By.className("price-from")).sendKeys("0");
         getDriver().findElement(By.className("price-to")).sendKeys("1000000");
         getDriver().findElement(By.id("Sid")).click();
-        getDriver().findElement(By.cssSelector("div[class='search-input'] input[type= 'submit']")).click();
+        getDriver().findElement(By.cssSelector("[class^='search-i'] [type= 'submit']")).click();
 
         Assert.assertEquals(getDriver().findElement(By.cssSelector("h2 a[href^= '/corel']")).getText(),
                 "Corel Paint Shop Pro Photo X2");
