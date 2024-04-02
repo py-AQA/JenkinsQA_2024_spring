@@ -294,7 +294,17 @@ public class CodeQAGroupTest extends BaseTest {
 
         Assert.assertEquals(actualMessage, expectedMessage);
     }
-    @Test
+  @Test
+      public void testGoToAnotherPage25() {
+
+       getDriver().get("https://the-internet.herokuapp.com/");
+       getDriver().findElement(By.cssSelector("a[href='/abtest']")).click();
+       String actualResult = getDriver().findElement(By.cssSelector("h3")).getText();
+
+        Assert.assertEquals(actualResult, "A/B Test Control")
+  }
+  
+      @Test
     public void testForConflict() {
 
         getDriver().get("https://the-internet.herokuapp.com/");
