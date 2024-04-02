@@ -38,7 +38,6 @@ public class GroupCompanionsTest extends BaseTest {
         String value = text.getText();
 
         Assert.assertEquals("Блог", value);
-
     }
 
 }
