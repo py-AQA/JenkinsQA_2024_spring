@@ -310,8 +310,8 @@ public class CodeQAGroupTest extends BaseTest {
 
         String expectedResult = "Exit Intent";
 
-        WebElement actualResult = getDriver().findElement(
-                By.xpath("//h3"));
+        String actualResult = getDriver().findElement(
+                By.xpath("//h3")).getText();
 
         Assert.assertEquals(actualResult, expectedResult);
     }
