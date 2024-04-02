@@ -2,9 +2,7 @@ package school.redrover;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -76,6 +74,7 @@ public class CodeQAGroupTest extends BaseTest {
 
         Assert.assertEquals(actualRes, "Project freestylePrTest39");
     }
+
     @Test
     public void testDropDownMenu() {
         getDriver().get("https://the-internet.herokuapp.com");
@@ -264,6 +263,7 @@ public class CodeQAGroupTest extends BaseTest {
 
         Assert.assertTrue(menuIsDisplayed);
     }
+
     @Test
     public void testFieldValidation() throws InterruptedException {
 
@@ -294,17 +294,18 @@ public class CodeQAGroupTest extends BaseTest {
 
         Assert.assertEquals(actualMessage, expectedMessage);
     }
+
   @Test
       public void testGoToAnotherPage() {
 
-       getDriver().get("https://the-internet.herokuapp.com/");
-       getDriver().findElement(By.cssSelector("a[href='/abtest']")).click();
-       String actualResult = getDriver().findElement(By.cssSelector("h3")).getText();
+        getDriver().get("https://the-internet.herokuapp.com/");
+        getDriver().findElement(By.cssSelector("a[href='/abtest']")).click();
+        String actualResult = getDriver().findElement(By.cssSelector("h3")).getText();
 
         Assert.assertEquals(actualResult, "A/B Test Control");
-  }
-  
-      @Test
+    }
+
+    @Test
     public void testForConflict() {
 
         getDriver().get("https://the-internet.herokuapp.com/");
@@ -322,6 +323,30 @@ public class CodeQAGroupTest extends BaseTest {
 
         String actualResult = getDriver().findElement(
                 By.xpath("//h3")).getText();
+
+        Assert.assertEquals(actualResult, expectedResult);
+    }
+    @Test
+    public void testForConflict2() {
+
+        getDriver().get("https://the-internet.herokuapp.com/");
+
+        WebDriverWait wait60 = new WebDriverWait(getDriver(), Duration.ofSeconds(60));
+
+        wait60.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//a [@href='/floating_menu']")));
+
+        WebElement linkToDynamicallyLoadedPageElementsPage = getDriver().findElement(
+                By.xpath("//a [@href='/exit_intent']"));
+        linkToDynamicallyLoadedPageElementsPage.click();
+
+        String expectedResult = "This is a modal window";
+
+        wait60.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//div [@class='modal-title']")));
+
+        String actualResult = getDriver().findElement(
+                By.xpath("//div [@class='modal-title']/h3")).getText();
 
         Assert.assertEquals(actualResult, expectedResult);
     }
