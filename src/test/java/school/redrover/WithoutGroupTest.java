@@ -3,6 +3,7 @@ package school.redrover;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -52,5 +53,19 @@ public class WithoutGroupTest extends BaseTest {
 
         Assert.assertEquals(driver.findElement(By.id("name")).getText(), "Name:Lilia");
         Assert.assertEquals(driver.findElement(By.id("email")).getText(), "Email:test@gmail.com");
+    }
+
+    @Test
+    public void TestAliceAndCat() {
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://aliceandcat.ru/");
+        WebElement harryPotterButton = driver.findElement(By.id("menu-item-1590"));
+        harryPotterButton.click();
+        WebElement wizardingBooksBuy = driver.findElement(By.xpath("//*[@data-productid='1460']"));
+        wizardingBooksBuy.click();
+        WebElement checkoutForm = driver.findElement(By.className("woocommerce"));
+        Assert.assertNotNull(checkoutForm, "Element Checkout Form is not found");
+
+        driver.quit();
     }
 }
