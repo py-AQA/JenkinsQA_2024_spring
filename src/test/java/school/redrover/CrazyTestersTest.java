@@ -92,4 +92,23 @@ public class CrazyTestersTest extends BaseTest {
         driver.quit();
 
     }
+
+    @Test
+    public void placeholderFillTest(){
+        WebDriver driver = getDriver();
+        // driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        driver.get("https://www.saucedemo.com/");
+
+        WebElement textBoxUser = driver.findElement(By.name("user-name"));
+        textBoxUser.sendKeys("standard_user");
+        WebElement textBoxPass = driver.findElement(By.id("password"));
+        textBoxPass.sendKeys("secret_sauce");
+        WebElement submitButton = driver.findElement(By.id("login-button"));
+
+        submitButton.click();
+
+        String currentUrl = driver.getCurrentUrl();
+        Assert.assertEquals(currentUrl, "https://www.saucedemo.com/inventory.html");
+
+    }
 }
