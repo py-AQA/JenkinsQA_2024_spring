@@ -19,8 +19,10 @@ import java.time.Duration;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class AqaGroupTest extends AqaGroupBaseTest {
+
     private static final String URL = "https://demoqa.com/alerts";
     private static final String BUTTONS_URL = "https://demoqa.com/buttons";
     private static final String BROWSER_WINDOWS_URL = "https://demoqa.com/browser-windows";
@@ -32,8 +34,22 @@ public class AqaGroupTest extends AqaGroupBaseTest {
     private static final By MODAL_DIALOG_OK_BUTTON = By.id("dialog-ok");
     private static final By MODAL_DIALOG_TEXT = By.id("dialog-text");
     private static final String URL_LETCODE = "https://letcode.in/edit";
+    private static final String MODAL_WINDOW_URL = "https://tympanus.net/Development/ModalWindowEffects/";
+    private static final String URL_MOB = "http://23.105.246.172:5000/login";
+    private static final String INPUT_EMAIL = "//input[@class='ant-input primaryInput  not-entered']";
+    private static final String BTN_PASSWORD = "//button[@class='ant-btn ant-btn-default authButton big colorPrimary ']";
+    private static final By GET_ERROR = By.xpath("//div[@style='text-align: center; margin-bottom: 20px; color: rgb(255, 0, 0);']");
+
+
     private String calc(String x) {
         return String.valueOf(Math.log(Math.abs(12 * Math.sin(Integer.parseInt(x)))));
+    }
+
+    private void url() {
+        getDriver().get(URL_MOB);
+        getDriver().manage().window().setSize(new Dimension(1920, 1080));
+        getDriver().manage().timeouts().pageLoadTimeout(25, TimeUnit.SECONDS);
+        getDriver().manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
     }
 
     @Test
@@ -224,7 +240,7 @@ public class AqaGroupTest extends AqaGroupBaseTest {
 
     @DataProvider(name = "windowDataProvider")
     public Object[][] windowDataProvider() {
-        return new Object[][] {{"tabButton"}, {"windowButton"}};
+        return new Object[][]{{"tabButton"}, {"windowButton"}};
     }
 
     @Test(dataProvider = "windowDataProvider")
@@ -707,6 +723,7 @@ public class AqaGroupTest extends AqaGroupBaseTest {
                 getDriver().findElement(By.id("event1")).getText(),
                 "down a 65");
     }
+
     @Test
     public void testSendKeys() {
         getDriver().get(URL_LETCODE);
@@ -830,7 +847,7 @@ public class AqaGroupTest extends AqaGroupBaseTest {
 
     @Test
     public void testModalWindow() {
-        getDriver().get("https://tympanus.net/Development/ModalWindowEffects/");
+        getDriver().get(MODAL_WINDOW_URL);
 
         getDriver().findElement(By.cssSelector("[data-modal = 'modal-1']")).click();
         getDriver().findElement(By.className("md-close")).click();
@@ -839,7 +856,7 @@ public class AqaGroupTest extends AqaGroupBaseTest {
     }
 
     @Test
-    public void testDragDrop(){
+    public void testDragDrop() {
         getDriver().get("https://testpages.eviltester.com/styled/drag-drop-javascript.html");
 
         WebElement draggable = getDriver().findElement(By.id("draggable1"));
@@ -880,6 +897,31 @@ public class AqaGroupTest extends AqaGroupBaseTest {
                 "You can see this child div content now that you hovered on the above 'button'.");
     }
 
+    @DataProvider(name = "modalWindowsDataProvider")
+    public Object[][] modalWindowsDataProvider() {
+        return new Object[][]{
+                {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10},
+                {11}, {12}, {13}, {14}, {15}, {16}, {17}, {18}, {19}
+        };
+    }
+
+    @Test(dataProvider = "modalWindowsDataProvider")
+    public void testModalWindowsClose(int windowNumber) {
+        getDriver().get(MODAL_WINDOW_URL);
+
+        getDriver().findElement(By.cssSelector("[data-modal = 'modal-" + windowNumber + "']")).click();
+
+        getWait5().until(ExpectedConditions.elementToBeClickable(By.cssSelector(".md-show .md-close")));
+
+        new Actions(getDriver())
+                .moveToLocation(0, 0)
+                .click()
+                .perform();
+
+        Assert.assertTrue(
+                getWait5().until(ExpectedConditions.invisibilityOfElementLocated(By.className("md-content"))));
+    }
+  
     @Test
     public void testUploadFile() throws URISyntaxException {
         getDriver().get("https://testpages.eviltester.com/styled/file-upload-test.html");
@@ -895,6 +937,7 @@ public class AqaGroupTest extends AqaGroupBaseTest {
     }
 
     @Test
+
     public void testButtonChangeItsName() {
         getDriver().get("http://uitestingplayground.com/textinput");
 
@@ -923,4 +966,14 @@ public class AqaGroupTest extends AqaGroupBaseTest {
 
         Assert.assertFalse(getDriver().findElement(By.xpath(xpath)).isDisplayed(), "Not all the buttons are hidden!");
      }
+
+    public void testRemovesPasword() {
+        url();
+        getDriver().findElement(By.xpath(INPUT_EMAIL)).sendKeys("yyyyyyyyyy@mail.xx");
+        getDriver().findElement(By.xpath(BTN_PASSWORD)).click();
+
+        String getError = getDriver().findElement(GET_ERROR).getText();
+
+        Assert.assertEquals(getError, "Неправильный логин или пароль");
+    }
 }
