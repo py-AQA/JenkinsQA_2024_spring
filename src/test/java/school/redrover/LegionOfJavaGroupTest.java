@@ -9,9 +9,7 @@ import org.testng.Assert;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
-
 import java.time.Duration;
-
 import static org.openqa.selenium.By.className;
 import static org.testng.Assert.assertTrue;
 
@@ -23,7 +21,7 @@ public class LegionOfJavaGroupTest extends BaseTest {
         getDriver().get("https://ferosor.cl");
         getDriver().manage().timeouts().pageLoadTimeout(Duration.ofSeconds(10));
 
-        WebElement textBox = getDriver().findElement(By.name("s"));
+        WebElement textBox =  getDriver().findElement(By.name("s"));
         textBox.sendKeys("alimento");
 
         getDriver().findElement(By.cssSelector("[type='submit']")).click();
@@ -33,24 +31,24 @@ public class LegionOfJavaGroupTest extends BaseTest {
         String result = String.valueOf(getDriver().findElement(By.className("h1")).getText());
 
         Assert.assertEquals(result, "Alimento para Perro cachorro FIT FORMULA Saco 10 kg");
-    }
+        }
 
     @Test
     public void testFerosorLogin() {
 
-        getDriver().get("https://ferosor.cl");
-        getDriver().findElement(className("login")).click();
+            getDriver().get("https://ferosor.cl");
+            getDriver().findElement(className("login")).click();
 
-        WebElement email = getDriver().findElement(By.className("form-control"));
-        email.sendKeys("test@test.com");
+            WebElement email =  getDriver().findElement(By.className("form-control"));
+            email.sendKeys("test@test.com");
 
-        WebElement password = getDriver().findElement(By.className("js-child-focus"));
-        password.sendKeys("12345");
+            WebElement password =  getDriver().findElement(By.className("js-child-focus"));
+            password.sendKeys("12345");
 
-        getDriver().findElement(By.id("submit-login")).click();
-        String result = String.valueOf(getDriver().findElement(By.className("page-header")).getText());
+            getDriver().findElement(By.id("submit-login")).click();
+            String result = String.valueOf( getDriver().findElement(By.className("page-header")).getText());
 
-        Assert.assertEquals(result, "Su cuenta");
+            Assert.assertEquals(result, "Su cuenta");
     }
 
     @Ignore
@@ -73,18 +71,17 @@ public class LegionOfJavaGroupTest extends BaseTest {
         Assert.assertEquals(arr[1], "RaisedGardenBeds");
 
     }
-
     @Test
-    public void testFindElement() {
+    public void testFindElement(){
         getDriver().get("https://www.w3schools.com/");
 
-        WebElement textBox = getDriver().findElement(By.id("search2"));
+        WebElement textBox=getDriver().findElement(By.id("search2"));
         textBox.sendKeys("Java Tutorial");
-        WebElement button = getDriver().findElement(By.id("learntocode_searchbtn"));
+        WebElement button=getDriver().findElement(By.id("learntocode_searchbtn"));
         button.click();
-        WebElement text = getDriver().findElement(By.xpath("//*[@id=\"leftmenuinnerinner\"]/a[1]"));
+        WebElement text=getDriver().findElement(By.xpath("//*[@id=\"leftmenuinnerinner\"]/a[1]"));
 
-        Assert.assertEquals(text.getText(), "Java HOME");
+        Assert.assertEquals(text.getText(),"Java HOME");
     }
 
     @Test
@@ -135,7 +132,7 @@ public class LegionOfJavaGroupTest extends BaseTest {
 
     @Test
 
-    public void testLogin() {
+    public void testLogin(){
         getDriver().get("https://practicetestautomation.com/practice-test-login/");
         WebElement userName = getDriver().findElement(By.name("username"));
         userName.sendKeys("student");
@@ -169,6 +166,19 @@ public class LegionOfJavaGroupTest extends BaseTest {
         WebElement listOfShows = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='subtabsWrapper-TXB_Y6RY']")));
         assertTrue(listOfShows.isDisplayed());
         assertTrue(listOfShows.isEnabled());
+    }
+
+    @Test
+    public void testSauseDemo() {
+        getDriver().get("https://www.saucedemo.com");
+
+        getDriver().findElement(By.id("user-name")).sendKeys("problem_user");
+        getDriver().findElement(By.id("password")).sendKeys("secret_sauce");
+        getDriver().findElement(By.id("login-button")).click();
+
+        String message = getDriver().findElement(By.xpath("//span[@class='title']")).getText();
+
+        Assert.assertEquals(message, "Products");
     }
 
     @Test
