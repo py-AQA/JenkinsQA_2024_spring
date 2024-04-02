@@ -186,4 +186,16 @@ public class GroupAqaQuaQuaTest extends BaseTest {
         Assert.assertEquals(getDriver().findElement(By.cssSelector("h2 a[href^= '/corel']")).getText(),
                 "Corel Paint Shop Pro Photo X2");
     }
+    @Test
+    public void testOpeningComputersPage() throws InterruptedException {
+        getDriver().get("https://demowebshop.tricentis.com/");
+
+        getDriver().findElement(By.xpath("//a[@href = '/computers']")).click();
+
+        Thread.sleep(2000);
+
+        String resultText = getDriver().findElement(By.cssSelector(".page-title")).getText();
+
+        Assert.assertEquals(resultText, "Computers");
+    }
 }
