@@ -197,6 +197,5 @@ public class LegionOfJavaGroupTest extends BaseTest {
 
         WebElement item = driver.findElement(By.xpath("//h3[text() = 'Creatine']"));
         Assert.assertTrue(item.isDisplayed());
-
     }
 }
