@@ -207,7 +207,6 @@ public class GroupAqaQuaQuaTest extends BaseTest {
 
         Assert.assertEquals(getDriver().findElement(By.cssSelector("[id$='result-block']")).getText(), "Enter valid email");
     }
-
     @Test
     public void testLoginNegativePass() {
         getDriver().get("https://demowebshop.tricentis.com/");
@@ -220,6 +219,5 @@ public class GroupAqaQuaQuaTest extends BaseTest {
 
         Assert.assertEquals(getDriver().findElement(By.xpath("//form/div[1]/div/ul/li")).getText(),
                 "The credentials provided are incorrect");
-
     }
 }
