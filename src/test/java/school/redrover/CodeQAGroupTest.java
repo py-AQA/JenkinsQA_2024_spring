@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-
 public class CodeQAGroupTest extends BaseTest {
 
     @Test
@@ -299,8 +298,8 @@ public class CodeQAGroupTest extends BaseTest {
         Assert.assertEquals(actualMessage, expectedMessage);
     }
 
-    @Test
-    public void testGoToAnotherPage25() {
+  @Test
+      public void testGoToAnotherPage() {
 
         getDriver().get("https://the-internet.herokuapp.com/");
         getDriver().findElement(By.cssSelector("a[href='/abtest']")).click();
@@ -332,7 +331,43 @@ public class CodeQAGroupTest extends BaseTest {
     }
 
     @Test
-    public void TestDropDownMenu() {
+    public void testForConflict2() {
+
+        getDriver().get("https://the-internet.herokuapp.com/");
+
+        WebDriverWait wait60 = new WebDriverWait(getDriver(), Duration.ofSeconds(60));
+
+        wait60.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//a [@href='/floating_menu']")));
+
+        WebElement linkToDynamicallyLoadedPageElementsPage = getDriver().findElement(
+                By.xpath("//a [@href='/exit_intent']"));
+        linkToDynamicallyLoadedPageElementsPage.click();
+
+        String expectedResult = "This is a modal window";
+
+        wait60.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//div [@class='modal-title']")));
+
+        String actualResult = getDriver().findElement(
+                By.xpath("//div [@class='modal-title']/h3")).getText();
+
+        Assert.assertEquals(actualResult, expectedResult);
+    }
+
+    @Test
+    public void testLoginFormWithEmptyFields() {
+        getDriver().get("https://the-internet.herokuapp.com/");
+
+        getDriver().findElement(By.cssSelector("a[href='/login']")).click();
+        getDriver().findElement(By.xpath("//*[@class='radius']")).click();
+        String actualResult = getDriver().findElement(By.id("flash")).getText();
+
+        Assert.assertTrue(actualResult.contains( "Your username is invalid!"));
+    }
+
+    @Test
+    public void testDropDown() {
 
         getDriver().get("https://the-internet.herokuapp.com/");
 
