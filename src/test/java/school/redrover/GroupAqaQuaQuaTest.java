@@ -7,7 +7,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
 public class GroupAqaQuaQuaTest extends BaseTest {
-
     @Test
     public void testyAddingBookToCart() {
         getDriver().get("https://demowebshop.tricentis.com/");
