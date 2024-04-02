@@ -1,39 +1,56 @@
 package school.redrover;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import school.redrover.runner.BaseTest;
 
 import java.time.Duration;
 
-public class JavaHashGroupTest {
+public class JavaHashGroupTest extends BaseTest {
 
     @Test
-    public void mainPafeTitleTest() {
+    public void mainPageTitleTest() {
 
-        WebDriver driver = new ChromeDriver();
+        final String expectedTitle = "Swag Labs";
 
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofMillis(500));
 
-        driver.get("https://www.saucedemo.com");
+        getDriver().get("https://www.saucedemo.com");
 
-        WebElement loginField = driver.findElement(By.xpath("//input[@id='user-name']"));
-        WebElement passField = driver.findElement(By.xpath("//input[@id='password']"));
-        WebElement submitButton = driver.findElement(By.xpath("//input[@id='login-button']"));
+        WebElement loginField = getDriver().findElement(By.xpath("//input[@id='user-name']"));
+        WebElement passField = getDriver().findElement(By.xpath("//input[@id='password']"));
+        WebElement submitButton = getDriver().findElement(By.xpath("//input[@id='login-button']"));
 
         loginField.sendKeys("standard_user");
         passField.sendKeys("secret_sauce");
         submitButton.click();
 
-        String expectedTitle = "Swag Labs";
-
-        String actualTitle = driver.findElement(By.xpath("//div[contains(text(),'Swag Labs')]")).getText();
+        String actualTitle = getDriver().findElement(By.xpath("//div[contains(text(),'Swag Labs')]")).getText();
 
         Assert.assertEquals(actualTitle,expectedTitle);
+    }
 
-        driver.quit();
+    private static final String BAD_USERNAME = "username@gmail.com";
+    private static final String BAD_PASSWORD = "Password123";
+    @Test
+    public void testBadLogin() throws InterruptedException {
+        getDriver().get("https://www.sofa.com/gb");
+
+        WebElement loginButton = getDriver().findElement(By.xpath("//a[@href=\"/gb/login\"]"));
+        loginButton.click();
+        Thread.sleep(500);
+
+        WebElement inputEmail = getDriver().findElement(By.id("j_username"));
+        inputEmail.sendKeys(BAD_USERNAME);
+        WebElement inputPassword = getDriver().findElement(By.id("j_password"));
+        inputPassword.sendKeys(BAD_PASSWORD);
+        getDriver().findElement(By.id("loginBtn")).click();
+        Thread.sleep(600);
+
+        WebElement errorText = getDriver().findElement(By.xpath("//div[@class=\"alert alert-danger alert-dismissable\"]"));
+
+        Assert.assertEquals(errorText.getText(), "×\n" + "Your username or password was incorrect.");
     }
 }
