@@ -6,6 +6,9 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
+
+import java.util.List;
+
 public class GroupAqaQuaQuaTest extends BaseTest {
 
     @Test
@@ -251,5 +254,14 @@ public class GroupAqaQuaQuaTest extends BaseTest {
         Assert.assertEquals(getDriver().findElement(
                         By.cssSelector("div#bar-notification> p:nth-child(5)"))
                 .getText(), "Enter valid sender email");
+    }
+    @Test
+    public void testSearchDropdownItemsQuantity() {
+        getDriver().get("https://demowebshop.tricentis.com/");
+
+        getDriver().findElement(By.linkText("Search")).click();
+        getDriver().findElement(By.id("As")).click();
+
+        Assert.assertEquals(getDriver().findElements(By.cssSelector("select[id='Cid'] option")).size(), 13);
     }
 }
