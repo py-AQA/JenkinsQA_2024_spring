@@ -294,14 +294,35 @@ public class CodeQAGroupTest extends BaseTest {
 
         Assert.assertEquals(actualMessage, expectedMessage);
     }
-
-    @Test
-    public void testGoToAnotherPage25() {
+  @Test
+      public void testGoToAnotherPage25() {
 
        getDriver().get("https://the-internet.herokuapp.com/");
        getDriver().findElement(By.cssSelector("a[href='/abtest']")).click();
        String actualResult = getDriver().findElement(By.cssSelector("h3")).getText();
 
-        Assert.assertEquals(actualResult, "A/B Test Control");
+        Assert.assertEquals(actualResult, "A/B Test Control")
+  }
+  
+      @Test
+    public void testForConflict() {
+
+        getDriver().get("https://the-internet.herokuapp.com/");
+
+        WebDriverWait wait60 = new WebDriverWait(getDriver(), Duration.ofSeconds(60));
+
+        wait60.until(ExpectedConditions.visibilityOfElementLocated(
+                By.xpath("//a [@href='/floating_menu']")));
+
+        WebElement linkToDynamicallyLoadedPageElementsPage = getDriver().findElement(
+                By.xpath("//a [@href='/exit_intent']"));
+        linkToDynamicallyLoadedPageElementsPage.click();
+
+        String expectedResult = "Exit Intent";
+
+        String actualResult = getDriver().findElement(
+                By.xpath("//h3")).getText();
+
+        Assert.assertEquals(actualResult, expectedResult);
     }
 }
