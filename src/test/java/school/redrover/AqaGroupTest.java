@@ -22,6 +22,7 @@ import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 public class AqaGroupTest extends AqaGroupBaseTest {
+
     private static final String URL = "https://demoqa.com/alerts";
     private static final String BUTTONS_URL = "https://demoqa.com/buttons";
     private static final String BROWSER_WINDOWS_URL = "https://demoqa.com/browser-windows";
@@ -33,10 +34,12 @@ public class AqaGroupTest extends AqaGroupBaseTest {
     private static final By MODAL_DIALOG_OK_BUTTON = By.id("dialog-ok");
     private static final By MODAL_DIALOG_TEXT = By.id("dialog-text");
     private static final String URL_LETCODE = "https://letcode.in/edit";
+    private static final String MODAL_WINDOW_URL = "https://tympanus.net/Development/ModalWindowEffects/";
     private static final String URL_MOB = "http://23.105.246.172:5000/login";
     private static final String INPUT_EMAIL = "//input[@class='ant-input primaryInput  not-entered']";
     private static final String BTN_PASSWORD = "//button[@class='ant-btn ant-btn-default authButton big colorPrimary ']";
     private static final By GET_ERROR = By.xpath("//div[@style='text-align: center; margin-bottom: 20px; color: rgb(255, 0, 0);']");
+
 
     private String calc(String x) {
         return String.valueOf(Math.log(Math.abs(12 * Math.sin(Integer.parseInt(x)))));
@@ -844,7 +847,7 @@ public class AqaGroupTest extends AqaGroupBaseTest {
 
     @Test
     public void testModalWindow() {
-        getDriver().get("https://tympanus.net/Development/ModalWindowEffects/");
+        getDriver().get(MODAL_WINDOW_URL);
 
         getDriver().findElement(By.cssSelector("[data-modal = 'modal-1']")).click();
         getDriver().findElement(By.className("md-close")).click();
@@ -894,6 +897,31 @@ public class AqaGroupTest extends AqaGroupBaseTest {
                 "You can see this child div content now that you hovered on the above 'button'.");
     }
 
+    @DataProvider(name = "modalWindowsDataProvider")
+    public Object[][] modalWindowsDataProvider() {
+        return new Object[][]{
+                {1}, {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10},
+                {11}, {12}, {13}, {14}, {15}, {16}, {17}, {18}, {19}
+        };
+    }
+
+    @Test(dataProvider = "modalWindowsDataProvider")
+    public void testModalWindowsClose(int windowNumber) {
+        getDriver().get(MODAL_WINDOW_URL);
+
+        getDriver().findElement(By.cssSelector("[data-modal = 'modal-" + windowNumber + "']")).click();
+
+        getWait5().until(ExpectedConditions.elementToBeClickable(By.cssSelector(".md-show .md-close")));
+
+        new Actions(getDriver())
+                .moveToLocation(0, 0)
+                .click()
+                .perform();
+
+        Assert.assertTrue(
+                getWait5().until(ExpectedConditions.invisibilityOfElementLocated(By.className("md-content"))));
+    }
+  
     @Test
     public void testUploadFile() throws URISyntaxException {
         getDriver().get("https://testpages.eviltester.com/styled/file-upload-test.html");
