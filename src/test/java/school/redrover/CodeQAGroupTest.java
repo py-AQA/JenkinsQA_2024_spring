@@ -2,9 +2,7 @@ package school.redrover;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -297,8 +295,8 @@ public class CodeQAGroupTest extends BaseTest {
         Assert.assertEquals(actualMessage, expectedMessage);
     }
 
-    @Test
-    public void testGoToAnotherPage25() {
+  @Test
+      public void testGoToAnotherPage() {
 
         getDriver().get("https://the-internet.herokuapp.com/");
         getDriver().findElement(By.cssSelector("a[href='/abtest']")).click();
@@ -351,5 +349,16 @@ public class CodeQAGroupTest extends BaseTest {
                 By.xpath("//div [@class='modal-title']/h3")).getText();
 
         Assert.assertEquals(actualResult, expectedResult);
+    }
+
+    @Test
+    public void testLoginFormWithEmptyFields() {
+        getDriver().get("https://the-internet.herokuapp.com/");
+
+        getDriver().findElement(By.cssSelector("a[href='/login']")).click();
+        getDriver().findElement(By.xpath("//*[@class='radius']")).click();
+        String actualResult = getDriver().findElement(By.id("flash")).getText();
+
+        Assert.assertTrue(actualResult.contains( "Your username is invalid!"));
     }
 }
