@@ -4,7 +4,6 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -13,6 +12,10 @@ import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
+
+import static java.sql.DriverManager.getDriver;
 
 public class CodeQAGroupTest extends BaseTest {
 
@@ -76,6 +79,7 @@ public class CodeQAGroupTest extends BaseTest {
 
         Assert.assertEquals(actualRes, "Project freestylePrTest39");
     }
+
     @Test
     public void testDropDownMenu() {
         getDriver().get("https://the-internet.herokuapp.com");
@@ -264,6 +268,7 @@ public class CodeQAGroupTest extends BaseTest {
 
         Assert.assertTrue(menuIsDisplayed);
     }
+
     @Test
     public void testFieldValidation() throws InterruptedException {
 
@@ -294,17 +299,18 @@ public class CodeQAGroupTest extends BaseTest {
 
         Assert.assertEquals(actualMessage, expectedMessage);
     }
-  @Test
-      public void testGoToAnotherPage25() {
 
-       getDriver().get("https://the-internet.herokuapp.com/");
-       getDriver().findElement(By.cssSelector("a[href='/abtest']")).click();
-       String actualResult = getDriver().findElement(By.cssSelector("h3")).getText();
+    @Test
+    public void testGoToAnotherPage25() {
 
-        Assert.assertEquals(actualResult, "A/B Test Control")
-  }
-  
-      @Test
+        getDriver().get("https://the-internet.herokuapp.com/");
+        getDriver().findElement(By.cssSelector("a[href='/abtest']")).click();
+        String actualResult = getDriver().findElement(By.cssSelector("h3")).getText();
+
+        Assert.assertEquals(actualResult, "A/B Test Control");
+    }
+
+    @Test
     public void testForConflict() {
 
         getDriver().get("https://the-internet.herokuapp.com/");
@@ -324,5 +330,24 @@ public class CodeQAGroupTest extends BaseTest {
                 By.xpath("//h3")).getText();
 
         Assert.assertEquals(actualResult, expectedResult);
+    }
+
+    @Test
+    public void TestDropDownMenu() {
+
+        getDriver().get("https://the-internet.herokuapp.com/");
+
+        WebElement atrValue = getDriver().findElement(By.xpath("//a[@href='/dropdown']"));
+        atrValue.click();
+        WebElement dropdown = getDriver().findElement(By.xpath("//*[@id='dropdown']"));
+        dropdown.click();
+        List<String> exResult = new ArrayList<>();
+        exResult.add("Option 1");
+        exResult.add("Option 2");
+        List<String> acResult = new ArrayList<>();
+        acResult.add(getDriver().findElement(By.cssSelector("#dropdown > option:nth-child(2)")).getText());
+        acResult.add(getDriver().findElement(By.cssSelector("#dropdown > option:nth-child(3)")).getText());
+
+        Assert.assertEquals(acResult, exResult);
     }
 }
