@@ -187,13 +187,24 @@ public class GroupAqaQuaQuaTest extends BaseTest {
                 "Corel Paint Shop Pro Photo X2");
     }
     @Test
-    public void testNewsletter() throws InterruptedException {
+    public void testNewsletterPositive() throws InterruptedException {
         getDriver().get("https://demowebshop.tricentis.com/");
 
         getDriver().findElement(By.cssSelector("[name^='News']")).sendKeys("topperharley@hotmail.com");
         getDriver().findElement(By.cssSelector("[value^='Sub']")).click();
         Thread.sleep(500);
+
         Assert.assertEquals(getDriver().findElement(By.cssSelector("[class$='result-block']")).getText().substring(0,5),
                 "Thank");
+    }
+    @Test
+    public void testNewsletterNegative() throws InterruptedException {
+        getDriver().get("https://demowebshop.tricentis.com/");
+
+        getDriver().findElement(By.cssSelector("[name^='News']")).sendKeys("hotmail.com");
+        getDriver().findElement(By.cssSelector("[value^='Sub']")).click();
+        Thread.sleep(500);
+
+        Assert.assertEquals(getDriver().findElement(By.cssSelector("[id$='result-block']")).getText(), "Enter valid email");
     }
 }
