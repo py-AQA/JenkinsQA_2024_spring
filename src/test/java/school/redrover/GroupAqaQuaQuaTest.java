@@ -260,4 +260,17 @@ public class GroupAqaQuaQuaTest extends BaseTest {
 
         Assert.assertEquals(getDriver().findElements(By.cssSelector("select[id='Cid'] option")).size(), 13);
     }
+    @Test
+    public void testSearchEmptyField() {
+        getDriver().get("https://demowebshop.tricentis.com/search");
+
+        getDriver().findElement(By.cssSelector("input[id='Q']")).sendKeys("");
+        getDriver().findElement(By.cssSelector("input[class~='search-button']")).click();
+        getDriver().findElement(By.id("As")).click();
+        getDriver().findElement(By.id("Isc")).click();
+        getDriver().findElement(By.id("Sid")).click();
+
+        Assert.assertEquals(getDriver().findElement(By.cssSelector("[class='warning']")).getText().substring(12, 26),
+                "minimum length");
+    }
 }
