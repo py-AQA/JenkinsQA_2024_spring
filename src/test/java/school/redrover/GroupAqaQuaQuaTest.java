@@ -113,10 +113,10 @@ public class GroupAqaQuaQuaTest extends BaseTest {
         getDriver().get("https://demowebshop.tricentis.com/");
 
         getDriver().findElement(By.linkText("Search")).click();
-        getDriver().findElement(By.id("As")).click();
 
         getDriver().findElement(By.cssSelector("[id= 'Q']")).sendKeys("corel");
-        getDriver().findElement(By.id("Cid")).click();
+
+        getDriver().findElement(By.id("As")).click();
         Select category = new Select(getDriver().findElement(By.id("Cid")));
         category.selectByVisibleText("All");
 
@@ -129,15 +129,7 @@ public class GroupAqaQuaQuaTest extends BaseTest {
         getDriver().findElement(By.id("Sid")).click();
         getDriver().findElement(By.cssSelector("div[class='search-input'] input[type= 'submit']")).click();
 
-//        getDriver().findElement(By.cssSelector("h2 a[href^= '/corel']")).click();
-
-
         Assert.assertEquals(getDriver().findElement(By.cssSelector("h2 a[href^= '/corel']")).getText(),
                 "Corel Paint Shop Pro Photo X2");
-//h2 a[href^= '/corel']  /html/body/div[4]/div[1]/div[4]/div[2]/div/div[2]/div[3]/div[1]/div/div/div[2]/h2/a
-        System.out.println(getDriver().findElement(By.cssSelector("h2 a[href^= '/corel']")).getText());
-
-
-
     }
 }
