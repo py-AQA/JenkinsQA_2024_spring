@@ -344,7 +344,7 @@ public class CodeQAGroupTest extends BaseTest {
                 By.xpath("//a [@href='/exit_intent']"));
         linkToDynamicallyLoadedPageElementsPage.click();
 
-        String expectedResult = "This is a modal window";
+        String expectedResult = "THIS IS A MODAL WINDOW";
 
         wait60.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//div [@class='modal-title']")));
