@@ -11,6 +11,9 @@ import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
 
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class CodeQAGroupTest extends BaseTest {
 
@@ -326,6 +329,7 @@ public class CodeQAGroupTest extends BaseTest {
 
         Assert.assertEquals(actualResult, expectedResult);
     }
+
     @Test
     public void testForConflict2() {
 
@@ -360,5 +364,24 @@ public class CodeQAGroupTest extends BaseTest {
         String actualResult = getDriver().findElement(By.id("flash")).getText();
 
         Assert.assertTrue(actualResult.contains( "Your username is invalid!"));
+    }
+
+    @Test
+    public void testDropDown() {
+
+        getDriver().get("https://the-internet.herokuapp.com/");
+
+        WebElement atrValue = getDriver().findElement(By.xpath("//a[@href='/dropdown']"));
+        atrValue.click();
+        WebElement dropdown = getDriver().findElement(By.xpath("//*[@id='dropdown']"));
+        dropdown.click();
+        List<String> exResult = new ArrayList<>();
+        exResult.add("Option 1");
+        exResult.add("Option 2");
+        List<String> acResult = new ArrayList<>();
+        acResult.add(getDriver().findElement(By.cssSelector("#dropdown > option:nth-child(2)")).getText());
+        acResult.add(getDriver().findElement(By.cssSelector("#dropdown > option:nth-child(3)")).getText());
+
+        Assert.assertEquals(acResult, exResult);
     }
 }
