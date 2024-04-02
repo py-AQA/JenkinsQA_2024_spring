@@ -196,7 +196,7 @@ public class GroupCarlthefogTest extends BaseTest {
         String email = "Suyn@mail" + userName + ".ru";
         String password = "W1234567" + Math.random()*3;
 
-        WebDriver driver = new ChromeDriver();
+        WebDriver driver = getDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
         driver.get("https://demo.realworld.io/#/register");
 
