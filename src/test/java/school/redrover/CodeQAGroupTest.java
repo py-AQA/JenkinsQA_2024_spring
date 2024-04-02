@@ -314,6 +314,5 @@ public class CodeQAGroupTest extends BaseTest {
                 By.xpath("//h3")).getText();
 
         Assert.assertEquals(actualResult, expectedResult);
-
     }
 }
