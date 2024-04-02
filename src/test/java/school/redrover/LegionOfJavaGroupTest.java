@@ -196,6 +196,6 @@ public class LegionOfJavaGroupTest extends BaseTest {
         rejectCookiesButton.click();
 
         WebElement item = driver.findElement(By.xpath("//h3[text() = 'Creatine']"));
-        Assert.assertTrue(item.isDisplayed()); // remove extra spacing
+        Assert.assertTrue(item.isDisplayed());
     }
 }
