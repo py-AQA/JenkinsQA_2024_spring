@@ -247,4 +247,16 @@ public class GroupUnitedByJava8Test extends BaseTest {
         WebElement accountName = getDriver().findElement(By.className("profile__title"));
         Assert.assertEquals(accountName.getText(), "Жак-Ив Кусто");
     }
+
+    @Test
+    public void testSuccessLoginSaucedemo(){
+        getDriver().get("https://www.saucedemo.com/");
+        getDriver().manage().window().maximize();
+
+        getDriver().findElement(By.id("user-name")).sendKeys("standard_user");
+        getDriver().findElement(By.id("password")).sendKeys("secret_sauce");
+        getDriver().findElement(By.id("login-button")).click();
+
+        Assert.assertEquals(getDriver().findElement(By.xpath("//div[@class='app_logo']")).getText(), "Swag Labs");
+    }
 }

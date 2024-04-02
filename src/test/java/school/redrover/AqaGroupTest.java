@@ -16,10 +16,7 @@ import org.testng.annotations.Test;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 import java.time.Duration;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.concurrent.TimeUnit;
+import java.util.*;
 
 public class AqaGroupTest extends AqaGroupBaseTest {
 
@@ -39,18 +36,13 @@ public class AqaGroupTest extends AqaGroupBaseTest {
     private static final String INPUT_EMAIL = "//input[@class='ant-input primaryInput  not-entered']";
     private static final String BTN_PASSWORD = "//button[@class='ant-btn ant-btn-default authButton big colorPrimary ']";
     private static final By GET_ERROR = By.xpath("//div[@style='text-align: center; margin-bottom: 20px; color: rgb(255, 0, 0);']");
+    private static final By GET_POLITICA = By.xpath("//h1[@class='page-header-title clr']");
 
 
     private String calc(String x) {
         return String.valueOf(Math.log(Math.abs(12 * Math.sin(Integer.parseInt(x)))));
     }
 
-    private void url() {
-        getDriver().get(URL_MOB);
-        getDriver().manage().window().setSize(new Dimension(1920, 1080));
-        getDriver().manage().timeouts().pageLoadTimeout(25, TimeUnit.SECONDS);
-        getDriver().manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
-    }
 
     @Test
     public void testAlert() {
@@ -937,13 +929,72 @@ public class AqaGroupTest extends AqaGroupBaseTest {
     }
 
     @Test
-    public void testRemovesPasword() {
-        url();
+    public void testButtonChangeItsName() {
+        getDriver().get("http://uitestingplayground.com/textinput");
+
+        getDriver().findElement(By.id("newButtonName")).sendKeys("carolync");
+        getDriver().findElement(By.id("updatingButton")).click();
+
+        Assert.assertEquals(getDriver().findElement(By.id("updatingButton")).getText(), "carolync");
+    }
+
+    @Test
+    public void testWaitUntilPageLoad() {
+        getDriver().get("http://uitestingplayground.com/home");
+
+        getDriver().findElement(By.xpath("//*[contains(text(), 'Load Delay')]")).click();
+        Assert.assertTrue(getWait60().until(ExpectedConditions.urlContains("http://uitestingplayground.com/loaddelay")), "Error of redirection!");
+    }
+
+    @Test
+    public void testHiddenButtons() {
+        getDriver().get("http://uitestingplayground.com/visibility");
+
+        String xpath = "//button[@id='removedButton' or @id='zeroWidthButton' or @id='overlappedButton' or @id='transparentButton'" +
+                " or @id='invisibleButton' or @id='notdisplayedButton' or @id='offscreenButton']";
+
+        getDriver().findElement(By.id("hideButton")).click();
+
+        Assert.assertFalse(getDriver().findElement(By.xpath(xpath)).isDisplayed(), "Not all the buttons are hidden!");
+     }
+
+    @Test
+    public void testRemovesPassword() {
+        getDriver().get(URL_MOB);
         getDriver().findElement(By.xpath(INPUT_EMAIL)).sendKeys("yyyyyyyyyy@mail.xx");
         getDriver().findElement(By.xpath(BTN_PASSWORD)).click();
 
-        String getError = getDriver().findElement(GET_ERROR).getText();
+        Assert.assertEquals(getDriver().findElement(GET_ERROR).getText(), "Неправильный логин или пароль");
+    }
 
-        Assert.assertEquals(getError, "Неправильный логин или пароль");
+    @Test
+    public void testHrefPolitic() {
+        getDriver().get(URL_MOB);
+
+        getWait15().until(ExpectedConditions.elementToBeClickable(By.xpath("//a[@href='https://vr-arsoft.com/personal-data-processing-policy/']"))).click();
+
+        Set<String> handles = getDriver().getWindowHandles();
+        handles.remove(getDriver().getWindowHandle());
+        getDriver().switchTo().window(handles.iterator().next());
+
+        Assert.assertEquals(getDriver().findElement(GET_POLITICA).getText(), "Политика обработки персональных данных");
+    }
+
+    @DataProvider(name = "visibilityDataProvider")
+    public Object[][] visibilityDataProvider() {
+        return new Object[][]{
+                {By.id("removedButton")}, {By.id("zeroWidthButton")}, {By.id("Overlapped")},
+                {By.id("transparentButton")}, {By.id("invisibleButton")}, {By.id("notdisplayedButton")},
+                {By.id("offscreenButton")}
+        };
+    }
+
+    @Test(dataProvider = "visibilityDataProvider")
+    public void testVisibility(By locator) {
+        getDriver().get("http://uitestingplayground.com/visibility");
+
+        getDriver().findElement(By.id("hideButton")).click();
+
+        Assert.assertTrue(getWait5().until(ExpectedConditions.invisibilityOfElementLocated(locator)));
     }
 }
