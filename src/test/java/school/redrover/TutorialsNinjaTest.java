@@ -49,13 +49,14 @@ public class TutorialsNinjaTest extends BaseTest {
         initialization(URL);
         getDriver().findElement(By.id("form-currency")).click();
         getDriver().findElement(By.xpath("//*[@name='GBP']")).click();
-
         String currentCurrency = getDriver().findElement(By.xpath("//strong")).getText();
         List<WebElement> itemPrices = getDriver().findElements(By.className("price"));
+
         Assert.assertEquals(currentCurrency, "£");
 
         for (WebElement price: itemPrices) {
             String exTax = new StringBuilder(price.getText().substring(price.getText().indexOf(":")+1)).toString();
+
             Assert.assertEquals(price.getText().charAt(0), '£');
             Assert.assertEquals(exTax.charAt(0), '£');
         }
@@ -74,6 +75,7 @@ public class TutorialsNinjaTest extends BaseTest {
         for (WebElement price: itemsPrice) {
             String exTax = new StringBuilder(price.getText().substring(price.getText().indexOf(":")+1)).toString();
             String totalPrice = new StringBuilder(price.getText().substring(0, price.getText().indexOf("€")+1)).toString();
+
             Assert.assertTrue(totalPrice.contains("€"));
             Assert.assertTrue(exTax.contains("€"));
         }
