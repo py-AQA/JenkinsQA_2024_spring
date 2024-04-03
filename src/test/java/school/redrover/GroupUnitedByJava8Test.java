@@ -267,7 +267,7 @@ public class GroupUnitedByJava8Test extends BaseTest {
     }
 
     @Test
-    public void testClassifiedCheckbox(){
+    public void testClassifiedCheckbox() {
         getDriver().get("https://demoqa.com");
 
         getDriver().findElement(By.xpath("//h5[text()='Elements']")).click();
@@ -302,5 +302,29 @@ public class GroupUnitedByJava8Test extends BaseTest {
         expectedSortedNames.sort(Collections.reverseOrder());
 
         Assert.assertEquals(itemsNames, expectedSortedNames);
+    }
+
+    @Test
+    public void testLoginAsCustomerHarryPotterGlobalsqa() throws InterruptedException {
+        getDriver().get("https://www.globalsqa.com/angularJs-protractor/BankingProject/#/login");
+
+        Thread.sleep(1500);
+
+        WebElement customerLoginButton = getDriver().findElement(By.xpath("//button[@ng-click='customer()']"));
+        customerLoginButton.click();
+
+        Thread.sleep(1500);
+
+        Select select = new Select(getDriver().findElement(By.id("userSelect")));
+        select.selectByIndex(2);
+
+        WebElement loginButton = getDriver().findElement(By.xpath("//button[@type = 'submit']"));
+        loginButton.click();
+
+        Thread.sleep(1500);
+
+        WebElement welcomeText = getDriver().findElement(By.xpath("//strong[text() = ' Welcome ']"));
+
+        Assert.assertEquals(welcomeText.getText(), "Welcome Harry Potter !!");
     }
 }
