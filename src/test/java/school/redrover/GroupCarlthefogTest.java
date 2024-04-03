@@ -220,7 +220,6 @@ public class GroupCarlthefogTest extends BaseTest {
         String expectedUrl = "https://demo.realworld.io/#/register";
 
         Assert.assertEquals(actualUrl, expectedUrl, "URL не совпадает");
-
     }
 
     @Test
@@ -228,10 +227,7 @@ public class GroupCarlthefogTest extends BaseTest {
 
         String expectedHeader = "Text Box";
 
-        ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.setPageLoadStrategy(PageLoadStrategy.EAGER);
-
-        WebDriver driver = new ChromeDriver(chromeOptions);
+        WebDriver driver = getDriver();
         driver.manage().window().maximize();
         driver.get("https://demoqa.com/text-box");
 
