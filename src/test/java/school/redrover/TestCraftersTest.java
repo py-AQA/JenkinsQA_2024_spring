@@ -2,14 +2,11 @@
 //URL for test: https://tutorialsninja.com/demo/
 
 package school.redrover;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
-
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -22,10 +19,7 @@ public class TestCraftersTest extends BaseTest {
         String featered = getDriver().findElement(By.xpath("//h3")).getText();
 
         Assert.assertEquals(featered, "Featured");
-
     }
-    // Header test
-//Site currency tests
     @Test(description = "default currency must be $")
     public void testDefaultCurrency() {
         initialization(URL);
@@ -38,7 +32,6 @@ public class TestCraftersTest extends BaseTest {
             String exTax = new StringBuilder(price.getText().substring(price.getText().indexOf(":")+1)).toString();
             Assert.assertEquals(price.getText().charAt(0), '$');
             Assert.assertEquals(exTax.charAt(0), '$');
-
         }
     }
 
@@ -77,10 +70,7 @@ public class TestCraftersTest extends BaseTest {
             Assert.assertTrue(totalPrice.contains("€"));
             Assert.assertTrue(exTax.contains("€"));
         }
-
-
     }
-    //tests phone
 
     @Test
     public void testPhoneIcoRedirect() {
@@ -97,8 +87,6 @@ public class TestCraftersTest extends BaseTest {
 
         Assert.assertEquals(phoneNumber, "123456789");
     }
-
-    // tests My account
 
     @Test
     public void testHeaderMyAccountRegisterRedirect() {
@@ -117,7 +105,7 @@ public class TestCraftersTest extends BaseTest {
 
         Assert.assertEquals(getDriver().getCurrentUrl(), "https://tutorialsninja.com/demo/index.php?route=account/login");
     }
-    //test wish list
+
     @Test(description = "without login")
     public void testWishListRedirec() {
         initialization(URL);
@@ -126,12 +114,10 @@ public class TestCraftersTest extends BaseTest {
         Assert.assertEquals(getDriver().getCurrentUrl(), "https://tutorialsninja.com/demo/index.php?route=account/login");
     }
 
-    //test wish list counter
     @Test
     public void testWishListCounter() throws InterruptedException {
         initialization(URL);
         List<WebElement> addItems = getDriver().findElements(By.xpath("//*[@data-original-title='Add to Wish List']"));
-
 
         for (int i = 0; i < addItems.size(); i++) {
             addItems.get(i).click();
@@ -143,13 +129,8 @@ public class TestCraftersTest extends BaseTest {
                     .getText();
             Integer currentCount = Integer.parseInt(currentSign.substring(currentSign.indexOf('(')+1, currentSign.indexOf(')')));
             Assert.assertEquals(currentCount, i+1);
-
-
         }
-
     }
-
-    //tests Shopping cart
 
     @Test
     public void testShopingCartRedirect () {
@@ -159,7 +140,6 @@ public class TestCraftersTest extends BaseTest {
         Assert.assertEquals(getDriver().getCurrentUrl(), "https://tutorialsninja.com/demo/index.php?route=checkout/cart");
     }
 
-            // test shopping Cart add
     @Test
     public void testAddShopingCart () {
         initialization(URL);
@@ -167,15 +147,9 @@ public class TestCraftersTest extends BaseTest {
         getDriver().findElement(By.xpath("//button[contains(text(),'Add to Cart')]")).click();
         getDriver().findElement(By.xpath("//span[@id='cart-total']")).click();
 
-
         Assert.assertTrue(getDriver().findElement(By.xpath("//ul[@class='dropdown-menu pull-right']//a[text()='MacBook']")).isEnabled());
     }
 
-
-
-
-
-    //tests Checkout
     @Test
     public void testCheckoutRedirect() {
         initialization(URL);
@@ -210,9 +184,6 @@ public class TestCraftersTest extends BaseTest {
         String expectedTitle = "Your Account Has Been Created!";
         Assert.assertEquals(actualTitle, expectedTitle);
     }
-
-
-
 
     public void initialization(String url) {
         getDriver().manage().timeouts().pageLoadTimeout(10, TimeUnit.SECONDS);
