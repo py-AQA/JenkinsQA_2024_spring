@@ -146,7 +146,7 @@ public class GroupAqaQuaQuaTest extends BaseTest {
                         By.cssSelector("div.page-title>h1")).getText(), "Shopping cart");
         Assert.assertEquals(getDriver().findElement(
                         By.cssSelector("td.product>a.product-name")).getText(), "$5 Virtual Gift Card");
-        // как подцепить эл.адреса?
+
         Assert.assertEquals(getDriver().findElement(
                         By.cssSelector("td.unit-price.nobr>span.product-unit-price")).getText(), "5.00");
         Assert.assertEquals(getDriver().findElement(
@@ -219,5 +219,37 @@ public class GroupAqaQuaQuaTest extends BaseTest {
 
         Assert.assertEquals(getDriver().findElement(By.xpath("//form/div[1]/div/ul/li")).getText(),
                 "The credentials provided are incorrect");
+    }
+    @Test
+    public void testAlertRequiredFieldsInGiftCard() throws InterruptedException {
+        getDriver().get("https://demowebshop.tricentis.com/gift-cards");
+
+        getDriver().findElement(
+                        By.xpath("//div[@data-productid='2']//div[@class='buttons']/input[@value='Add to cart']"))
+                .click();
+
+        Thread.sleep(3000);
+
+        getDriver().findElement(
+                        By.cssSelector("input#add-to-cart-button-2.button-1.add-to-cart-button"))
+                .click();
+
+        Thread.sleep(3000);
+
+        Assert.assertTrue(getDriver().findElement(
+                        By.cssSelector("div#bar-notification"))
+                .isDisplayed());
+        Assert.assertEquals(getDriver().findElement(
+                        By.cssSelector("div#bar-notification> p:nth-child(2)"))
+                .getText(), "Enter valid recipient name");
+        Assert.assertEquals(getDriver().findElement(
+                        By.cssSelector("div#bar-notification> p:nth-child(3)"))
+                .getText(), "Enter valid recipient email");
+        Assert.assertEquals(getDriver().findElement(
+                        By.cssSelector("div#bar-notification> p:nth-child(4)"))
+                .getText(), "Enter valid sender name");
+        Assert.assertEquals(getDriver().findElement(
+                        By.cssSelector("div#bar-notification> p:nth-child(5)"))
+                .getText(), "Enter valid sender email");
     }
 }
