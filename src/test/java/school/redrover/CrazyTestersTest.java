@@ -138,7 +138,7 @@ public class CrazyTestersTest extends BaseTest {
         button.click();
     }
 
-    /*@Test
+    @Test
     public void testTest3() {
         WebDriver driver = getDriver();
         driver.get("https://www.nike.com/es/");
@@ -151,7 +151,7 @@ public class CrazyTestersTest extends BaseTest {
 
         String pageUrl = driver.getCurrentUrl();
         Assert.assertEquals(pageUrl, "https://www.nike.com/es/w?q=Jordan&vst=Jordan");
-    }*/
+    }
 
     @Test
     public void testTest2() {
