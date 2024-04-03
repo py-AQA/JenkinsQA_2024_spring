@@ -396,7 +396,7 @@ public class GroupUnitedByJava8Test extends BaseTest {
     }
 
     @Test
-    public void testRemoveItemToCart() throws InterruptedException {
+    public void testRemoveItemToCart() {
 
         getDriver().manage().window().maximize();
         getDriver().get("https://www.saucedemo.com/");
