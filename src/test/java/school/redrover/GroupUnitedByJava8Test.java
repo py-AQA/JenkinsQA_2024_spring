@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -380,5 +381,38 @@ public class GroupUnitedByJava8Test extends BaseTest {
 
         Assert.assertEquals(defaultSortingCriterion, "Name (A to Z)",
                 "Default sorting criterion is not alphabetical");
+    }
+    @Test
+    public void testLoginInvalidUser() {
+
+        getDriver().manage().window().maximize();
+        getDriver().get("https://www.saucedemo.com/");
+        getDriver().findElement(By.id("user-name")).sendKeys("user");
+        getDriver().findElement(By.id("password")).sendKeys("user");
+        getDriver().findElement(By.id("login-button")).click();
+
+        WebElement errorText = getDriver().findElement(By.xpath("//h3[@data-test= 'error']"));
+        Assert.assertEquals(errorText.getText(), "Epic sadface: Username and password do not match any user in this service");
+    }
+
+    @Test
+    public void testRemoveItemToCart() throws InterruptedException {
+
+        getDriver().manage().window().maximize();
+        getDriver().get("https://www.saucedemo.com/");
+        getDriver().findElement(By.id("user-name")).sendKeys(STANDARD_USER_LOGIN);
+        getDriver().findElement(By.id("password")).sendKeys(STANDARD_USER_PASSWORD);
+        getDriver().findElement(By.id("login-button")).click();
+
+        WebElement addingButton = getDriver().findElement(By.id("add-to-cart-sauce-labs-backpack"));
+        addingButton.click();
+
+        WebElement cartIcon = getDriver().findElement(By.id("shopping_cart_container"));
+        cartIcon.click();
+
+        WebElement removeButton = getDriver().findElement(By.id("remove-sauce-labs-backpack"));
+        removeButton.click();
+
+        Assert.assertTrue(getDriver().findElements(By.id("item_4_title_link")).isEmpty());
     }
 }
