@@ -276,5 +276,33 @@ public class GroupRedroverJava7Test extends BaseTest {
         Assert.assertEquals(actualUrl, expectedUrl);
 
     }
+
+    @Test
+    public  void testSwag() {
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://www.saucedemo.com/v1/");
+
+        WebElement userNameField = driver.findElement(By.id("user-name"));
+        userNameField.sendKeys("locked_out_user");
+
+        WebElement passwordField = driver.findElement(By.id("password"));
+        passwordField.sendKeys("secret_sauce");
+
+        WebElement buttonLogin = driver.findElement(By.id("login-button"));
+        buttonLogin.click();
+
+        WebElement getErrorText = driver.findElement(By.xpath("//h3[@data-test='error']"));
+        String actualErrorMessage = getErrorText.getText();
+
+        Assert.assertEquals(actualErrorMessage, "Epic sadface: Sorry, this user has been locked out.");
+
+        driver.quit();
+    }
 }
+
+
+
+
+
+
 
