@@ -7,10 +7,13 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
 
+import java.time.Duration;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -119,7 +122,7 @@ public class TutorialsNinjaTest extends BaseTest {
 
         Assert.assertEquals(getDriver().getCurrentUrl(), "https://tutorialsninja.com/demo/index.php?route=account/login");
     }
-    //test whish list
+    //test wish list
     @Test(description = "without login")
     public void testWishListRedirec() {
         initialization(URL);
@@ -127,8 +130,29 @@ public class TutorialsNinjaTest extends BaseTest {
 
         Assert.assertEquals(getDriver().getCurrentUrl(), "https://tutorialsninja.com/demo/index.php?route=account/login");
     }
+    //test wish list counter
+    @Test
+    public void testWishListCounter() throws InterruptedException {
+        initialization(URL);
+        List<WebElement> addItems = getDriver().findElements(By.xpath("//*[@data-original-title='Add to Wish List']"));
 
-    //tests Shoping cart
+
+        for (int i = 0; i < addItems.size(); i++) {
+            addItems.get(i).click();
+
+            Thread.sleep(1000L);
+
+            String currentSign = getDriver()
+                    .findElement(By.xpath("//*[@id='wishlist-total']/span"))
+                    .getText();
+            Integer currentCount = Integer.parseInt(currentSign.substring(currentSign.indexOf('(')+1, currentSign.indexOf(')')));
+            Assert.assertEquals(currentCount, i+1);
+
+        }
+
+    }
+
+    //tests Shopping cart
 
     @Test
     public void testShopingCartRedirect() {
@@ -136,6 +160,20 @@ public class TutorialsNinjaTest extends BaseTest {
         getDriver().findElement(By.xpath("//*[contains(text(),'Shopping Cart')]")).click();
 
         Assert.assertEquals(getDriver().getCurrentUrl(), "https://tutorialsninja.com/demo/index.php?route=checkout/cart");
+    }
+
+    // test shopping Cart add
+    @Test
+    public void testAddShopingCart(){
+        initialization(URL);
+        getDriver().findElement(By.xpath("//*[@class='product-thumb transition']//img[@alt='MacBook']")).click();
+        getDriver().findElement(By.xpath("//button[contains(text(),'Add to Cart')]")).click();
+        getDriver().findElement(By.xpath("//span[@id='cart-total']")).click();
+
+
+        Assert.assertTrue(getDriver().findElement(By.xpath("//ul[@class='dropdown-menu pull-right']//a[text()='MacBook']")).isEnabled());
+
+
     }
 
     //tests Checkout
