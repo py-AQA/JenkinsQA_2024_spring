@@ -5,6 +5,7 @@ package school.redrover;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
@@ -124,6 +125,7 @@ public class TestCraftersTest extends BaseTest {
 
         Assert.assertEquals(getDriver().getCurrentUrl(), "https://tutorialsninja.com/demo/index.php?route=account/login");
     }
+
     //test wish list counter
     @Test
     public void testWishListCounter() throws InterruptedException {
@@ -142,6 +144,7 @@ public class TestCraftersTest extends BaseTest {
             Integer currentCount = Integer.parseInt(currentSign.substring(currentSign.indexOf('(')+1, currentSign.indexOf(')')));
             Assert.assertEquals(currentCount, i+1);
 
+
         }
 
     }
@@ -149,16 +152,16 @@ public class TestCraftersTest extends BaseTest {
     //tests Shopping cart
 
     @Test
-    public void testShopingCartRedirect() {
+    public void testShopingCartRedirect () {
         initialization(URL);
         getDriver().findElement(By.xpath("//*[contains(text(),'Shopping Cart')]")).click();
 
         Assert.assertEquals(getDriver().getCurrentUrl(), "https://tutorialsninja.com/demo/index.php?route=checkout/cart");
     }
 
-    // test shopping Cart add
+            // test shopping Cart add
     @Test
-    public void testAddShopingCart(){
+    public void testAddShopingCart () {
         initialization(URL);
         getDriver().findElement(By.xpath("//*[@class='product-thumb transition']//img[@alt='MacBook']")).click();
         getDriver().findElement(By.xpath("//button[contains(text(),'Add to Cart')]")).click();
@@ -166,9 +169,11 @@ public class TestCraftersTest extends BaseTest {
 
 
         Assert.assertTrue(getDriver().findElement(By.xpath("//ul[@class='dropdown-menu pull-right']//a[text()='MacBook']")).isEnabled());
-
-
     }
+
+
+
+
 
     //tests Checkout
     @Test
@@ -179,7 +184,7 @@ public class TestCraftersTest extends BaseTest {
         Assert.assertEquals(getDriver().getCurrentUrl(), "https://tutorialsninja.com/demo/index.php?route=checkout/cart");
     }
     @Test
-    public void testHomePageTitle(){
+    public void testHomePageTitle() {
         initialization(URL);
         String actualTitle = getDriver().getTitle();
         String expectedTitle = "Your Store";
@@ -187,7 +192,7 @@ public class TestCraftersTest extends BaseTest {
     }
 
     @Test
-    public void testRegister() {
+    public void testRegister () {
         getDriver().get(URL);
 
         getDriver().findElement(By.linkText("My Account")).click();
@@ -215,4 +220,9 @@ public class TestCraftersTest extends BaseTest {
         getDriver().get(url);
 
     }
+
+
+
 }
+
+
