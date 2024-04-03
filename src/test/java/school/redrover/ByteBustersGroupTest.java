@@ -1,12 +1,10 @@
 package school.redrover;
-
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
-
 import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
@@ -148,7 +146,9 @@ public class ByteBustersGroupTest extends BaseTest {
         WebDriver driver = getDriver();
         driver.get("https://www.counter-strike.net/");
 
-        WebElement buttonSelectLanguage= driver.findElement(By.className("languageselector_LanguageIcon_yTASe"));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(7));
+
+        WebElement buttonSelectLanguage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".languageselector_InnerWrapper_A5ZD2 .languageselector_LanguageIcon_yTASe")));
         buttonSelectLanguage.click();
 
         WebElement selectEnglish= driver.findElement(By.className("languageselector_LanguageOption_Kd1K6"));
@@ -159,7 +159,6 @@ public class ByteBustersGroupTest extends BaseTest {
 
         Assert.assertEquals(languageText, "SELECT LANGUAGE");
 
-        driver.quit();
     }
 
     @Test
