@@ -16,19 +16,16 @@ public class CrazyTestersTest extends BaseTest {
 
     @Test
     public void testDragAndDrop() {
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://the-internet.herokuapp.com/drag_and_drop");
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+        getDriver().get("https://the-internet.herokuapp.com/drag_and_drop");
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
 
-        WebElement columnA = driver.findElement(By.id("column-a"));
-        WebElement columnB = driver.findElement(By.id("column-b"));
-        new Actions(driver)
+        WebElement columnA = getDriver().findElement(By.id("column-a"));
+        WebElement columnB = getDriver().findElement(By.id("column-b"));
+        new Actions(getDriver())
                 .dragAndDrop(columnA, columnB)
                 .perform();
 
         Assert.assertEquals(columnB.getText(), "A");
-
-        driver.quit();
     }
 
     @Test
