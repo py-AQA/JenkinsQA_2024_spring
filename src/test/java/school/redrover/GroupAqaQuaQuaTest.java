@@ -7,7 +7,6 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
 public class GroupAqaQuaQuaTest extends BaseTest {
-
     @Test
     public void testyAddingBookToCart() {
         getDriver().get("https://demowebshop.tricentis.com/");
@@ -251,5 +250,27 @@ public class GroupAqaQuaQuaTest extends BaseTest {
         Assert.assertEquals(getDriver().findElement(
                         By.cssSelector("div#bar-notification> p:nth-child(5)"))
                 .getText(), "Enter valid sender email");
+    }
+    @Test
+    public void testSearchDropdownItemsQuantity() {
+        getDriver().get("https://demowebshop.tricentis.com/");
+
+        getDriver().findElement(By.linkText("Search")).click();
+        getDriver().findElement(By.id("As")).click();
+
+        Assert.assertEquals(getDriver().findElements(By.cssSelector("select[id='Cid'] option")).size(), 13);
+    }
+    @Test
+    public void testSearchEmptyField() {
+        getDriver().get("https://demowebshop.tricentis.com/search");
+
+        getDriver().findElement(By.cssSelector("input[id='Q']")).sendKeys("");
+        getDriver().findElement(By.cssSelector("input[class~='search-button']")).click();
+        getDriver().findElement(By.id("As")).click();
+        getDriver().findElement(By.id("Isc")).click();
+        getDriver().findElement(By.id("Sid")).click();
+
+        Assert.assertEquals(getDriver().findElement(By.cssSelector("[class='warning']")).getText().substring(12, 26),
+                "minimum length");
     }
 }
