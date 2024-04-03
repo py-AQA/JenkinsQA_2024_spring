@@ -147,7 +147,7 @@ public class ByteBustersGroupTest extends BaseTest {
         WebDriver driver = getDriver();
         driver.get("https://www.counter-strike.net/");
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(7));
 
         WebElement buttonSelectLanguage = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".languageselector_InnerWrapper_A5ZD2 .languageselector_LanguageIcon_yTASe")));
         buttonSelectLanguage.click();
