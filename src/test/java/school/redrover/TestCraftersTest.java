@@ -5,7 +5,6 @@ package school.redrover;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
@@ -117,7 +116,7 @@ public class TestCraftersTest extends BaseTest {
 
         Assert.assertEquals(getDriver().getCurrentUrl(), "https://tutorialsninja.com/demo/index.php?route=account/login");
     }
-    //test wish list
+
     @Test(description = "without login")
     public void testWishListRedirec() {
         initialization(URL);
@@ -125,6 +124,7 @@ public class TestCraftersTest extends BaseTest {
 
         Assert.assertEquals(getDriver().getCurrentUrl(), "https://tutorialsninja.com/demo/index.php?route=account/login");
     }
+
 
     //test wish list counter
     @Test
@@ -149,15 +149,18 @@ public class TestCraftersTest extends BaseTest {
 
     }
 
-    //tests Shopping cart
+
+    //tests Shoping cart
 
     @Test
-    public void testShopingCartRedirect () {
+    public void testShopingCartRedirect() {
+
         initialization(URL);
         getDriver().findElement(By.xpath("//*[contains(text(),'Shopping Cart')]")).click();
 
         Assert.assertEquals(getDriver().getCurrentUrl(), "https://tutorialsninja.com/demo/index.php?route=checkout/cart");
     }
+
 
             // test shopping Cart add
     @Test
@@ -171,10 +174,6 @@ public class TestCraftersTest extends BaseTest {
         Assert.assertTrue(getDriver().findElement(By.xpath("//ul[@class='dropdown-menu pull-right']//a[text()='MacBook']")).isEnabled());
     }
 
-
-
-
-
     //tests Checkout
     @Test
     public void testCheckoutRedirect() {
@@ -184,7 +183,7 @@ public class TestCraftersTest extends BaseTest {
         Assert.assertEquals(getDriver().getCurrentUrl(), "https://tutorialsninja.com/demo/index.php?route=checkout/cart");
     }
     @Test
-    public void testHomePageTitle() {
+    public void testHomePageTitle(){
         initialization(URL);
         String actualTitle = getDriver().getTitle();
         String expectedTitle = "Your Store";
@@ -192,7 +191,7 @@ public class TestCraftersTest extends BaseTest {
     }
 
     @Test
-    public void testRegister () {
+    public void testRegister() {
         getDriver().get(URL);
 
         getDriver().findElement(By.linkText("My Account")).click();
@@ -220,6 +219,7 @@ public class TestCraftersTest extends BaseTest {
         getDriver().get(url);
 
     }
+
 
 
 
