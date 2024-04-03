@@ -4,18 +4,15 @@
 package school.redrover;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class TutorialsNinjaTest extends BaseTest {
+public class TestCraftersTest extends BaseTest {
     private final static String URL = "https://tutorialsninja.com/demo/";
 
     @Test
@@ -146,7 +143,33 @@ public class TutorialsNinjaTest extends BaseTest {
 
         Assert.assertEquals(getDriver().getCurrentUrl(), "https://tutorialsninja.com/demo/index.php?route=checkout/cart");
     }
+    @Test
+    public void testHomePageTitle(){
+        initialization(URL);
+        String actualTitle = getDriver().getTitle();
+        String expectedTitle = "Your Store";
+        Assert.assertEquals(actualTitle, expectedTitle);
+    }
 
+    @Test
+    public void testRegister() {
+        getDriver().get(URL);
+
+        getDriver().findElement(By.linkText("My Account")).click();
+        getDriver().findElement(By.linkText("Register")).click();
+        getDriver().findElement(By.id("input-firstname")).sendKeys("TestFirstName2");
+        getDriver().findElement(By.id("input-lastname")).sendKeys("TestLastName2");
+        getDriver().findElement(By.id("input-email")).sendKeys("Kattin@gmail.com");
+        getDriver().findElement(By.id("input-telephone")).sendKeys("1234567891");
+        getDriver().findElement(By.id("input-password")).sendKeys("12345test");
+        getDriver().findElement(By.id("input-confirm")).sendKeys("12345test");
+        getDriver().findElement(By.name("agree")).click();
+        getDriver().findElement(By.xpath("//input[@class= 'btn btn-primary']")).click();
+
+        String actualTitle = getDriver().getTitle();
+        String expectedTitle = "Your Account Has Been Created!";
+        Assert.assertEquals(actualTitle, expectedTitle);
+    }
 
 
 
