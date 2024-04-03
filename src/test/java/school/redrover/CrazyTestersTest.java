@@ -139,6 +139,21 @@ public class CrazyTestersTest extends BaseTest {
     }
 
     @Test
+    public void testTest3() {
+        WebDriver driver = getDriver();
+        driver.get("https://www.nike.com/es/");
+
+        WebElement username = driver.findElement(By.id("VisualSearchInput"));
+        username.sendKeys("Jordan");
+
+        WebElement submitButton2 = driver.findElement(By.xpath("//button[@*='Buscar']"));
+        submitButton2.click();
+
+        String pageUrl = driver.getCurrentUrl();
+        Assert.assertEquals(pageUrl, "https://www.nike.com/es/w?q=Jordan&vst=Jordan");
+    }
+
+    @Test
     public void testTest2() {
         WebDriver driver = getDriver();
         driver.get("https://www.saucedemo.com/");
