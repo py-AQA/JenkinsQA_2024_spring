@@ -16,7 +16,7 @@ public class VivaTest {
 
         driver.get("https://www.yrt.ca/en/schedules-and-maps/viva-routes.aspx");
         WebElement textBox = driver.findElement(By.name("search"));
-        textBox.sendKeys("bbbb");
+        textBox.sendKeys("ddd");
         Thread.sleep(1000);
 
         WebElement submitButton = driver.findElement(By.xpath("//*[@id=\"search-box\"]/button"));//find button
