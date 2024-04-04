@@ -271,7 +271,6 @@ public class GroupRedroverJava7Test extends BaseTest {
         String actualUrl="https://www.saucedemo.com/inventory.html";
         String expectedUrl= getDriver().getCurrentUrl();
         Assert.assertEquals(actualUrl, expectedUrl);
-
     }
 
     @Test
