@@ -8,6 +8,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -380,5 +381,35 @@ public class GroupUnitedByJava8Test extends BaseTest {
 
         Assert.assertEquals(defaultSortingCriterion, "Name (A to Z)",
                 "Default sorting criterion is not alphabetical");
+    }
+    @Test
+    public void testAlertAppearsAfterRatingIsNotSelected() {
+        getDriver().get("https://magento.softwaretestingboard.com");
+
+        getDriver().findElement(By
+                .xpath("//span[contains (.,'Women')]")).click();
+
+        getDriver().findElement(By
+                .xpath("//div[contains(@class, 'categories')]//a[contains(., 'Hoodies')]")).click();
+
+        getDriver().findElement(By
+                .xpath("//a[contains(., 'Circe')]")).click();
+
+        getDriver().findElement(By
+                .xpath("//a[normalize-space(.) = 'Reviews']")).click();
+
+        getDriver().findElement(By.id("nickname_field")).sendKeys("Chubaka");
+
+        getDriver().findElement(By.id("summary_field")).sendKeys("My f***king sh**ty review");
+
+        getDriver().findElement(By.id("review_field")).sendKeys("bla bla bla");
+
+        getDriver().findElement(By
+                .xpath("//button[normalize-space(.) = 'Submit Review']")).click();
+
+        WebElement alert = getDriver().findElement(By.id("ratings[4]-error"));
+
+        Assert.assertTrue(alert.isDisplayed());
+        Assert.assertEquals(alert.getText(), "Please select one of each of the ratings above.");
     }
 }
