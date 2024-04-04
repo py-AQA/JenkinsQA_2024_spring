@@ -251,17 +251,11 @@ public class UnderdogsGroupTest extends BaseTest {
 
     @Test
     public void testArticleTitle() {
-        final String baseUrl = "https://en.wikipedia.org/wiki/Wikipedia";
         getDriver().manage().window().maximize();
-        getDriver().get(baseUrl);
-        // Find Page Title
+        getDriver().get("https://en.wikipedia.org/wiki/Wikipedia");
         WebElement articleTitleElement = getDriver().findElement(By.className("mw-page-title-main"));
         String articleTitle = articleTitleElement.getText();
-
-        // Expected Article Name
         String expectedTitle = "Wikipedia";
-
-        // Check that page title equals
         Assert.assertEquals(articleTitle, expectedTitle, "Page title does not equals to the expected title");
     }
 
