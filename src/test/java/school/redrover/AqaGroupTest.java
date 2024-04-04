@@ -953,4 +953,48 @@ public class AqaGroupTest extends AqaGroupBaseTest {
     public void testUserRole(@Optional("Admin") String role, @Optional("true") Boolean isActive) {
         Assert.assertTrue(role.equals("Admin") && isActive);
     }
+
+    @Test
+    public void testOpenCloseAlertPopUp() {
+        getDriver().get("http://uitestingplayground.com/classattr");
+
+        String blueButtonXpath = "//button[contains(concat(' ', (@class), ' '),' btn-primary ')]";
+        getDriver().findElement(By.xpath(blueButtonXpath)).click();
+        getWait5().until(ExpectedConditions.alertIsPresent()).accept();
+
+        Assert.assertTrue(getWait5().until(ExpectedConditions.elementToBeClickable(By
+                        .xpath(blueButtonXpath))).isEnabled(),
+                "Alert hasn't been closed!");
+    }
+
+    @Test
+    public void testScrollToFindButton() {
+        getDriver().get("http://uitestingplayground.com/scrollbars");
+
+        Assert.assertTrue(scrollIntoView(getDriver().findElement(By.id("hidingButton"))).isEnabled());
+    }
+
+    @Test
+    public void testDoubleClickAtFakeLink() {
+        getDriver().get("http://uitestingplayground.com/mouseover");
+
+        new Actions(getDriver()).moveToElement(getDriver().findElement(By.linkText("Click me"))).doubleClick().build().perform();
+
+        Assert.assertEquals(getDriver().findElement(By.id("clickCount")).getText(), "2",
+                "Double click doesn't work!");
+    }
+
+    @Test
+    public void testSuccessfulLogin() {
+        getDriver().get("http://uitestingplayground.com/sampleapp");
+
+        String login = "carolync";
+
+        getDriver().findElement(By.xpath("//input[@name='UserName']")).sendKeys(login);
+        getDriver().findElement(By.xpath("//input[@name='Password']")).sendKeys("pwd");
+        getDriver().findElement(By.id("login")).click();
+
+        Assert.assertTrue(getWait5().until(ExpectedConditions.textToBePresentInElementLocated(By.id("loginstatus"),
+                "Welcome, " + login)), "Unsuccessful login attempt!");
+    }
 }
