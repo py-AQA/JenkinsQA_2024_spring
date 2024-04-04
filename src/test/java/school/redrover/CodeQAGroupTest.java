@@ -397,6 +397,18 @@ public class CodeQAGroupTest extends BaseTest {
         WebElement header3 = getDriver().findElement(By.xpath("/html/body/div[2]/div/div/button"));
         Assert.assertEquals(header3.getText(), "Add Element");
     }
+    @Test
+    public void testDeleteBtn() {
+
+        getDriver().get("https://the-internet.herokuapp.com/add_remove_elements/");
+
+        WebElement addButton = getDriver().findElement(By.xpath("/html/body/div[2]/div/div/button"));
+        addButton.click();
+
+        boolean deleteButtonVisible = getDriver().findElement(By.xpath("/html/body/div[2]/div/div/div/button")).isDisplayed();
+
+        Assert.assertTrue(deleteButtonVisible);
+    }
         @Test
     public void testCheckboxDynamicControls() throws InterruptedException {
         getDriver().get("https://the-internet.herokuapp.com/");
