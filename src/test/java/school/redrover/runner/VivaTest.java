@@ -4,22 +4,33 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.Test;
+import org.w3c.dom.ls.LSOutput;
 
+import java.sql.SQLOutput;
 import java.time.Duration;
 
-public class VivaTest {
+public class VivaTest extends BaseTest {
     @Test
     public void testTest() throws InterruptedException {
-        WebDriver driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
 
-        driver.get("https://www.yrt.ca/en/schedules-and-maps/viva-routes.aspx");
-        WebElement textBox = driver.findElement(By.name("search"));
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+
+        getDriver().get("https://www.yrt.ca/en/schedules-and-maps/viva-routes.aspx");
+
+
+        WebElement textBox = getDriver().findElement(By.name("search"));
         textBox.sendKeys("ddd");
+        textBox.clear();
         Thread.sleep(1000);
+        WebElement submitButton = getDriver().findElement(By.linkText("Schedules and Maps"));
 
-        WebElement submitButton = driver.findElement(By.xpath("//*[@id=\"search-box\"]/button"));//find button
-        driver.quit();
+
+        String currentUrl = getDriver().getCurrentUrl();
+
+        Assert.assertEquals(currentUrl, "https://www.yrt.ca/en/schedules-and-maps/viva-routes.aspx");
+
+
     }
 }
