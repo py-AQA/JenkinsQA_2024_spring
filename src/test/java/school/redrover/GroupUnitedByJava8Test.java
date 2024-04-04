@@ -466,8 +466,8 @@ public class GroupUnitedByJava8Test extends BaseTest {
     public void testSaucedemoErrorLoginCloseErrorMessage() {
         getDriver().get("https://www.saucedemo.com/");
         getDriver().findElement(By.id("login-button")).click();
-        WebElement userUserLoginError = getDriver().findElement(By.xpath("//div/h3[@data-test='error']"));
-        userUserLoginError.isDisplayed();
+        WebElement userLoginError = getDriver().findElement(By.xpath("//div/h3[@data-test='error']"));
+        userLoginError.isDisplayed();
         getDriver().findElement(By.className("error-button")).click();
         boolean result = getDriver().findElements(By.xpath("//div/h3[@data-test='error']")).isEmpty();
 
@@ -480,11 +480,11 @@ public class GroupUnitedByJava8Test extends BaseTest {
         getDriver().findElement(By.name("user-name")).sendKeys("user");
         getDriver().findElement(By.name("password")).sendKeys("user");
         getDriver().findElement(By.id("login-button")).click();
-        WebElement userUserLoginError = getDriver().findElement(
+        WebElement userLoginError = getDriver().findElement(
             By.xpath("//div/h3[@data-test='error']"));
 
-        Assert.assertTrue(userUserLoginError.isDisplayed());
-        Assert.assertEquals(userUserLoginError.getText(),
+        Assert.assertTrue(userLoginError.isDisplayed());
+        Assert.assertEquals(userLoginError.getText(),
             "Epic sadface: Username and password do not match any user in this service");
     }
 }
