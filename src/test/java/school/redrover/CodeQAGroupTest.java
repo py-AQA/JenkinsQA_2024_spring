@@ -398,6 +398,5 @@ public class CodeQAGroupTest extends BaseTest {
         atrValue.click();
         WebElement header3 = getDriver().findElement(By.xpath("/html/body/div[2]/div/div/button"));
         Assert.assertEquals(header3.getText(), "Add Element");
-        getDriver().quit();
     }
 }
