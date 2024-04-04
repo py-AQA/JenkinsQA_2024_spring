@@ -189,9 +189,9 @@ public class GroupCarlthefogTest extends BaseTest {
     @Test
 
     public void testLoginConduit() {
-        String userName ="Grechka"+ Math.random()*3 ;
+        String userName = "Grechka" + Math.random() * 3;
         String email = "Suyn@mail" + userName + ".ru";
-        String password = "W1234567" + Math.random()*3;
+        String password = "W1234567" + Math.random() * 3;
 
         WebDriver driver = getDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofMillis(500));
@@ -251,8 +251,9 @@ public class GroupCarlthefogTest extends BaseTest {
 
         driver.quit();
     }
+
     @Test
-    public void testWikipediaSearch() throws InterruptedException {
+    public void testWikipediaSearch() {
 
         getDriver().get("https://en.wikipedia.org");
         getDriver().findElement(By.id("searchInput")).sendKeys("Selenium (software)");
@@ -265,5 +266,26 @@ public class GroupCarlthefogTest extends BaseTest {
         String actualTitle = getDriver().getTitle();
 
         Assert.assertEquals(actualTitle, expectedTitle, "Page title doesn't match expected title");
+    }
+
+    @Test
+    public void GoogleTranslateTest() {
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(1));
+
+        getDriver().get("https://translate.google.com/");
+
+        Assert.assertEquals(getDriver().getTitle().toLowerCase(), "google переводчик");
+
+        WebElement inputField = getDriver().findElement(By.xpath("//textarea"));
+
+        inputField.sendKeys("Привет");
+
+        WebElement translateToEnglish = getDriver().findElement(By.xpath("(//span[contains(text(), 'английский')])[2]/ancestor::button"));
+
+        translateToEnglish.click();
+
+        WebElement translationResult = getDriver().findElement(By.xpath("//span[@lang='en']"));
+
+        Assert.assertEquals(translationResult.getText(), "Hello");
     }
 }
