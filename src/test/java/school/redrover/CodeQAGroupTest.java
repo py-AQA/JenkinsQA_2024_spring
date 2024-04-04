@@ -299,8 +299,8 @@ public class CodeQAGroupTest extends BaseTest {
         Assert.assertEquals(actualMessage, expectedMessage);
     }
 
-  @Test
-      public void testGoToAnotherPage() {
+    @Test
+    public void testGoToAnotherPage() {
 
         getDriver().get("https://the-internet.herokuapp.com/");
         getDriver().findElement(By.cssSelector("a[href='/abtest']")).click();
@@ -346,7 +346,7 @@ public class CodeQAGroupTest extends BaseTest {
         linkToExitIntentPage.click();
 
         Robot robot = new Robot();
-        robot.mouseMove(600,0);
+        robot.mouseMove(600, 0);
 
         wait60.until(ExpectedConditions.visibilityOfElementLocated(
                 By.xpath("//div [@class='modal-title']/h3")));
@@ -368,7 +368,7 @@ public class CodeQAGroupTest extends BaseTest {
         getDriver().findElement(By.xpath("//*[@class='radius']")).click();
         String actualResult = getDriver().findElement(By.id("flash")).getText();
 
-        Assert.assertTrue(actualResult.contains( "Your username is invalid!"));
+        Assert.assertTrue(actualResult.contains("Your username is invalid!"));
     }
 
     @Test
@@ -408,5 +408,21 @@ public class CodeQAGroupTest extends BaseTest {
         boolean deleteButtonVisible = getDriver().findElement(By.xpath("/html/body/div[2]/div/div/div/button")).isDisplayed();
 
         Assert.assertTrue(deleteButtonVisible);
+    }
+        @Test
+    public void testCheckboxDynamicControls() throws InterruptedException {
+        getDriver().get("https://the-internet.herokuapp.com/");
+
+        WebElement dynamicControls = getDriver().findElement(By.xpath("//a[@href=\'/dynamic_controls\']"));
+        dynamicControls.click();
+        WebElement checkbox = getDriver().findElement(By.xpath("//input[@type='checkbox']"));
+        checkbox.click();
+        Thread.sleep(3000);
+        WebElement buttonRemove = getDriver().findElement(By.xpath("//form[@id='checkbox-example']/button"));
+        buttonRemove.click();
+        Thread.sleep(5000);
+        String actualResult = getDriver().findElement(By.xpath("//p[@id='message']")).getText();
+
+        Assert.assertEquals(actualResult, "It's gone!");
     }
 }
