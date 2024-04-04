@@ -142,6 +142,25 @@ public class ByteBustersGroupTest extends BaseTest {
     }
 
     @Test
+    public void xpathDinerTest() throws InterruptedException {
+
+        getDriver().get("https://topswagcode.com/xpath/");
+        getDriver().manage().window().maximize();
+
+        WebElement inputField = getDriver().findElement(By.
+                xpath("(//input[@placeholder='Type in a Xpath selector'])[1]"));
+        WebElement levelText = getDriver().findElement(By.xpath("//span[@class='level-text']"));
+
+        inputField.sendKeys("//plate ");
+        inputField.sendKeys(Keys.ENTER);
+
+        Thread.sleep(2000); //sorry, i can not use another variants - they do not work!
+
+        Assert.assertEquals(levelText.getText(), "Level 2 of 26");
+
+    }
+
+    @Test
     public void testCounterStrike() {
 
         WebDriver driver = getDriver();
