@@ -31,6 +31,10 @@ public class AqaGroupTest extends AqaGroupBaseTest {
     private static final By MODAL_DIALOG_TEXT = By.id("dialog-text");
     private static final String URL_LETCODE = "https://letcode.in/edit";
     private static final String MODAL_WINDOW_URL = "https://tympanus.net/Development/ModalWindowEffects/";
+    private static final String URL_MOB = "http://23.105.246.172:5000/login";
+    private static final By EMAIL_INPUT = By.cssSelector("input.primaryInput");
+    private static final By LOGIN_BUTTON = By.className("authButton");
+    private static final By ERROR_MESSAGE = By.xpath("//*[contains(text(), 'Неправильный')]");
 
     private String calc(String x) {
         return String.valueOf(Math.log(Math.abs(12 * Math.sin(Integer.parseInt(x)))));
@@ -914,6 +918,16 @@ public class AqaGroupTest extends AqaGroupBaseTest {
         getDriver().findElement(By.id("hideButton")).click();
 
         Assert.assertFalse(getDriver().findElement(By.xpath(xpath)).isDisplayed(), "Not all the buttons are hidden!");
+    }
+
+    @Test
+    public void testRemovesPassword() {
+        getDriver().get(URL_MOB);
+
+        getWait15().until(ExpectedConditions.visibilityOfElementLocated(EMAIL_INPUT)).sendKeys("yyyyyyyyyy@mail.xx");
+        getDriver().findElement(LOGIN_BUTTON).click();
+
+        Assert.assertEquals(getWait15().until(ExpectedConditions.presenceOfElementLocated(ERROR_MESSAGE)).getText(), "Неправильный логин или пароль");
     }
 
     @DataProvider(name = "visibilityDataProvider")
