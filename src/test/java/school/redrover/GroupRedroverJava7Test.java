@@ -287,16 +287,8 @@ public class GroupRedroverJava7Test extends BaseTest {
 
         getDriver().findElement(By.id("login-button")).click();
 
-        WebElement getErrorText = getDriver().findElement(By.xpath("//h3[@data-test='error']"));
-        String actualErrorMessage = getErrorText.getText();
+        WebElement actualErrorMessage = getDriver().findElement(By.xpath("//h3[@data-test='error']"));
 
-        Assert.assertEquals(actualErrorMessage, "Epic sadface: Sorry, this user has been locked out.");
+        Assert.assertEquals(actualErrorMessage.getText(), "Epic sadface: Sorry, this user has been locked out.");
     }
 }
-
-
-
-
-
-
-
