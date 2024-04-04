@@ -1,6 +1,7 @@
 package school.redrover;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -270,4 +271,25 @@ public class ByteBustersGroupTest extends BaseTest {
 
         Assert.assertEquals(getDriver().getCurrentUrl(), "https://www.saucedemo.com/inventory.html");
     }
+    @Test
+    public void testCheckSortFantasyPlayersByPrice() {
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofMillis(500));
+        getDriver().manage().window().maximize();
+
+        getDriver().get("https://fantasy.premierleague.com/");
+        if(getDriver().findElement(By.id("onetrust-policy-text")).isDisplayed()){
+            getDriver().findElement(By.id("onetrust-accept-btn-handler")).click();
+        }
+        getDriver().findElement(By.xpath("//*[text()='Statistics']")).click();
+        new Select(getDriver().findElement(By.id("sort"))).selectByVisibleText("Price");
+        List<WebElement> prices = getDriver().findElements(By.xpath("//tr[contains(@class, 'Row')]/td[3]"));
+
+        double currentValue = Double.parseDouble(prices.get(0).getText());
+        for (int i = 1; i < prices.size(); i++) {
+            double nextValue = Double.parseDouble(prices.get(i).getText());
+            Assert.assertTrue(nextValue <= currentValue, "Error of Sort!!");
+            currentValue = nextValue;
+        }
+    }
+
 }
