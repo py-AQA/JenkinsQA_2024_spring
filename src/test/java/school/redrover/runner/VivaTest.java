@@ -20,9 +20,10 @@ public class VivaTest extends BaseTest {
         getDriver().get("https://www.yrt.ca/en/schedules-and-maps/viva-routes.aspx");
 
 
-        WebElement textBox = getDriver().findElement(By.name("search"));
-        textBox.sendKeys("ddd");
-        textBox.clear();
+        //WebElement textBox = getDriver().findElement(By.name("search")).sendKeys("ffff");
+        getDriver().findElement(By.name("search")).sendKeys("ffff");
+        getDriver().findElement(By.name("search")).clear();;
+
         Thread.sleep(1000);
         WebElement submitButton = getDriver().findElement(By.linkText("Schedules and Maps"));
 
