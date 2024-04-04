@@ -393,12 +393,11 @@ public class CodeQAGroupTest extends BaseTest {
     }
     @Test
     public void testAddElement() {
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://the-internet.herokuapp.com/");
-        WebElement atrValue = driver.findElement(By.cssSelector("#content > ul > li:nth-child(2) > a"));
+        getDriver().get("https://the-internet.herokuapp.com/");
+        WebElement atrValue = getDriver().findElement(By.cssSelector("#content > ul > li:nth-child(2) > a"));
         atrValue.click();
-        WebElement header3 = driver.findElement(By.xpath("/html/body/div[2]/div/div/button"));
+        WebElement header3 = getDriver().findElement(By.xpath("/html/body/div[2]/div/div/button"));
         Assert.assertEquals(header3.getText(), "Add Element");
-        driver.quit();
+        getDriver().quit();
     }
 }
