@@ -2,7 +2,9 @@ package school.redrover;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -388,5 +390,15 @@ public class CodeQAGroupTest extends BaseTest {
         acResult.add(getDriver().findElement(By.cssSelector("#dropdown > option:nth-child(3)")).getText());
 
         Assert.assertEquals(acResult, exResult);
+    }
+    @Test
+    public void testAddElement() {
+        WebDriver driver = new ChromeDriver();
+        driver.get("https://the-internet.herokuapp.com/");
+        WebElement atrValue = driver.findElement(By.cssSelector("#content > ul > li:nth-child(2) > a"));
+        atrValue.click();
+        WebElement header3 = driver.findElement(By.xpath("/html/body/div[2]/div/div/button"));
+        Assert.assertEquals(header3.getText(), "Add Element");
+        driver.quit();
     }
 }
