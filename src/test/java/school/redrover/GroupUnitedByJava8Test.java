@@ -394,7 +394,7 @@ public class GroupUnitedByJava8Test extends BaseTest {
     }
 
     @Test
-    public void testRemoveItemToCart() {
+    public void testRemoveItemFromCart() {
 
         getDriver().manage().window().maximize();
         getDriver().get("https://www.saucedemo.com/");
@@ -404,10 +404,8 @@ public class GroupUnitedByJava8Test extends BaseTest {
 
         WebElement addingButton = getDriver().findElement(By.id("add-to-cart-sauce-labs-backpack"));
         addingButton.click();
-
         WebElement cartIcon = getDriver().findElement(By.id("shopping_cart_container"));
         cartIcon.click();
-
         WebElement removeButton = getDriver().findElement(By.id("remove-sauce-labs-backpack"));
         removeButton.click();
 
