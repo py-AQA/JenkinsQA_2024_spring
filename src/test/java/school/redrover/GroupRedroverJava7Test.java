@@ -1,6 +1,4 @@
 package school.redrover;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -269,8 +267,7 @@ public class GroupRedroverJava7Test extends BaseTest {
         WebElement passwordField = getDriver().findElement(By.id("password"));
         passwordField.sendKeys("secret_sauce");
 
-        WebElement button = getDriver().findElement(By.id("login-button"));
-        button.click();
+        getDriver().findElement(By.id("login-button")).click();
         String actualUrl="https://www.saucedemo.com/inventory.html";
         String expectedUrl= getDriver().getCurrentUrl();
         Assert.assertEquals(actualUrl, expectedUrl);
@@ -279,24 +276,21 @@ public class GroupRedroverJava7Test extends BaseTest {
 
     @Test
     public  void testSwag() {
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://www.saucedemo.com/v1/");
+        getDriver().get("https://www.saucedemo.com/v1/");
+        getDriver().manage().window().maximize();
 
-        WebElement userNameField = driver.findElement(By.id("user-name"));
+        WebElement userNameField = getDriver().findElement(By.id("user-name"));
         userNameField.sendKeys("locked_out_user");
 
-        WebElement passwordField = driver.findElement(By.id("password"));
+        WebElement passwordField = getDriver().findElement(By.id("password"));
         passwordField.sendKeys("secret_sauce");
 
-        WebElement buttonLogin = driver.findElement(By.id("login-button"));
-        buttonLogin.click();
+        getDriver().findElement(By.id("login-button")).click();
 
-        WebElement getErrorText = driver.findElement(By.xpath("//h3[@data-test='error']"));
+        WebElement getErrorText = getDriver().findElement(By.xpath("//h3[@data-test='error']"));
         String actualErrorMessage = getErrorText.getText();
 
         Assert.assertEquals(actualErrorMessage, "Epic sadface: Sorry, this user has been locked out.");
-
-        driver.quit();
     }
 }
 
