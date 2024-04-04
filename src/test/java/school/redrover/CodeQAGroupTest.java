@@ -2,9 +2,7 @@ package school.redrover;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -398,5 +396,17 @@ public class CodeQAGroupTest extends BaseTest {
         atrValue.click();
         WebElement header3 = getDriver().findElement(By.xpath("/html/body/div[2]/div/div/button"));
         Assert.assertEquals(header3.getText(), "Add Element");
+    }
+    @Test
+    public void testDeleteBtn() {
+
+        getDriver().get("https://the-internet.herokuapp.com/add_remove_elements/");
+
+        WebElement addButton = getDriver().findElement(By.xpath("/html/body/div[2]/div/div/button"));
+        addButton.click();
+
+        boolean deleteButtonVisible = getDriver().findElement(By.xpath("/html/body/div[2]/div/div/div/button")).isDisplayed();
+
+        Assert.assertTrue(deleteButtonVisible);
     }
 }
