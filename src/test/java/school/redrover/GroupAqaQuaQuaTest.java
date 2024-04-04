@@ -6,6 +6,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
+import java.util.List;
+
 public class GroupAqaQuaQuaTest extends BaseTest {
 
     @Test
@@ -166,7 +168,7 @@ public class GroupAqaQuaQuaTest extends BaseTest {
                 By.cssSelector("div.page-title>h1")).getText(), "Welcome, Please Sign In!");
     }
     @Test
-    public void testAdvancedSearch() {
+    public void testSearch() {
         getDriver().get("https://demowebshop.tricentis.com/");
 
         getDriver().findElement(By.linkText("Search")).click();
@@ -219,5 +221,91 @@ public class GroupAqaQuaQuaTest extends BaseTest {
 
         Assert.assertEquals(getDriver().findElement(By.xpath("//form/div[1]/div/ul/li")).getText(),
                 "The credentials provided are incorrect");
+    }
+    @Test
+    public void testAlertRequiredFieldsInGiftCard() throws InterruptedException {
+        getDriver().get("https://demowebshop.tricentis.com/gift-cards");
+
+        getDriver().findElement(
+                        By.xpath("//div[@data-productid='2']//div[@class='buttons']/input[@value='Add to cart']"))
+                .click();
+
+        Thread.sleep(3000);
+
+        getDriver().findElement(
+                        By.cssSelector("input#add-to-cart-button-2.button-1.add-to-cart-button"))
+                .click();
+
+        Thread.sleep(3000);
+
+        Assert.assertTrue(getDriver().findElement(
+                        By.cssSelector("div#bar-notification"))
+                .isDisplayed());
+        Assert.assertEquals(getDriver().findElement(
+                        By.cssSelector("div#bar-notification> p:nth-child(2)"))
+                .getText(), "Enter valid recipient name");
+        Assert.assertEquals(getDriver().findElement(
+                        By.cssSelector("div#bar-notification> p:nth-child(3)"))
+                .getText(), "Enter valid recipient email");
+        Assert.assertEquals(getDriver().findElement(
+                        By.cssSelector("div#bar-notification> p:nth-child(4)"))
+                .getText(), "Enter valid sender name");
+        Assert.assertEquals(getDriver().findElement(
+                        By.cssSelector("div#bar-notification> p:nth-child(5)"))
+                .getText(), "Enter valid sender email");
+    }
+    @Test
+    public void testSearchDropdownItemsQuantity() {
+        getDriver().get("https://demowebshop.tricentis.com/");
+
+        getDriver().findElement(By.linkText("Search")).click();
+        getDriver().findElement(By.id("As")).click();
+
+        Assert.assertEquals(getDriver().findElements(By.cssSelector("select[id='Cid'] option")).size(), 13);
+    }
+    @Test
+    public void testSearchEmptyField() {
+        getDriver().get("https://demowebshop.tricentis.com/search");
+
+        getDriver().findElement(By.cssSelector("input[id='Q']")).sendKeys("");
+        getDriver().findElement(By.cssSelector("input[class~='search-button']")).click();
+        getDriver().findElement(By.id("As")).click();
+        getDriver().findElement(By.id("Isc")).click();
+        getDriver().findElement(By.id("Sid")).click();
+
+        Assert.assertEquals(getDriver().findElement(By.cssSelector("[class='warning']")).getText().substring(12, 26),
+                "minimum length");
+    }
+    @Test
+    public void testOpeningComputersPage() throws InterruptedException {
+        getDriver().get("https://demowebshop.tricentis.com/");
+        getDriver().findElement(By.xpath("//a[@href = '/computers']")).click();
+        Thread.sleep(2000);
+        String resultText = getDriver().findElement(By.cssSelector(".page-title")).getText();
+
+        Assert.assertEquals(resultText, "Computers");
+    }
+    @Test
+    public void testDesktopSortByPriceLowToHigh() throws InterruptedException {
+        getDriver().get("https://demowebshop.tricentis.com/");
+        getDriver().findElement(By.xpath("//ul[@class='list' ]//li[@class='inactive']//a[@href='/computers']")).click();
+        Thread.sleep(2000);
+
+        getDriver().findElement(By.xpath("//ul[@class='sublist' ]//li[@class='inactive']//a[@href = '/desktops']")).click();
+        Thread.sleep(2000);
+
+        getDriver().findElement(By.id("products-orderby")).click();
+        getDriver().findElement(By.xpath("//option[text()='Price: Low to High']")).click();
+
+        List<WebElement> prices = getDriver().findElements(By.cssSelector(".prices .price"));
+        double prevPrice = Integer.MIN_VALUE;
+
+        for (WebElement priceElement : prices) {
+            String priceText = priceElement.getText().replace("$", "").replace(",", "");
+            double price = Double.parseDouble(priceText);
+
+            Assert.assertTrue(price >= prevPrice, "Prices are not sorted correctly");
+            prevPrice = price;
+        }
     }
 }
