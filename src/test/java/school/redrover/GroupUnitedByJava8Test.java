@@ -433,4 +433,58 @@ public class GroupUnitedByJava8Test extends BaseTest {
         Assert.assertTrue(getDriver().findElements(By.id("item_4_title_link")).isEmpty());
 
     }
+
+    @Test
+    public void testSaucedemoPlaceholderUsernameByDefault() {
+        getDriver().get("https://www.saucedemo.com/");
+
+        Assert.assertEquals(getDriver().findElement(By.name("user-name")).getAttribute("placeholder"), "Username");
+    }
+
+    @Test
+    public void testSaucedemoPasswordPlaceholderByDefault() {
+        getDriver().get("https://www.saucedemo.com/");
+
+        Assert.assertEquals(getDriver().findElement(By.name("password")).getAttribute("placeholder"), "Password");
+    }
+
+    @Test
+    public void testSaucedemoErrorLoginWithEmptyInputs() {
+        getDriver().get("https://www.saucedemo.com/");
+        getDriver().findElement(By.id("login-button")).click();
+        WebElement emptyLoginError = getDriver().findElement(By.xpath("//div/h3[@data-test='error']"));
+        WebElement errorUsernameCrossSVG =getDriver().findElement(By.cssSelector("#user-name + .svg-inline--fa"));
+        WebElement errorPasswordCrossSVG =getDriver().findElement(By.cssSelector("#password + .svg-inline--fa"));
+
+        Assert.assertTrue(emptyLoginError.isDisplayed());
+        Assert.assertEquals(emptyLoginError.getText(), "Epic sadface: Username is required");
+        Assert.assertTrue(errorUsernameCrossSVG.isDisplayed());
+        Assert.assertTrue(errorPasswordCrossSVG.isDisplayed());
+    }
+
+    @Test
+    public void testSaucedemoErrorLoginCloseErrorMessage() {
+        getDriver().get("https://www.saucedemo.com/");
+        getDriver().findElement(By.id("login-button")).click();
+        WebElement userUserLoginError = getDriver().findElement(By.xpath("//div/h3[@data-test='error']"));
+        userUserLoginError.isDisplayed();
+        getDriver().findElement(By.className("error-button")).click();
+        boolean result = getDriver().findElements(By.xpath("//div/h3[@data-test='error']")).isEmpty();
+
+        Assert.assertTrue(result);
+    }
+
+    @Test
+    public void testSaucedemoIncorrectDataLogin() {
+        getDriver().get("https://www.saucedemo.com/");
+        getDriver().findElement(By.name("user-name")).sendKeys("user");
+        getDriver().findElement(By.name("password")).sendKeys("user");
+        getDriver().findElement(By.id("login-button")).click();
+        WebElement userUserLoginError = getDriver().findElement(
+            By.xpath("//div/h3[@data-test='error']"));
+
+        Assert.assertTrue(userUserLoginError.isDisplayed());
+        Assert.assertEquals(userUserLoginError.getText(),
+            "Epic sadface: Username and password do not match any user in this service");
+    }
 }
