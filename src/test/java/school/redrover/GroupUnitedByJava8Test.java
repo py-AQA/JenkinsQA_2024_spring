@@ -381,7 +381,6 @@ public class GroupUnitedByJava8Test extends BaseTest {
                 "Default sorting criterion is not alphabetical");
     }
     @Test
-
     public void testAlertAppearsAfterRatingIsNotSelected() {
         getDriver().get("https://magento.softwaretestingboard.com");
         getDriver().findElement(By
@@ -401,7 +400,8 @@ public class GroupUnitedByJava8Test extends BaseTest {
 
         Assert.assertTrue(alert.isDisplayed());
         Assert.assertEquals(alert.getText(), "Please select one of each of the ratings above.");
-      
+    }
+    @Test
     public void testLoginInvalidUser() {
 
         getDriver().manage().window().maximize();
