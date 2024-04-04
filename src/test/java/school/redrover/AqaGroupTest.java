@@ -997,4 +997,16 @@ public class AqaGroupTest extends AqaGroupBaseTest {
         Assert.assertTrue(getWait5().until(ExpectedConditions.textToBePresentInElementLocated(By.id("loginstatus"),
                 "Welcome, " + login)), "Unsuccessful login attempt!");
     }
+
+    @Test
+    public void testGetValFromDynamicTable() {
+        getDriver().get("http://uitestingplayground.com/dynamictable");
+
+        String cpuValueRegEX = "^.* ([\\d.]+%).*";
+        String rowChrome = getDriver().findElement(By.xpath("//span[text()= 'Chrome']/..")).getText();
+        String cpuValue = rowChrome.replaceAll(cpuValueRegEX, "$1");
+        String warningValue = getDriver().findElement(By.className("bg-warning")).getText().replaceAll(cpuValueRegEX, "$1");
+
+        Assert.assertEquals(cpuValue, warningValue, "CPU values aren't equivalents!");
+    }
 }
