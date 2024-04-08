@@ -7,26 +7,25 @@ import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
 
 public class CreateFolderTest extends BaseTest {
+    private static final String FIRST_FOLDER_NAME = "First Folder";
+    private static final String INNER_FOLDER_NAME = "Inner Folder";
+    private static final String ANOTHER_FOLDER_NAME = "Another Inner Folder";
     @Test
     public void testCreateFolder(){
-        String firstFolderName = "FirstFolder";
-        String innerFolderName = "InnerFolder";
-        String anotherFolderName = "AnotherInnerFolder";
+        createFolder(FIRST_FOLDER_NAME);
 
-        createFolder(firstFolderName);
-
-        Assert.assertEquals(getDriver().findElement(By.xpath("//h1")).getText(), firstFolderName);
-        Assert.assertTrue(getLinkToFolder(firstFolderName).isDisplayed());
+        Assert.assertEquals(getDriver().findElement(By.xpath("//h1")).getText(), FIRST_FOLDER_NAME);
+        Assert.assertTrue(getLinkToFolder(FIRST_FOLDER_NAME).isDisplayed());
         Assert.assertTrue(getDriver().findElement(By.className("empty-state-section")).isDisplayed());
 
-        createFolder(innerFolderName);
-        getLinkToFolder(firstFolderName).click();
-        createFolder(anotherFolderName);
-        getLinkToFolder(firstFolderName).click();
+        createFolder(INNER_FOLDER_NAME);
+        getLinkToFolder(FIRST_FOLDER_NAME).click();
+        createFolder(ANOTHER_FOLDER_NAME);
+        getLinkToFolder(FIRST_FOLDER_NAME).click();
 
-        Assert.assertEquals(getDriver().findElement(By.xpath("//h1")).getText(), firstFolderName);
-        Assert.assertTrue(getLinkToFolder(innerFolderName).isDisplayed());
-        Assert.assertTrue(getLinkToFolder(anotherFolderName).isDisplayed());
+        Assert.assertEquals(getDriver().findElement(By.xpath("//h1")).getText(), FIRST_FOLDER_NAME);
+        Assert.assertTrue(getLinkToFolder(INNER_FOLDER_NAME).isDisplayed());
+        Assert.assertTrue(getLinkToFolder(ANOTHER_FOLDER_NAME).isDisplayed());
         Assert.assertTrue(getDriver().findElement(By.xpath("//a[.='New Item']")).isDisplayed());
     }
 
