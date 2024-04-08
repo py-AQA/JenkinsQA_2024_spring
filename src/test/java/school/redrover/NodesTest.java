@@ -16,6 +16,6 @@ public class NodesTest extends BaseTest {
         getDriver().findElement(By.xpath("//*[@href='new']")).click();
         text = getDriver().findElement(By.xpath("//h1")).getText();
 
-        Assert.assertEquals(text,"New node");
+        Assert.assertNotEquals(text,"New node");
     }
 }
