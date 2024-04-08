@@ -10,6 +10,7 @@ public class CreateFolderTest extends BaseTest {
     private static final String FIRST_FOLDER_NAME = "First Folder";
     private static final String INNER_FOLDER_NAME = "Inner Folder";
     private static final String ANOTHER_FOLDER_NAME = "Another Inner Folder";
+
     @Test
     public void testCreateFolder(){
         createFolder(FIRST_FOLDER_NAME);
