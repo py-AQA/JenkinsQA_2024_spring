@@ -36,5 +36,5 @@ ADD pom.xml /tests
 COPY ./src /tests/src
 
 # Запускаем maven
-CMD ["mvn", "test"]
+CMD ["mvn", "-Dtest=Aqa*", "test"]
 #CMD ["sleep", "infinity"]
