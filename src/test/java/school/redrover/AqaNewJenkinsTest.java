@@ -260,7 +260,7 @@ public class AqaNewJenkinsTest extends AqaBaseTest{
     }
 
     @Test
-    public void testChangeLanguage() throws InterruptedException {
+    public void testChangeLanguage() {
         getDriver().findElement(By.cssSelector("a[href = '/manage']")).click();
         getDriver().findElement(By.cssSelector("a[href = 'configure']")).click();
         WebElement l = getDriver().findElement(By.name("_.systemLocale"));
