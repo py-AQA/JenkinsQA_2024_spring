@@ -107,7 +107,7 @@ public class AqaNewJenkinsTest extends AqaBaseTest{
                 .click()
                 .perform();
 
-        getDriver().findElement(By.cssSelector(String.format("a[href='/job/%s/confirm-rename']", name))).click();
+        getWait15().until(ExpectedConditions.elementToBeClickable(By.cssSelector(String.format("a[href='/job/%s/confirm-rename']", name)))).click();
         getDriver().findElement(By.className("jenkins-input")).clear();
         getDriver().findElement(By.className("jenkins-input")).sendKeys(rename);
         getDriver().findElement(By.name("Submit")).click();
@@ -119,8 +119,6 @@ public class AqaNewJenkinsTest extends AqaBaseTest{
 
     @Test
     public void testAuthJenkins() {
-        login();
-
         Assert.assertTrue(getDriver().findElement(By.cssSelector("a[href = '/logout']")).isDisplayed());
     }
 
@@ -157,7 +155,7 @@ public class AqaNewJenkinsTest extends AqaBaseTest{
 
         createItem("MCP", Item.MULTI_CONFIGURATION_PROJECT);
 
-        getWait15().until(ExpectedConditions.presenceOfElementLocated(By.xpath("//textarea[@name = 'description']")));
+        getWait15().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//textarea[@name = 'description']")));
         getDriver().findElement(By.xpath("//textarea[@name = 'description']")).sendKeys("xxx");
         getDriver().findElement(By.xpath("//button[@formnovalidate = 'formNoValidate']")).click();
 
@@ -263,7 +261,7 @@ public class AqaNewJenkinsTest extends AqaBaseTest{
     public void testChangeLanguage() {
         getDriver().findElement(By.cssSelector("a[href = '/manage']")).click();
         getDriver().findElement(By.cssSelector("a[href = 'configure']")).click();
-        WebElement l = getDriver().findElement(By.name("_.systemLocale"));
+        WebElement l = getWait15().until(ExpectedConditions.visibilityOfElementLocated(By.name("_.systemLocale")));
         ((JavascriptExecutor)getDriver()).executeScript("return arguments[0].scrollIntoView(true);", l);
         l.sendKeys("ru");
         getDriver().findElement(By.cssSelector("[name = '_.ignoreAcceptLanguage']~label")).click();
