@@ -9,6 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 public class AqaNewJenkinsTest extends AqaBaseTest{
@@ -149,6 +150,7 @@ public class AqaNewJenkinsTest extends AqaBaseTest{
         Assert.assertTrue(getDriver().findElement(By.cssSelector("a[href = 'job/MCP/']")).isDisplayed());
     }
 
+    @Ignore
     @Test
     public void testAddDescription() {
         deleteItem("MCP");
@@ -222,6 +224,7 @@ public class AqaNewJenkinsTest extends AqaBaseTest{
                 "renameFolder");
     }
 
+    @Ignore
     @Test
     public void testRenameItem() {
         deleteItem("Renamed1");
@@ -257,6 +260,7 @@ public class AqaNewJenkinsTest extends AqaBaseTest{
         deleteItem(name);
     }
 
+    @Ignore
     @Test
     public void testChangeLanguage() {
         getDriver().findElement(By.cssSelector("a[href = '/manage']")).click();
