@@ -7,18 +7,6 @@ import org.testng.annotations.Test;
 
 public class AqaManageJenkinsTest extends AqaBaseTest{
 
-    public void createUser(String name) {
-        getDriver().findElement(By.cssSelector("[href = '/manage']")).click();
-        getDriver().findElement(By.cssSelector("[href = 'securityRealm/']")).click();
-        getDriver().findElement(By.cssSelector("[href = 'addUser']")).click();
-
-        getDriver().findElement(By.id("username")).sendKeys(name);
-        getDriver().findElement(By.name("password1")).sendKeys(name);
-        getDriver().findElement(By.name("password2")).sendKeys(name);
-        getDriver().findElement(By.name("fullname")).sendKeys(name);
-        getDriver().findElement(By.name("email")).sendKeys(String.format("%s@user.com", name));
-        getDriver().findElement(By.name("Submit")).click();
-    }
 
     @Test
     public void testCreateUser() {
