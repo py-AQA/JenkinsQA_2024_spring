@@ -85,83 +85,14 @@ public class AqaBaseTest extends BaseTest {
         returnToDashBoard();
     }
 
-//    protected void deleteItem(String name) {
-//        if (!getDriver().findElements(By.cssSelector(String.format("a[href = 'job/%s/']", name))).isEmpty()) {
-//            new Actions(getDriver())
-//                    .moveToElement(getDriver().findElement(
-//                            By.cssSelector(String.format("a[href = 'job/%s/']", name))))
-//                    .pause(1000)
-//                    .moveToElement(getDriver().findElement(
-//                            By.cssSelector(String.format("button[data-href = 'http://localhost:8080/job/%s/']", name))))
-//                    .click()
-//                    .perform();
-//
-//            getDriver().findElement(By.cssSelector(String.format("button[href='/job/%s/doDelete']", name))).click();
-//            getDriver().findElement(By.className("jenkins-button--primary")).click();
-//        }
-//    }
-
-//    protected void deleteItem(String name) throws InterruptedException {
-//        if (!getDriver().findElements(By.cssSelector(String.format("a[href = 'job/%s/']", name))).isEmpty()) {
-//
-//            getDriver().findElement(By.cssSelector(String.format("a[href = 'job/%s/']", name))).click();
-//            Thread.sleep(3000);
-//            getDriver().findElement(By.cssSelector(String.format("a[href = 'job/%s/']", name))).click();
-//            getDriver().findElement(By.cssSelector(String.format("[data-url='/job/%s/doDelete']", name))).click();
-//
-//            getDriver().findElement(By.className("jenkins-button--primary")).click();
-//        }
-//    }
-
-    protected void deleteItem(String name) {
-
-        if (!getDriver().findElements(By.cssSelector(String.format("a[href = 'job/%s/']", name))).isEmpty()) {
-            WebElement a = getDriver().findElement(By.cssSelector(String.format("a[href = 'job/%s/']", name)));
-            Point b = a.getLocation();
-
-            new Actions(getDriver())
-                    .moveToLocation(b.getX(), b.getY())
-                    .click()
-                    .perform();
-
-//            new Actions(getDriver()).moveToElement(getDriver().findElement(By.cssSelector(String.format("[data-url='/job/%s/doDelete']", name)))).contextClick().perform();
-            getDriver().findElement(By.cssSelector(String.format("[data-url='/job/%s/doDelete']", name))).click();
-//            new Actions(getDriver()).pause(5000).perform();
-            getWait15().until(ExpectedConditions.elementToBeClickable(By.cssSelector("dialog .jenkins-button--primary"))).click();
-//            new Actions(getDriver()).moveToElement(getDriver().findElement(By.className("jenkins-button--primary"))).contextClick().perform();
-//            new Actions(getDriver()).pause(5000).perform();
-        }
-    }
-
-//    protected void deleteItem(String name) {
-//        if (!getDriver().findElements(By.cssSelector(String.format("a[href = 'job/%s/']", name))).isEmpty()) {
-//            new Actions(getDriver())
-//                    .moveToElement(getDriver().findElement(
-//                            By.cssSelector(String.format("a[href = 'job/%s/']", name))))
-//                    .doubleClick()
-//                    .pause(1000)
-//                    .perform();
-//
-//            getDriver().findElement(By.cssSelector(String.format("[data-url='/job/%s/doDelete']", name))).click();
-//            getDriver().findElement(By.className("jenkins-button--primary")).click();
-//        }
-//    }
-
-    protected void renameItem(String name, String rename) {
+    protected void clickItemNameInCurrentView(String name) {
+        Point item_left_upper_corner = getWait15().until(ExpectedConditions.elementToBeClickable(
+                By.cssSelector(String.format("td a[href = 'job/%s/']", name)))).getLocation();
 
         new Actions(getDriver())
-                .moveToElement(getDriver().findElement(
-                        By.cssSelector(String.format("a[href = 'job/%s/']", name))))
-                .pause(1000)
-                .moveToElement(getDriver().findElement(
-                        By.cssSelector(String.format("button[data-href $= '/job/%s/']", name))))
+                .moveToLocation(item_left_upper_corner.getX(), item_left_upper_corner.getY())
                 .click()
                 .perform();
-
-        getWait15().until(ExpectedConditions.elementToBeClickable(By.cssSelector(String.format("a[href='/job/%s/confirm-rename']", name)))).click();
-        getDriver().findElement(By.className("jenkins-input")).clear();
-        getDriver().findElement(By.className("jenkins-input")).sendKeys(rename);
-        getDriver().findElement(By.name("Submit")).click();
     }
 
     protected void openItem(String name) {
@@ -199,5 +130,25 @@ public class AqaBaseTest extends BaseTest {
     protected String asURL(String str) {
 
         return str.replace(" ", "%20");
+    }
+
+    protected void deleteItem(String name) {
+
+        if (!getDriver().findElements(By.cssSelector(String.format("a[href = 'job/%s/']", name))).isEmpty()) {
+            WebElement a = getDriver().findElement(By.cssSelector(String.format("a[href = 'job/%s/']", name)));
+            Point b = a.getLocation();
+
+            new Actions(getDriver())
+                    .moveToLocation(b.getX(), b.getY())
+                    .click()
+                    .perform();
+
+//            new Actions(getDriver()).moveToElement(getDriver().findElement(By.cssSelector(String.format("[data-url='/job/%s/doDelete']", name)))).contextClick().perform();
+            getDriver().findElement(By.cssSelector(String.format("[data-url='/job/%s/doDelete']", name))).click();
+//            new Actions(getDriver()).pause(5000).perform();
+            getWait15().until(ExpectedConditions.elementToBeClickable(By.cssSelector("dialog .jenkins-button--primary"))).click();
+//            new Actions(getDriver()).moveToElement(getDriver().findElement(By.className("jenkins-button--primary"))).contextClick().perform();
+//            new Actions(getDriver()).pause(5000).perform();
+        }
     }
 }

@@ -5,17 +5,18 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 
-public class AqaManageJenkinsTest extends AqaBaseTest{
-
+public class AqaManageJenkinsTest extends AqaBaseTest {
 
     @Test
     public void testCreateUser() {
+
         createUser("user");
         Assert.assertTrue(getDriver().findElement(By.cssSelector("[href = 'user/user/']")).getText().contains("user"));
     }
 
     @Test
     public void testDeleteUser() {
+
         createUser("user");
 
         int count = getDriver().findElements(By.cssSelector("tbody tr")).size();

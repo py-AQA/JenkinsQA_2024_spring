@@ -1,6 +1,7 @@
 package school.redrover;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -21,4 +22,35 @@ public class AqaCreateProjectTest extends AqaBaseTest {
 
         deleteItem(name);
     }
+
+    @Test
+    public void testCreateMultiConfigurationProject() {
+
+        createItemAndReturnToDashboard("MCP", Item.MULTI_CONFIGURATION_PROJECT);
+
+        Assert.assertTrue(getDriver().findElement(By.cssSelector("td a[href = 'job/MCP/']")).isDisplayed());
+    }
+
+    @Test
+    public void testAddDescription() {
+
+        createItem("MCP", "hudson_matrix_MatrixProject");
+
+        getWait15().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//textarea[@name = 'description']"))).sendKeys("xxx");
+        getDriver().findElement(By.xpath("//button[@formnovalidate = 'formNoValidate']")).click();
+
+        Assert.assertTrue(
+                getWait15().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div#description"))).getText().startsWith("xxx"));
+    }
+
+    @Test
+    public void testNewItemJenkins() {
+
+        createItem("FP", "hudson_model_FreeStyleProject");
+
+        returnToDashBoard();
+
+        Assert.assertTrue(getDriver().findElement(By.cssSelector("a[href = 'job/FP/']")).isDisplayed());
+    }
+
 }
