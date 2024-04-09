@@ -164,10 +164,12 @@ public class AqaNewJenkinsTest extends AqaBaseTest{
         Assert.assertTrue(getDriver().findElement(By.cssSelector("td a[href = 'job/Folder/']")).isDisplayed());
     }
 
+
     private void openItem(String name) {
 
         getWait15().until(ExpectedConditions.elementToBeClickable(By.cssSelector(String.format("td a[href = 'job/%s/']", name)))).click();
     }
+
 
     @Test
     public void testMoveItemToFolder() {
@@ -247,6 +249,7 @@ public class AqaNewJenkinsTest extends AqaBaseTest{
         Assert.assertTrue(getDriver().findElement(By.tagName("h1")).getText().contains("Renamed1"));
     }
 
+
 //    @DataProvider(name = "itemsProvider")
 //    public Object[][] itemsProvider() {
 //        return new Object[][]{
@@ -270,12 +273,14 @@ public class AqaNewJenkinsTest extends AqaBaseTest{
         };
     }
 
+
     @Test(dataProvider = "itemsProvider")
     public void testCreateItem(String name, String itemClassName) {
 
         createItemAndReturnToDashboard(name, itemClassName);
 
-        Assert.assertTrue(getDriver().findElement(By.cssSelector(String.format("td a[href = 'job/%s/']", name))).isDisplayed());
+        Assert.assertTrue(getDriver().findElement(By.cssSelector(String.format("td a[href = 'job/%s/']", asURL(name)))).isDisplayed());
+
     }
 
     @Test(dataProvider = "itemsProvider")

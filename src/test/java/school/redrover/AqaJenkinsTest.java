@@ -8,32 +8,32 @@ import org.testng.annotations.Test;
 
 public class AqaJenkinsTest extends AqaBaseTest {
 
-    private void createItem(String name, String itemClassName) {
-        getDriver().findElement(By.cssSelector("#side-panel > div > div")).click();
-        getWait15().until(ExpectedConditions.presenceOfElementLocated(By.id("name"))).sendKeys(name);
-        getDriver().findElement(By.className(itemClassName)).click();
-        getDriver().findElement(By.id("ok-button")).click();
-    }
+//    private void createItem(String name, String itemClassName) {
+//        getDriver().findElement(By.cssSelector("#side-panel > div > div")).click();
+//        getWait15().until(ExpectedConditions.presenceOfElementLocated(By.id("name"))).sendKeys(name);
+//        getDriver().findElement(By.className(itemClassName)).click();
+//        getDriver().findElement(By.id("ok-button")).click();
+//    }
+//
+//    private void deleteItem(String name) {
+//        if (!getDriver().findElements(By.cssSelector(String.format("a[href = 'job/%s/']", name))).isEmpty()) {
+//            new Actions(getDriver())
+//                    .moveToElement(getDriver().findElement(
+//                            By.cssSelector(String.format("a[href = 'job/%s/']", name))))
+//                    .pause(1000)
+//                    .moveToElement(getDriver().findElement(
+//                            By.cssSelector(String.format("button[data-href = 'http://localhost:8080/job/%s/']", name))))
+//                    .click()
+//                    .perform();
+//
+//            getDriver().findElement(By.cssSelector(String.format("button[href='/job/%s/doDelete']", name))).click();
+//            getDriver().findElement(By.className("jenkins-button--primary")).click();
+//        }
+//    }
 
-    private void deleteItem(String name) {
-        if (!getDriver().findElements(By.cssSelector(String.format("a[href = 'job/%s/']", name))).isEmpty()) {
-            new Actions(getDriver())
-                    .moveToElement(getDriver().findElement(
-                            By.cssSelector(String.format("a[href = 'job/%s/']", name))))
-                    .pause(1000)
-                    .moveToElement(getDriver().findElement(
-                            By.cssSelector(String.format("button[data-href = 'http://localhost:8080/job/%s/']", name))))
-                    .click()
-                    .perform();
-
-            getDriver().findElement(By.cssSelector(String.format("button[href='/job/%s/doDelete']", name))).click();
-            getDriver().findElement(By.className("jenkins-button--primary")).click();
-        }
-    }
-
-    private void returnToDashBoard() {
-        getDriver().findElement(By.cssSelector("a[href = '/']")).click();
-    }
+//    private void returnToDashBoard() {
+//        getDriver().findElement(By.cssSelector("a[href = '/']")).click();
+//    }
 
     @Test
     public void testAuthJenkins() {
