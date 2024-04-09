@@ -44,6 +44,7 @@ public class AqaBaseTest extends BaseTest {
     }
 
     protected static class Item {
+
         public static final String FREESTYLE_PROJECT = "hudson_model_FreeStyleProject";
         public static final String PIPELINE = "org_jenkinsci_plugins_workflow_job_WorkflowJob";
         public static final String MULTI_CONFIGURATION_PROJECT = "hudson_matrix_MatrixProject";
@@ -53,6 +54,7 @@ public class AqaBaseTest extends BaseTest {
     }
 
     protected void login() {
+
         getDriver().get("http://localhost:8080/login");
 
         getDriver().findElement(By.id("j_username")).sendKeys("admin");
@@ -61,6 +63,7 @@ public class AqaBaseTest extends BaseTest {
     }
 
     protected void createItem(String name, String itemClassName) {
+
         getDriver().findElement(By.cssSelector("#side-panel > div > div")).click();
         getWait15().until(ExpectedConditions.visibilityOfElementLocated(By.id("name"))).sendKeys(name);
         getDriver().findElement(By.className(itemClassName)).click();
@@ -96,6 +99,7 @@ public class AqaBaseTest extends BaseTest {
 //    }
 
     protected void deleteItem(String name) {
+
         if (!getDriver().findElements(By.cssSelector(String.format("a[href = 'job/%s/']", name))).isEmpty()) {
             WebElement a = getDriver().findElement(By.cssSelector(String.format("a[href = 'job/%s/']", name)));
             Point b = a.getLocation();
@@ -129,6 +133,7 @@ public class AqaBaseTest extends BaseTest {
 //    }
 
     protected void renameItem(String name, String rename) {
+
         new Actions(getDriver())
                 .moveToElement(getDriver().findElement(
                         By.cssSelector(String.format("a[href = 'job/%s/']", name))))
@@ -145,14 +150,17 @@ public class AqaBaseTest extends BaseTest {
     }
 
     protected void returnToDashBoard() {
+
         getDriver().findElement(By.cssSelector("a[href = '/']")).click();
     }
 
     protected void openItem(String name) {
+
         getWait15().until(ExpectedConditions.elementToBeClickable(By.cssSelector(String.format("a[href = 'job/%s/']", name)))).click();
     }
 
     protected void createUser(String name) {
+
         getDriver().findElement(By.cssSelector("[href = '/manage']")).click();
         getDriver().findElement(By.cssSelector("[href = 'securityRealm/']")).click();
         getDriver().findElement(By.cssSelector("[href = 'addUser']")).click();
@@ -167,6 +175,7 @@ public class AqaBaseTest extends BaseTest {
 
     @DataProvider(name = "itemsProvider")
     public Object[][] itemsProvider() {
+
         return new Object[][]{
                 {"Freestyle project", Item.FREESTYLE_PROJECT},
                 {"Pipeline", Item.PIPELINE},
@@ -178,6 +187,7 @@ public class AqaBaseTest extends BaseTest {
     }
 
     protected String asURL(String str) {
+
         return str.replace(" ", "%20");
     }
 }
