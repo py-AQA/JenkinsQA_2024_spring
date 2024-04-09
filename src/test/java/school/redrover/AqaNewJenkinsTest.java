@@ -138,9 +138,7 @@ public class AqaNewJenkinsTest extends AqaBaseTest{
 
         createItem("MCP", Item.MULTI_CONFIGURATION_PROJECT);
         sleep(5);
-        getWait15().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//textarea[@name = 'description']")));
-        sleep(5);
-        getDriver().findElement(By.xpath("//textarea[@name = 'description']")).sendKeys("xxx");
+        getWait15().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//textarea[@name = 'description']"))).sendKeys("xxx");;
         sleep(5);
         getDriver().findElement(By.xpath("//button[@formnovalidate = 'formNoValidate']")).click();
         sleep(5);
