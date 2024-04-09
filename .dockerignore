@@ -1,14 +1,14 @@
 .git
 .github
 .idea
+.run
 jenkins_data
 target
 src/test/java/school/redrover/old
 .dockerignore
 .gitignore
-aqa.dockerfile
+*.dockerfile
 LICENSE
 my.iws
-*.dockerfile
 README.md
 run_jenkins_test.xml
