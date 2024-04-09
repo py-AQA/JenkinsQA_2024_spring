@@ -136,7 +136,7 @@ public class AqaNewJenkinsTest extends AqaBaseTest{
         createItem(name, itemClassName);
         returnToDashBoard();
 
-        Assert.assertTrue(getDriver().findElement(By.cssSelector(String.format("a[href = 'job/%s/']", name))).isDisplayed());
+        Assert.assertTrue(getDriver().findElement(By.cssSelector(String.format("a[href = 'job/%s/']", asURL(name)))).isDisplayed());
     }
 
     @Test(dataProvider = "itemsProvider")
