@@ -9,7 +9,7 @@ public class PeopleIconSizeTest extends BaseTest {
     @Test
     public void testIconSizeSmall() {
         getDriver().findElement(By.cssSelector("[href='/asynchPeople/']")).click();
-        getDriver().findElement(By.cssSelector("[href='/iconSize?16x16']")).click();
+        getDriver().findElement(By.cssSelector("[title='Small']")).click();
 
         Assert.assertEquals(getDriver().findElement(By.cssSelector("div > svg:nth-child(1)")).getSize(),
                 new Dimension(16, 16));
