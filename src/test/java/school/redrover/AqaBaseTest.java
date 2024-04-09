@@ -53,6 +53,10 @@ public class AqaBaseTest extends BaseTest {
         public static final String ORGANIZATION_FOLDER = "jenkins_branch_OrganizationFolder";
     }
 
+    private void sleep(long seconds) {
+        new Actions(getDriver()).pause(seconds * 1000).perform();
+    }
+
     protected void login() {
 
         getDriver().get("http://localhost:8080/login");
@@ -68,6 +72,17 @@ public class AqaBaseTest extends BaseTest {
         getWait15().until(ExpectedConditions.visibilityOfElementLocated(By.id("name"))).sendKeys(name);
         getDriver().findElement(By.className(itemClassName)).click();
         getDriver().findElement(By.id("ok-button")).click();
+    }
+
+    protected void returnToDashBoard() {
+
+        getDriver().findElement(By.cssSelector("a[href = '/']")).click();
+    }
+
+    protected void createItemAndReturnToDashboard(String name, String itemClassName) {
+
+        createItem(name, itemClassName);
+        returnToDashBoard();
     }
 
 //    protected void deleteItem(String name) {
@@ -139,7 +154,7 @@ public class AqaBaseTest extends BaseTest {
                         By.cssSelector(String.format("a[href = 'job/%s/']", name))))
                 .pause(1000)
                 .moveToElement(getDriver().findElement(
-                        By.cssSelector(String.format("button[data-href = 'http://localhost:8080/job/%s/']", name))))
+                        By.cssSelector(String.format("button[data-href $= '/job/%s/']", name))))
                 .click()
                 .perform();
 
@@ -149,14 +164,9 @@ public class AqaBaseTest extends BaseTest {
         getDriver().findElement(By.name("Submit")).click();
     }
 
-    protected void returnToDashBoard() {
-
-        getDriver().findElement(By.cssSelector("a[href = '/']")).click();
-    }
-
     protected void openItem(String name) {
 
-        getWait15().until(ExpectedConditions.elementToBeClickable(By.cssSelector(String.format("a[href = 'job/%s/']", name)))).click();
+        getWait15().until(ExpectedConditions.elementToBeClickable(By.cssSelector(String.format("td a[href = 'job/%s/']", name)))).click();
     }
 
     protected void createUser(String name) {
