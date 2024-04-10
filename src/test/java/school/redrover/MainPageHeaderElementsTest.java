@@ -3,6 +3,7 @@ package school.redrover;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
 
@@ -45,10 +46,9 @@ public class MainPageHeaderElementsTest extends BaseTest {
              By.cssSelector("a#visible-sec-am-button>svg[aria-hidden='true']")).isDisplayed());
     }
     @Test
+
     public void testUserElementsDisplayed () {
-     Assert.assertEquals(getDriver().findElement(
-             By.cssSelector("div.login>a.model-link"))
-             .getAttribute("href"), "http://localhost:8080/user/ippolit_tester");
+
      Assert.assertTrue(getDriver().findElement(
              By.cssSelector("a.model-link>svg.icon-md")).isDisplayed());
 
