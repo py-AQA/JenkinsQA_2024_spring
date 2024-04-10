@@ -54,7 +54,6 @@ public class AqaInProgressTest extends AqaBaseTest {
 //    }
 
 
-
     //
 //    private void renameItem(String name, String rename) {
 //
@@ -87,11 +86,11 @@ public class AqaInProgressTest extends AqaBaseTest {
         getDriver().findElement(By.cssSelector("a[href = '/manage']")).click();
         getDriver().findElement(By.cssSelector("a[href = 'configure']")).click();
         WebElement l = getWait15().until(ExpectedConditions.visibilityOfElementLocated(By.name("_.systemLocale")));
-        ((JavascriptExecutor)getDriver()).executeScript("return arguments[0].scrollIntoView(true);", l);
+        ((JavascriptExecutor) getDriver()).executeScript("return arguments[0].scrollIntoView(true);", l);
         l.sendKeys("ru");
         getDriver().findElement(By.cssSelector("[name = '_.ignoreAcceptLanguage']~label")).click();
         WebElement submit = getDriver().findElement(By.className("jenkins-button--primary"));
-        ((JavascriptExecutor)getDriver()).executeScript("return arguments[0].scrollIntoView(true);", submit);
+        ((JavascriptExecutor) getDriver()).executeScript("return arguments[0].scrollIntoView(true);", submit);
         submit.click();
 
         Assert.assertTrue(getDriver().findElement(By.cssSelector("a[href='/manage/']")).getText().contains("Настроить Jenkins"));
@@ -203,11 +202,13 @@ public class AqaInProgressTest extends AqaBaseTest {
     @Ignore
     @Test
     public void testRenameItem() {
+        final String initial_name = "org_folder";
+        final String final_name = "Renamed1";
 
-        createItemAndReturnToDashboard("org_folder", Item.ORGANIZATION_FOLDER);
+        createItemAndReturnToDashboard(initial_name, Item.ORGANIZATION_FOLDER);
 
-        renameItem("org_folder", "Renamed1");
+        renameItem(initial_name, final_name);
 
-        Assert.assertTrue(getDriver().findElement(By.tagName("h1")).getText().contains("Renamed1"));
+        Assert.assertTrue(getDriver().findElement(By.tagName("h1")).getText().contains(final_name));
     }
 }
