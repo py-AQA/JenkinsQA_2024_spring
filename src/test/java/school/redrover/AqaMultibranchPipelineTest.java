@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 
 public class AqaMultibranchPipelineTest extends AqaBaseTest {
 
-    @Test(dataProvider = "itemsProvider")
+    @Test(dataProvider = "itemProvider")
     public void testEnableItem(String name, String itemClassName) {
 
         if (!itemClassName.equals(Item.FOLDER)) {
@@ -18,7 +18,7 @@ public class AqaMultibranchPipelineTest extends AqaBaseTest {
         }
     }
 
-    @Test(dataProvider = "itemsProvider")
+    @Test(dataProvider = "itemProvider")
     public void testDisableItem(String name, String itemClassName) {
 
         if (!itemClassName.equals(Item.FOLDER)) {

@@ -3,11 +3,23 @@ package school.redrover;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 public class AqaCreateProjectTest extends AqaBaseTest {
 
-    @Test(dataProvider = "itemsProvider")
+    @Ignore
+    @Test(dataProvider = "itemNameProvider")
+    public void testDeleteFolder(String name) {
+
+        createItemAndReturnToDashboard(name, Item.FOLDER);
+
+        deleteItem(name);
+
+        Assert.assertTrue(getDriver().findElement(By.cssSelector(String.format("td a[href = 'job/%s/']", asURL(name)))).isDisplayed());
+    }
+
+    @Test(dataProvider = "itemProvider")
     public void testCreateItem(String name, String itemClassName) {
 
         createItemAndReturnToDashboard(name, itemClassName);
@@ -15,12 +27,14 @@ public class AqaCreateProjectTest extends AqaBaseTest {
         Assert.assertTrue(getDriver().findElement(By.cssSelector(String.format("td a[href = 'job/%s/']", asURL(name)))).isDisplayed());
     }
 
-    @Test(dataProvider = "itemsProvider")
+    @Test(dataProvider = "itemProvider")
     public void testDeleteItem(String name, String itemClassName) {
 
         createItemAndReturnToDashboard(name, itemClassName);
 
         deleteItem(name);
+
+//        TODO add assert here please
     }
 
     @Test
