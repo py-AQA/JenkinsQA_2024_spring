@@ -80,7 +80,7 @@ public class AqaBaseTest extends BaseTest {
         };
     }
 
-    private void sleep(long seconds) {
+    protected void sleep(long seconds) {
         new Actions(getDriver()).pause(seconds * 1000).perform();
     }
 
@@ -142,6 +142,7 @@ public class AqaBaseTest extends BaseTest {
     }
 
     protected String asURL(String str) {
+        //TODO check this if it works well
         return URLEncoder.encode(str, StandardCharsets.UTF_8)
                 .replaceAll("\\+", "%20")
                 .replaceAll("%21", "!")

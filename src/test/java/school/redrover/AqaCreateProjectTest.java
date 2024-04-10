@@ -60,9 +60,7 @@ public class AqaCreateProjectTest extends AqaBaseTest {
     @Test
     public void testNewItemJenkins() {
 
-        createItem("FP", "hudson_model_FreeStyleProject");
-
-        returnToDashBoard();
+        createItemAndReturnToDashboard("FP", "hudson_model_FreeStyleProject");
 
         Assert.assertTrue(getDriver().findElement(By.cssSelector("a[href = 'job/FP/']")).isDisplayed());
     }
