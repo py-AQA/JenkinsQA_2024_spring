@@ -36,7 +36,8 @@ public class MainPageHeaderElementsTest extends BaseTest {
      Assert.assertTrue(getDriver().findElement(
              By.cssSelector("a.main-search__icon-trailing>svg[aria-hidden='true']")).isDisplayed());
      Assert.assertTrue(urlSearchBox.isEnabled());
-     Assert.assertEquals(urlSearchBox.getAttribute("href"), "https://www.jenkins.io/redirect/search-box");
+     Assert.assertEquals(urlSearchBox
+             .getAttribute("href"), "https://www.jenkins.io/redirect/search-box");
     }
     @Test
     public void testSecButtonElementsDisplayed () {
@@ -46,12 +47,14 @@ public class MainPageHeaderElementsTest extends BaseTest {
     @Test
     public void testUserElementsDisplayed () {
      Assert.assertEquals(getDriver().findElement(
-             By.cssSelector("a.model-link")).getAttribute("href"), "http://localhost:8080/user/ippolit_tester");
+             By.cssSelector("div.login>a.model-link"))
+             .getAttribute("href"), "http://localhost:8080/user/ippolit_tester");
      Assert.assertTrue(getDriver().findElement(
              By.cssSelector("a.model-link>svg.icon-md")).isDisplayed());
 
      String q = getDriver().findElement(
-             By.cssSelector("a.model-link>span.hidden-xs.hidden-sm")).getText();
+             By.cssSelector("a.model-link>span.hidden-xs.hidden-sm"))
+             .getText();
      Assert.assertEquals(q, "Ippolit");
 
      Assert.assertTrue(getDriver().findElement(
