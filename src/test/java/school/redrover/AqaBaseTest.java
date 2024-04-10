@@ -2,7 +2,6 @@ package school.redrover;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Point;
-import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -53,6 +52,34 @@ public class AqaBaseTest extends BaseTest {
         public static final String ORGANIZATION_FOLDER = "jenkins_branch_OrganizationFolder";
     }
 
+    @DataProvider(name = "itemProvider")
+    public Object[][] itemProvider() {
+
+        return new Object[][]{
+                {"Freestyle project", Item.FREESTYLE_PROJECT},
+                {"Pipeline", Item.PIPELINE},
+                {"Multi-configuration project", Item.MULTI_CONFIGURATION_PROJECT},
+                {"Folder", Item.FOLDER},
+                {"Multibranch pipeline", Item.MULTI_BRANCH_PIPELINE},
+                {"Organization folder", Item.ORGANIZATION_FOLDER},
+        };
+    }
+
+    @DataProvider(name = "itemNameProvider")
+    public Object[][] itemNameProvider() {
+
+        return new Object[][]{
+                {""},
+                {"I"},
+                {"☼"},
+                {"<!--"},
+                {"'"},
+                {"lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll" +
+                        "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll" +
+                        "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll"},
+        };
+    }
+
     private void sleep(long seconds) {
         new Actions(getDriver()).pause(seconds * 1000).perform();
     }
@@ -87,7 +114,7 @@ public class AqaBaseTest extends BaseTest {
 
     protected void clickItemNameInCurrentView(String name) {
         Point item_left_upper_corner = getWait15().until(ExpectedConditions.elementToBeClickable(
-                By.cssSelector(String.format("td a[href = 'job/%s/']", name)))).getLocation();
+                By.cssSelector(String.format("td a[href = 'job/%s/']", asURL(name))))).getLocation();
 
         new Actions(getDriver())
                 .moveToLocation(item_left_upper_corner.getX(), item_left_upper_corner.getY())
@@ -96,7 +123,7 @@ public class AqaBaseTest extends BaseTest {
     }
 
     protected void openItem(String name) {
-
+//TODO check this one for super short names
         getWait15().until(ExpectedConditions.elementToBeClickable(By.cssSelector(String.format("td a[href = 'job/%s/']", name)))).click();
     }
 
@@ -114,41 +141,20 @@ public class AqaBaseTest extends BaseTest {
         getDriver().findElement(By.name("Submit")).click();
     }
 
-    @DataProvider(name = "itemsProvider")
-    public Object[][] itemsProvider() {
-
-        return new Object[][]{
-                {"Freestyle project", Item.FREESTYLE_PROJECT},
-                {"Pipeline", Item.PIPELINE},
-                {"Multi-configuration project", Item.MULTI_CONFIGURATION_PROJECT},
-                {"Folder", Item.FOLDER},
-                {"Multibranch pipeline", Item.MULTI_BRANCH_PIPELINE},
-                {"Organization folder", Item.ORGANIZATION_FOLDER},
-        };
-    }
-
     protected String asURL(String str) {
-
-        return str.replace(" ", "%20");
+        return URLEncoder.encode(str, StandardCharsets.UTF_8)
+                .replaceAll("\\+", "%20")
+                .replaceAll("%21", "!")
+                .replaceAll("%27", "'")
+                .replaceAll("%28", "(")
+                .replaceAll("%29", ")")
+                .replaceAll("%7E", "~");
     }
 
     protected void deleteItem(String name) {
 
-        if (!getDriver().findElements(By.cssSelector(String.format("a[href = 'job/%s/']", name))).isEmpty()) {
-            WebElement a = getDriver().findElement(By.cssSelector(String.format("a[href = 'job/%s/']", name)));
-            Point b = a.getLocation();
-
-            new Actions(getDriver())
-                    .moveToLocation(b.getX(), b.getY())
-                    .click()
-                    .perform();
-
-//            new Actions(getDriver()).moveToElement(getDriver().findElement(By.cssSelector(String.format("[data-url='/job/%s/doDelete']", name)))).contextClick().perform();
-            getDriver().findElement(By.cssSelector(String.format("[data-url='/job/%s/doDelete']", name))).click();
-//            new Actions(getDriver()).pause(5000).perform();
-            getWait15().until(ExpectedConditions.elementToBeClickable(By.cssSelector("dialog .jenkins-button--primary"))).click();
-//            new Actions(getDriver()).moveToElement(getDriver().findElement(By.className("jenkins-button--primary"))).contextClick().perform();
-//            new Actions(getDriver()).pause(5000).perform();
-        }
+        clickItemNameInCurrentView(name);
+        getDriver().findElement(By.cssSelector(String.format("[data-url='/job/%s/doDelete']", asURL(name)))).click();
+        getWait15().until(ExpectedConditions.elementToBeClickable(By.cssSelector("dialog .jenkins-button--primary"))).click();
     }
 }
