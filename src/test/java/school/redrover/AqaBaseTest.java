@@ -146,11 +146,11 @@ public class AqaBaseTest extends BaseTest {
     protected String asURL(String str) {
         return URLEncoder.encode(str, StandardCharsets.UTF_8)
                 .replaceAll("\\+", "%20")
-                .replaceAll("\\%21", "!")
-                .replaceAll("\\%27", "'")
-                .replaceAll("\\%28", "(")
-                .replaceAll("\\%29", ")")
-                .replaceAll("\\%7E", "~");
+                .replaceAll("%21", "!")
+                .replaceAll("%27", "'")
+                .replaceAll("%28", "(")
+                .replaceAll("%29", ")")
+                .replaceAll("%7E", "~");
     }
 
     protected void deleteItem(String name) {
@@ -158,25 +158,5 @@ public class AqaBaseTest extends BaseTest {
         clickItemNameInCurrentView(name);
         getDriver().findElement(By.cssSelector(String.format("[data-url='/job/%s/doDelete']", asURL(name)))).click();
         getWait15().until(ExpectedConditions.elementToBeClickable(By.cssSelector("dialog .jenkins-button--primary"))).click();
-    }
-
-    protected void deleteItem(String name) {
-
-        if (!getDriver().findElements(By.cssSelector(String.format("a[href = 'job/%s/']", name))).isEmpty()) {
-            WebElement a = getDriver().findElement(By.cssSelector(String.format("a[href = 'job/%s/']", name)));
-            Point b = a.getLocation();
-
-            new Actions(getDriver())
-                    .moveToLocation(b.getX(), b.getY())
-                    .click()
-                    .perform();
-
-//            new Actions(getDriver()).moveToElement(getDriver().findElement(By.cssSelector(String.format("[data-url='/job/%s/doDelete']", name)))).contextClick().perform();
-            getDriver().findElement(By.cssSelector(String.format("[data-url='/job/%s/doDelete']", name))).click();
-//            new Actions(getDriver()).pause(5000).perform();
-            getWait15().until(ExpectedConditions.elementToBeClickable(By.cssSelector("dialog .jenkins-button--primary"))).click();
-//            new Actions(getDriver()).moveToElement(getDriver().findElement(By.className("jenkins-button--primary"))).contextClick().perform();
-//            new Actions(getDriver()).pause(5000).perform();
-        }
     }
 }
