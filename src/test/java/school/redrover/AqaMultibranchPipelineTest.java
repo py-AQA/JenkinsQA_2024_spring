@@ -11,6 +11,7 @@ public class AqaMultibranchPipelineTest extends AqaBaseTest {
     public void testEnableItem(String name, String itemClassName) {
 
         if (!itemClassName.equals(Item.FOLDER)) {
+
             createItem(name, itemClassName);
 
             Assert.assertTrue(getDriver().findElement(By.cssSelector(".jenkins-app-bar #enable-disable-project")).isSelected());
@@ -21,6 +22,7 @@ public class AqaMultibranchPipelineTest extends AqaBaseTest {
     public void testDisableItem(String name, String itemClassName) {
 
         if (!itemClassName.equals(Item.FOLDER)) {
+
             createItem(name, itemClassName);
 
             getWait15().until(ExpectedConditions.elementToBeClickable(By.cssSelector(String.format("a[href='/job/%s/']", asURL(name))))).click();
