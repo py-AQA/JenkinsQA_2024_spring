@@ -199,6 +199,7 @@ public class AqaInProgressTest extends AqaBaseTest {
         getDriver().findElement(By.className("jenkins-input")).sendKeys(rename);
         getDriver().findElement(By.name("Submit")).click();
     }
+
     @Ignore
     @Test
     public void testRenameItem() {
