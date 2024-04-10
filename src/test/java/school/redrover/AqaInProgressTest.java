@@ -212,6 +212,7 @@ public class AqaInProgressTest extends AqaBaseTest {
 
         Assert.assertTrue(getDriver().findElement(By.tagName("h1")).getText().contains(final_name));
     }
+
     protected void deleteItemWORKING(String name) {
 
         if (!getDriver().findElements(By.cssSelector(String.format("a[href = 'job/%s/']", name))).isEmpty()) {

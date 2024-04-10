@@ -159,4 +159,24 @@ public class AqaBaseTest extends BaseTest {
         getDriver().findElement(By.cssSelector(String.format("[data-url='/job/%s/doDelete']", asURL(name)))).click();
         getWait15().until(ExpectedConditions.elementToBeClickable(By.cssSelector("dialog .jenkins-button--primary"))).click();
     }
+
+    protected void deleteItem(String name) {
+
+        if (!getDriver().findElements(By.cssSelector(String.format("a[href = 'job/%s/']", name))).isEmpty()) {
+            WebElement a = getDriver().findElement(By.cssSelector(String.format("a[href = 'job/%s/']", name)));
+            Point b = a.getLocation();
+
+            new Actions(getDriver())
+                    .moveToLocation(b.getX(), b.getY())
+                    .click()
+                    .perform();
+
+//            new Actions(getDriver()).moveToElement(getDriver().findElement(By.cssSelector(String.format("[data-url='/job/%s/doDelete']", name)))).contextClick().perform();
+            getDriver().findElement(By.cssSelector(String.format("[data-url='/job/%s/doDelete']", name))).click();
+//            new Actions(getDriver()).pause(5000).perform();
+            getWait15().until(ExpectedConditions.elementToBeClickable(By.cssSelector("dialog .jenkins-button--primary"))).click();
+//            new Actions(getDriver()).moveToElement(getDriver().findElement(By.className("jenkins-button--primary"))).contextClick().perform();
+//            new Actions(getDriver()).pause(5000).perform();
+        }
+    }
 }
