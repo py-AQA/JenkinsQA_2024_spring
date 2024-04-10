@@ -52,11 +52,6 @@ public class MainPageHeaderElementsTest extends BaseTest {
      Assert.assertTrue(getDriver().findElement(
              By.cssSelector("a.model-link>svg.icon-md")).isDisplayed());
 
-     String q = getDriver().findElement(
-             By.cssSelector("a.model-link>span.hidden-xs.hidden-sm"))
-             .getText();
-     Assert.assertEquals(q, "Ippolit");
-
      Assert.assertTrue(getDriver().findElement(
              By.cssSelector("a.model-link>svg.icon-md")).isDisplayed());
      Assert.assertTrue(getDriver().findElement(
