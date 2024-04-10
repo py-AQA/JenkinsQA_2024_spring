@@ -16,12 +16,12 @@ public class DashboardMenuTest extends BaseTest {
     @Test
     public void testDashboardMenu() {
 
-        List<String> expectedDashboardMenu = new ArrayList<>(Arrays.asList(
+                List<String> expectedDashboardMenu = Arrays.asList(
                 "New Item",
                 "People",
                 "Build History",
                 "Manage Jenkins",
-                "My Views"));
+                "My Views");
 
        getDriver().findElement(By.xpath("//ol[@id='breadcrumbs']/li[1]")).click();
 
