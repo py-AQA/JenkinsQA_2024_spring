@@ -17,7 +17,7 @@ public class OperationJavaGroupTest extends BaseTest {
     }
     @Test
     public void testFreestyleProject() {
-        getDriver().findElement(By.cssSelector("[it='hudson.model.Hudson@57458ec6'] [fill='none']")).click();
+        getDriver().findElement(By.xpath("//a[.='New Item']")).click();
 
         WebElement nameInput = getDriver().findElement(By.id("name"));
         nameInput.click();
