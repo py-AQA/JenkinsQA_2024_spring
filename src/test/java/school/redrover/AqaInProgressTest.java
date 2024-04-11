@@ -2,7 +2,6 @@ package school.redrover;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Point;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -11,136 +10,6 @@ import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 public class AqaInProgressTest extends AqaBaseTest {
-
-//    TODO we have working deleteItem in BaseTest
-    private void deleteItem1(String name) {
-        if (!getDriver().findElements(By.cssSelector(String.format("a[href = 'job/%s/']", name))).isEmpty()) {
-            new Actions(getDriver())
-                    .moveToElement(getDriver().findElement(
-                            By.cssSelector(String.format("a[href = 'job/%s/']", name))))
-                    .pause(1000)
-                    .moveToElement(getDriver().findElement(
-                            By.cssSelector(String.format("button[data-href = 'http://localhost:8080/job/%s/']", name))))
-                    .click()
-                    .perform();
-
-            getDriver().findElement(By.cssSelector(String.format("button[href='/job/%s/doDelete']", name))).click();
-            getDriver().findElement(By.className("jenkins-button--primary")).click();
-        }
-    }
-    protected void deleteItem3(String name) {
-        if (!getDriver().findElements(By.cssSelector(String.format("a[href = 'job/%s/']", name))).isEmpty()) {
-            new Actions(getDriver())
-                    .moveToElement(getDriver().findElement(
-                            By.cssSelector(String.format("a[href = 'job/%s/']", name))))
-                    .doubleClick()
-                    .pause(1000)
-                    .perform();
-
-            getDriver().findElement(By.cssSelector(String.format("[data-url='/job/%s/doDelete']", name))).click();
-            getDriver().findElement(By.className("jenkins-button--primary")).click();
-        }
-    }
-    protected void deleteItem2(String name) {
-        if (!getDriver().findElements(By.cssSelector(String.format("a[href = 'job/%s/']", name))).isEmpty()) {
-
-            getDriver().findElement(By.cssSelector(String.format("a[href = 'job/%s/']", name))).click();
-
-            sleep(3);
-
-            getDriver().findElement(By.cssSelector(String.format("a[href = 'job/%s/']", name))).click();
-            getDriver().findElement(By.cssSelector(String.format("[data-url='/job/%s/doDelete']", name))).click();
-
-            getDriver().findElement(By.className("jenkins-button--primary")).click();
-        }
-    }
-
-    private void deleteItem4(String name) {
-        if (!getDriver().findElements(By.cssSelector(String.format("a[href = 'job/%s/']", name))).isEmpty()) {
-            new Actions(getDriver())
-                    .moveToElement(getDriver().findElement(
-                            By.cssSelector(String.format("a[href = 'job/%s/']", name))))
-                    .pause(1000)
-                    .moveToElement(getDriver().findElement(
-                            By.cssSelector(String.format("button[data-href = 'http://localhost:8080/job/%s/']", name))))
-                    .click()
-                    .perform();
-
-            getDriver().findElement(By.cssSelector(String.format("button[href='/job/%s/doDelete']", name))).click();
-            getDriver().findElement(By.className("jenkins-button--primary")).click();
-        }
-    }
-
-    private void deleteItem5(String name) throws InterruptedException {
-        if (!getDriver().findElements(By.cssSelector(String.format("a[href = 'job/%s/']", name))).isEmpty()) {
-
-            getDriver().findElement(By.cssSelector(String.format("a[href = 'job/%s/']", name))).click();
-            Thread.sleep(3000);
-            getDriver().findElement(By.cssSelector(String.format("a[href = 'job/%s/']", name))).click();
-            getDriver().findElement(By.cssSelector(String.format("[data-url='/job/%s/doDelete']", name))).click();
-
-            getDriver().findElement(By.className("jenkins-button--primary")).click();
-        }
-    }
-
-    private void deleteItem6(String name) {
-        clickItemNameInCurrentView(name);
-
-//            new Actions(getDriver()).moveToElement(getDriver().findElement(By.cssSelector(String.format("[data-url='/job/%s/doDelete']", name)))).contextClick().perform();
-        getDriver().findElement(By.cssSelector(String.format("[data-url='/job/%s/doDelete']", name))).click();
-//            new Actions(getDriver()).pause(5000).perform();
-        getWait15().until(ExpectedConditions.elementToBeClickable(By.cssSelector("dialog .jenkins-button--primary"))).click();
-//            new Actions(getDriver()).moveToElement(getDriver().findElement(By.className("jenkins-button--primary"))).contextClick().perform();
-//            new Actions(getDriver()).pause(5000).perform();
-
-    }
-
-
-//    private void deleteItem(String name) {
-//        if (!getDriver().findElements(By.cssSelector(String.format("td a[href = 'job/%s/']", name))).isEmpty()) {
-//            new Actions(getDriver())
-//                    .moveToElement(getDriver().findElement(
-//                            By.cssSelector(String.format("td a[href = 'job/%s/']", name))))
-//                    .doubleClick()
-//                    .pause(1000)
-//                    .perform();
-//
-//            getDriver().findElement(By.cssSelector(String.format("[data-url='/job/%s/doDelete']", name))).click();
-//            getDriver().findElement(By.className("jenkins-button--primary")).click();
-//        }
-//    }
-
-//    private void returnToDashBoard() {
-//        getDriver().findElement(By.cssSelector("a[href = '/']")).click();
-//    }
-protected void deleteItemWORKING(String name) {
-
-    if (!getDriver().findElements(By.cssSelector(String.format("a[href = 'job/%s/']", name))).isEmpty()) {
-        WebElement a = getDriver().findElement(By.cssSelector(String.format("a[href = 'job/%s/']", name)));
-        Point b = a.getLocation();
-
-        new Actions(getDriver())
-                .moveToLocation(b.getX(), b.getY())
-                .click()
-                .perform();
-
-//            new Actions(getDriver()).moveToElement(getDriver().findElement(By.cssSelector(String.format("[data-url='/job/%s/doDelete']", name)))).contextClick().perform();
-        getDriver().findElement(By.cssSelector(String.format("[data-url='/job/%s/doDelete']", name))).click();
-//            new Actions(getDriver()).pause(5000).perform();
-        getWait15().until(ExpectedConditions.elementToBeClickable(By.cssSelector("dialog .jenkins-button--primary"))).click();
-//            new Actions(getDriver()).moveToElement(getDriver().findElement(By.className("jenkins-button--primary"))).contextClick().perform();
-//            new Actions(getDriver()).pause(5000).perform();
-    }
-}
-
-
-
-
-
-
-
-
-
 
 //TODO rename item - fix and move to BaseClass
 
@@ -163,7 +32,7 @@ protected void deleteItemWORKING(String name) {
 
     private void renameItem1(String name, String rename) {
 
-        clickItemNameInCurrentView(name);
+        openItemByNameClickInCurrentView(name);
 
         getWait15().until(ExpectedConditions.elementToBeClickable(By.cssSelector(String.format("a[href='/job/%s/confirm-rename']", name)))).click();
         getDriver().findElement(By.className("jenkins-input")).clear();

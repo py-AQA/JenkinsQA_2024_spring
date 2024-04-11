@@ -68,7 +68,7 @@ public class AqaNewJenkinsTest extends AqaBaseTest {
 
         createItemAndReturnToDashboard("Folder1", Item.FOLDER);
 
-        openItem("newFolder");
+        openItemByNameClickInCurrentView("newFolder");
         getWait15().until(ExpectedConditions.elementToBeClickable(By.cssSelector("[href = '/job/newFolder/move']"))).click();
         new Select(getDriver().findElement(By.name("destination"))).selectByValue("/Folder1");
         getDriver().findElement(By.name("Submit")).click();
@@ -81,7 +81,7 @@ public class AqaNewJenkinsTest extends AqaBaseTest {
 
         createItemAndReturnToDashboard("newFolder", Item.FOLDER);
 
-        openItem("newFolder");
+        openItemByNameClickInCurrentView("newFolder");
         getDriver().findElement(By.cssSelector("a[href='/job/newFolder/confirm-rename']")).click();
         WebElement name = getDriver().findElement(By.name("newName"));
         name.clear();

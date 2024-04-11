@@ -1,7 +1,9 @@
 package school.redrover;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.Point;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -42,6 +44,12 @@ public class AqaBaseTest extends BaseTest {
         }
     }
 
+
+    public static final By SIDE_PANEL_DELETE = By.cssSelector("[data-url $= '/doDelete']");
+    public static final By DROPDOWN_DELETE = By.cssSelector("button[href $= '/doDelete']");
+    public static final By DIALOG_DEFAULT_BUTTON = By.cssSelector("dialog .jenkins-button--primary");
+    public static final By EMPTY_STATE_BLOCK = By.cssSelector("div.empty-state-block");
+
     protected static class Item {
 
         public static final String FREESTYLE_PROJECT = "hudson_model_FreeStyleProject";
@@ -67,17 +75,24 @@ public class AqaBaseTest extends BaseTest {
 
     @DataProvider(name = "itemNameProvider")
     public Object[][] itemNameProvider() {
-
         return new Object[][]{
-                {""},
-                {"I"},
-                {"☼"},
-                {"<!--"},
-                {"'"},
-                {"lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll" +
-                        "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll" +
-                        "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll"},
+                {"123"},
+                {"123 123"},
+                {" 123"},
+                {"123 "},
+                {"1"},
+                {"123456789"},
         };
+//        return new Object[][]{
+//                {""},
+//                {"I"},
+//                {"☼"},
+//                {"<!--"},
+//                {"'"},
+//                {"lllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll" +
+//                        "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll" +
+//                        "llllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllllll"},
+//        };
     }
 
     protected void sleep(long seconds) {
@@ -112,7 +127,7 @@ public class AqaBaseTest extends BaseTest {
         returnToDashBoard();
     }
 
-    protected void clickItemNameInCurrentView(String name) {
+    protected void openItemByNameClickInCurrentView(String name) {
         Point item_left_upper_corner = getWait15().until(ExpectedConditions.elementToBeClickable(
                 By.cssSelector(String.format("td a[href = 'job/%s/']", asURL(name))))).getLocation();
 
@@ -122,9 +137,12 @@ public class AqaBaseTest extends BaseTest {
                 .perform();
     }
 
-    protected void openItem(String name) {
-//TODO check this one for super short names
-        getWait15().until(ExpectedConditions.elementToBeClickable(By.cssSelector(String.format("td a[href = 'job/%s/']", name)))).click();
+    protected void sidePanelDoDelete(String name) {
+
+        openItemByNameClickInCurrentView(name);
+
+        getDriver().findElement(SIDE_PANEL_DELETE).click();
+        getWait15().until(ExpectedConditions.elementToBeClickable(DIALOG_DEFAULT_BUTTON)).click();
     }
 
     protected void createUser(String name) {
@@ -143,7 +161,7 @@ public class AqaBaseTest extends BaseTest {
 
     protected String asURL(String str) {
         //TODO check this if it works well
-        return URLEncoder.encode(str, StandardCharsets.UTF_8)
+        return URLEncoder.encode(str.trim(), StandardCharsets.UTF_8)
                 .replaceAll("\\+", "%20")
                 .replaceAll("%21", "!")
                 .replaceAll("%27", "'")
@@ -152,10 +170,40 @@ public class AqaBaseTest extends BaseTest {
                 .replaceAll("%7E", "~");
     }
 
-    protected void deleteItem(String name) {
 
-        clickItemNameInCurrentView(name);
-        getDriver().findElement(By.cssSelector(String.format("[data-url='/job/%s/doDelete']", asURL(name)))).click();
-        getWait15().until(ExpectedConditions.elementToBeClickable(By.cssSelector("dialog .jenkins-button--primary"))).click();
+    protected void dropdownDoDelete(String name) {
+        WebElement x = getDriver().findElement(By.cssSelector(String.format("a[href = 'job/%s/']", asURL(name))));
+        new Actions(getDriver())
+                .moveToElement(getDriver().findElement(
+                        By.cssSelector(String.format("a[href = 'job/%s/']", asURL(name)))))
+                .pause(400) //transition 0.3 sec
+//                .moveToElement(getDriver().findElement(
+//                        By.cssSelector(String.format("button[data-href $= 'job/%s/']", asURL(name)))))
+                .moveByOffset(x.getSize().width / 2 + 14, 0)
+                .pause(400) //transition 0.3 sec
+//                .click()
+                .perform();
+
+        WebElement y = getDriver().findElement(By.cssSelector(String.format("button[data-href $= 'job/%s/']", asURL(name))));
+//        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", x);
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].dispatchEvent(new Event('mouseenter'));", y);
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].dispatchEvent(new Event('click'));", y);
+        sleep(1);
+
+//        System.out.println(x.getSize() + " <> " + y.getSize());
+//        System.out.println(x.getLocation() + " <> " + y.getLocation());
+//        System.out.printf("place computed %d%n", x.getSize().width / 2 + 14);
+//        List<WebElement> lst  = getDriver().findElements(By.cssSelector(".jenkins-menu-dropdown-chevron"));
+//        for (WebElement e : lst) {
+//            System.out.println(e.getAttribute("outerHTML") + "\n\n\n");
+//        }
+//        File scrFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
+//        try {
+//            FileUtils.copyFile(scrFile, new File(String.format("~/screenshot_%s.png", name)));
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+        getDriver().findElement(DROPDOWN_DELETE).click();
+        getWait15().until(ExpectedConditions.elementToBeClickable(DIALOG_DEFAULT_BUTTON)).click();
     }
 }
