@@ -170,39 +170,19 @@ public class AqaBaseTest extends BaseTest {
                 .replaceAll("%7E", "~");
     }
 
+    protected void openElementDropdown(WebElement element) {
+
+        WebElement chevron = element.findElement(By.className("jenkins-menu-dropdown-chevron"));
+
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].dispatchEvent(new Event('mouseenter'));", chevron);
+        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].dispatchEvent(new Event('click'));", chevron);
+    }
 
     protected void dropdownDoDelete(String name) {
-        WebElement x = getDriver().findElement(By.cssSelector(String.format("a[href = 'job/%s/']", asURL(name))));
-        new Actions(getDriver())
-                .moveToElement(getDriver().findElement(
-                        By.cssSelector(String.format("a[href = 'job/%s/']", asURL(name)))))
-                .pause(400) //transition 0.3 sec
-//                .moveToElement(getDriver().findElement(
-//                        By.cssSelector(String.format("button[data-href $= 'job/%s/']", asURL(name)))))
-                .moveByOffset(x.getSize().width / 2 + 14, 0)
-                .pause(400) //transition 0.3 sec
-//                .click()
-                .perform();
 
-        WebElement y = getDriver().findElement(By.cssSelector(String.format("button[data-href $= 'job/%s/']", asURL(name))));
-//        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].click();", x);
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].dispatchEvent(new Event('mouseenter'));", y);
-        ((JavascriptExecutor) getDriver()).executeScript("arguments[0].dispatchEvent(new Event('click'));", y);
-        sleep(1);
+        openElementDropdown(getDriver().findElement(
+                By.cssSelector(String.format("td a[href = 'job/%s/']", asURL(name)))));
 
-//        System.out.println(x.getSize() + " <> " + y.getSize());
-//        System.out.println(x.getLocation() + " <> " + y.getLocation());
-//        System.out.printf("place computed %d%n", x.getSize().width / 2 + 14);
-//        List<WebElement> lst  = getDriver().findElements(By.cssSelector(".jenkins-menu-dropdown-chevron"));
-//        for (WebElement e : lst) {
-//            System.out.println(e.getAttribute("outerHTML") + "\n\n\n");
-//        }
-//        File scrFile = ((TakesScreenshot) getDriver()).getScreenshotAs(OutputType.FILE);
-//        try {
-//            FileUtils.copyFile(scrFile, new File(String.format("~/screenshot_%s.png", name)));
-//            } catch (IOException e) {
-//                e.printStackTrace();
-//            }
         getDriver().findElement(DROPDOWN_DELETE).click();
         getWait15().until(ExpectedConditions.elementToBeClickable(DIALOG_DEFAULT_BUTTON)).click();
     }

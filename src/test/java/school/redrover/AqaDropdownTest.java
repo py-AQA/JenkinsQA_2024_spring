@@ -6,7 +6,7 @@ import org.testng.annotations.Test;
 public class AqaDropdownTest extends AqaBaseTest {
 
     @Test(dataProvider = "itemNameProvider")
-    public void testSidePanelDeleteFolder(String name) {
+    public void testSidePanelDeletePipeline(String name) {
 
         createItemAndReturnToDashboard(name, Item.PIPELINE);
 
