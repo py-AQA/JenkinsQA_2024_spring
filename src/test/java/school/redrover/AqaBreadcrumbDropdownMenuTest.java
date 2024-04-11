@@ -18,8 +18,8 @@ public class AqaBreadcrumbDropdownMenuTest extends AqaBaseTest{
         new Actions(getDriver())
                 .moveToElement(getDriver().findElement(By.xpath("//a[contains (text(), 'Dashboard')]")))
                 .perform();
-        sleep(3);
-        getWait15().until(ExpectedConditions.elementToBeClickable(By.cssSelector("[id=\"breadcrumbBar\"] button"))).click();
+
+        getWait15().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[id=\"breadcrumbBar\"] button"))).click();
 
         Set<String> words = new HashSet<>();
         List<WebElement> lst = getDriver().findElements(By.className("jenkins-dropdown__item"));
