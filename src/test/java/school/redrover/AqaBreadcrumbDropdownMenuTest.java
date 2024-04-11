@@ -3,6 +3,7 @@ package school.redrover;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -18,7 +19,7 @@ public class AqaBreadcrumbDropdownMenuTest extends AqaBaseTest{
                 .moveToElement(getDriver().findElement(By.xpath("//a[contains (text(), 'Dashboard')]")))
                 .perform();
 
-        getDriver().findElement(By.cssSelector("[id=\"breadcrumbBar\"] button")).click();
+        getWait15().until(ExpectedConditions.elementToBeClickable(By.cssSelector("[id=\"breadcrumbBar\"] button"))).click();
 
         Set<String> words = new HashSet<>();
         List<WebElement> lst = getDriver().findElements(By.className("jenkins-dropdown__item"));
