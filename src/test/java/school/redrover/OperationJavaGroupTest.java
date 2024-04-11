@@ -8,7 +8,6 @@ import school.redrover.runner.BaseTest;
 
 public class OperationJavaGroupTest extends BaseTest {
 
-
     @Test
     public void testFreestyleProject() {
         getDriver().findElement(By.xpath("//a[.='New Item']")).click();
@@ -34,4 +33,5 @@ public class OperationJavaGroupTest extends BaseTest {
         Assert.assertEquals(nameDashboard.getText(), "FreestyleProject");
     }
 }
+
 
