@@ -10,6 +10,7 @@ public class AqaNodeStatusTest extends AqaBaseTest {
     @Test
     public void testNodeStatus() {
 //        Assert.assertTrue(getDriver().findElement(By.cssSelector("#executors th > span")).getText(). contains("offline"));
+        System.out.println(getDriver().findElement(By.id("executors")).getText());
         Assert.assertTrue(getDriver().findElement(By.id("executors")).getText().contains("Idle"));
     }
 
