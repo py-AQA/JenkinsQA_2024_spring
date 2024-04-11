@@ -14,7 +14,6 @@ public class AqaManageJenkinsTest extends AqaBaseTest {
         return new Object[][]{{"user1"}, {"user2"}, {"user3"}};
     }
 
-
     @Test
     public void testCreateUser() {
 
@@ -22,7 +21,6 @@ public class AqaManageJenkinsTest extends AqaBaseTest {
 
         Assert.assertTrue(getDriver().findElement(By.cssSelector("[href = 'user/user/']")).getText().contains("user"));
     }
-
 
     @Test(dataProvider = "usersProvider")
     public void testDeleteUser(String user_name) {

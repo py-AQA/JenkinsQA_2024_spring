@@ -3,20 +3,18 @@ package school.redrover;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 public class AqaCreateProjectTest extends AqaBaseTest {
 
-    @Ignore
     @Test(dataProvider = "itemNameProvider")
-    public void testDeleteFolder(String name) {
+    public void testSidePanelDeleteFolder(String name) {
 
         createItemAndReturnToDashboard(name, Item.FOLDER);
 
-        deleteItem(name);
+        sidePanelDoDelete(name);
 
-        Assert.assertTrue(getDriver().findElement(By.cssSelector(String.format("td a[href = 'job/%s/']", asURL(name)))).isDisplayed());
+        Assert.assertTrue(getDriver().findElement(EMPTY_STATE_BLOCK).isDisplayed());
     }
 
     @Test(dataProvider = "itemProvider")
@@ -28,13 +26,13 @@ public class AqaCreateProjectTest extends AqaBaseTest {
     }
 
     @Test(dataProvider = "itemProvider")
-    public void testDeleteItem(String name, String itemClassName) {
+    public void testSidePanelDeleteItem(String name, String itemClassName) {
 
         createItemAndReturnToDashboard(name, itemClassName);
 
-        deleteItem(name);
+        sidePanelDoDelete(name);
 
-//        TODO add assert here please
+        Assert.assertTrue(getDriver().findElement(EMPTY_STATE_BLOCK).isDisplayed());
     }
 
     @Test
