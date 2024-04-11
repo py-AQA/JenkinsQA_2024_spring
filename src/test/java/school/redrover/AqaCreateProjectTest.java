@@ -24,6 +24,20 @@ public class AqaCreateProjectTest extends AqaBaseTest {
 
         Assert.assertTrue(getDriver().findElement(By.cssSelector(String.format("td a[href = 'job/%s/']", asURL(name)))).isDisplayed());
     }
+    @Test
+    public void testAddDescriptionFolder() {
+
+        createItemAndReturnToDashboard("FirstProject", Item.FOLDER);
+        openItemByNameClickInCurrentView("FirstProject");
+
+        getDriver().findElement(By.id("description-link")).click();
+        getDriver().findElement(By.name("description")).sendKeys("Hello, it's a first project");
+        getDriver().findElement(By.name("Submit")).click();
+
+        Assert.assertEquals(
+                getDriver().findElement(By.cssSelector("#description div:first-child")).getText(),
+                "Hello, it's a first project");
+    }
 
     @Test(dataProvider = "itemProvider")
     public void testSidePanelDeleteItem(String name, String itemClassName) {
