@@ -19,8 +19,7 @@ public class OperationJavaGroupTest extends BaseTest {
         WebElement project = getDriver().findElement(By.xpath("//li[@class='hudson_model_FreeStyleProject']"));
         project.click();
 
-        WebElement buttonOk = getDriver().findElement(By.id("ok-button"));
-        buttonOk.click();
+      getDriver().findElement(By.id("ok-button")).click();
 
         WebElement buttonSave = getDriver().findElement(By.name("Submit"));
         buttonSave.click();
