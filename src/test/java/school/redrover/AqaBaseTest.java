@@ -186,4 +186,17 @@ public class AqaBaseTest extends BaseTest {
         getDriver().findElement(DROPDOWN_DELETE).click();
         getWait15().until(ExpectedConditions.elementToBeClickable(DIALOG_DEFAULT_BUTTON)).click();
     }
+
+    protected static class View {
+        public static final String MY_VIEW = "hudson.model.MyView";
+        public static final String LIST_VIEW = "hudson.model.ListView";
+
+    }
+
+    public void addView(String viewName, String viewType) {
+        getDriver().findElement(By.className("addTab")).click();
+        getDriver().findElement(By.id("name")).sendKeys(viewName);
+        getDriver().findElement(By.cssSelector(String.format("[for = '%s']", viewType))).click();
+        getDriver().findElement(By.id("ok")).click();
+    }
 }
