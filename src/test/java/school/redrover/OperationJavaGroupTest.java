@@ -16,7 +16,7 @@ public class OperationJavaGroupTest extends BaseTest {
         Assert.assertEquals(welcomeText.getText(), "Welcome to Jenkins!");
     }
     @Test
-    public void testFreestyleProject() throws InterruptedException {
+    public void testFreestyleProject() {
         getDriver().findElement(By.cssSelector("[it='hudson.model.Hudson@57458ec6'] [fill='none']")).click();
 
         WebElement nameInput = getDriver().findElement(By.id("name"));
