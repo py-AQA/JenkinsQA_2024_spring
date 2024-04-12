@@ -10,14 +10,13 @@ import school.redrover.runner.BaseTest;
 public class MultibranchPipeline extends BaseTest {
 
     @Test
-    public void testChangeMultPipelineFromDisabledToEnabledOnStatusPage()
-        throws InterruptedException {
-        final String MultPipelineName = "Multibranch Pipeline";
+    public void testChangeMultPipelineFromDisabledToEnabledOnStatusPage() {
+        final String multPipelineName = "Multibranch Pipeline";
 
-        createNewMultPipiline(MultPipelineName);
-        disableCratedMultPipiline(MultPipelineName);
+        createNewMultPipiline(multPipelineName);
+        disableCratedMultPipiline(multPipelineName);
 
-        getDriver().findElement(By.xpath("//span[text()='" + MultPipelineName + "']")).click();
+        getDriver().findElement(By.xpath("//span[text()='" + multPipelineName + "']")).click();
         getDriver().findElement(By.xpath("//button[@name='Submit']")).click();
         List<WebElement> disabledMultPipelineMessage = getDriver().findElements(
             By.xpath("//form[@id='enable-project']"));
