@@ -193,7 +193,7 @@ public class AqaBaseTest extends BaseTest {
 
     }
 
-    public void addView(String viewName, String viewType) {
+    public void createView(String viewName, String viewType) {
         getDriver().findElement(By.className("addTab")).click();
         getDriver().findElement(By.id("name")).sendKeys(viewName);
         getDriver().findElement(By.cssSelector(String.format("[for = '%s']", viewType))).click();
