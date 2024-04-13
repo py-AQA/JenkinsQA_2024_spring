@@ -9,24 +9,9 @@ import school.redrover.runner.BaseTest;
 
 public class MultibranchPipelineTest extends BaseTest {
 
-    @Test
-    public void testChangeMultPipelineFromDisabledToEnabledOnStatusPage() {
-        final String multPipelineName = "Multibranch Pipeline";
-
-        createNewMultPipeline(multPipelineName);
-        disableCreatedMultPipeline(multPipelineName);
-
-        getDriver().findElement(By.xpath("//span[text()='" + multPipelineName + "']")).click();
-        getDriver().findElement(By.xpath("//button[contains(., 'Enable')]")).click();
-        List<WebElement> disabledMultPipelineMessage = getDriver().findElements(
-            By.xpath("//form[contains(., 'This Multibranch Pipeline is currently disabled')]"));
-
-        Assert.assertEquals(disabledMultPipelineMessage.size(), 0, "Disabled message is displayed!!!");
-    }
-
     private void disableCreatedMultPipeline(String MultPipelineName) {
         getDriver().findElement(By.xpath("//span[text()='" + MultPipelineName + "']")).click();
-        WebElement configureLink = getDriver().findElement(By.xpath("//div/div[2]/span"));
+        WebElement configureLink = getDriver().findElement(By.cssSelector(".task-link-wrapper [href$='configure']"));
         configureLink.click();
         if (getDriver().findElement(By.className("jenkins-toggle-switch__label__checked-title"))
             .isDisplayed()) {
@@ -42,5 +27,20 @@ public class MultibranchPipelineTest extends BaseTest {
         getDriver().findElement(By.cssSelector("[class*='WorkflowMultiBranchProject']")).click();
         getDriver().findElement(By.id("ok-button")).click();
         getDriver().findElement(By.id("jenkins-home-link")).click();
+    }
+
+    @Test
+    public void testChangeMultPipelineFromDisabledToEnabledOnStatusPage() {
+        final String multPipelineName = "Multibranch Pipeline";
+
+        createNewMultPipeline(multPipelineName);
+        disableCreatedMultPipeline(multPipelineName);
+
+        getDriver().findElement(By.xpath("//span[text()='" + multPipelineName + "']")).click();
+        getDriver().findElement(By.xpath("//button[contains(., 'Enable')]")).click();
+        List<WebElement> disabledMultPipelineMessage = getDriver().findElements(
+            By.xpath("//form[contains(., 'This Multibranch Pipeline is currently disabled')]"));
+
+        Assert.assertEquals(disabledMultPipelineMessage.size(), 0, "Disabled message is displayed!!!");
     }
 }
