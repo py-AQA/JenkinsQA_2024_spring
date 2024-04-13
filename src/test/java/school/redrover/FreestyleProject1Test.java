@@ -10,11 +10,11 @@ import java.util.List;
 
 public class FreestyleProject1Test extends BaseTest {
 
-    final String freestyleProjectName = "Freestyle project";
+    final String FREESTYLE_PROJECT_NAME = "Freestyle project";
 
     private void createFreestyleProject(){
         getDriver().findElement(By.xpath("//div[@id='tasks']/descendant::div[1]")).click();
-        getDriver().findElement(By.id("name")).sendKeys(freestyleProjectName);
+        getDriver().findElement(By.id("name")).sendKeys(FREESTYLE_PROJECT_NAME);
         getDriver().findElement(
                 By.xpath("//div[@id='items']//*[text()='Freestyle project']//ancestor::li")).click();
         getDriver().findElement(By.id("ok-button")).click();
@@ -26,8 +26,8 @@ public class FreestyleProject1Test extends BaseTest {
         createFreestyleProject();
 
         Assert.assertEquals(
-                getDriver().findElement(By.xpath("//h1[text()='" + freestyleProjectName + "']")).getText(),
-                freestyleProjectName);
+                getDriver().findElement(By.xpath("//h1[text()='" + FREESTYLE_PROJECT_NAME + "']")).getText(),
+                FREESTYLE_PROJECT_NAME);
     }
 
     @Test
@@ -42,7 +42,7 @@ public class FreestyleProject1Test extends BaseTest {
         boolean projectIsDisplayed = false;
 
         for (WebElement el : displayedProjects) {
-            if (el.getText().equals(freestyleProjectName)) {
+            if (el.getText().equals(FREESTYLE_PROJECT_NAME)) {
                 projectIsDisplayed = true;
                 break;
             }
@@ -50,7 +50,7 @@ public class FreestyleProject1Test extends BaseTest {
 
         Assert.assertTrue(
                 projectIsDisplayed,
-                "Project with '" + freestyleProjectName + "' name is not in the list");
+                "Project with '" + FREESTYLE_PROJECT_NAME + "' name is not in the list");
     }
 
     @Test
