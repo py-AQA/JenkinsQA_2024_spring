@@ -7,25 +7,25 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 import school.redrover.runner.BaseTest;
 
-public class MultibranchPipeline extends BaseTest {
+public class MultibranchPipelineTest extends BaseTest {
 
     @Test
     public void testChangeMultPipelineFromDisabledToEnabledOnStatusPage() {
         final String multPipelineName = "Multibranch Pipeline";
 
-        createNewMultPipiline(multPipelineName);
-        disableCratedMultPipiline(multPipelineName);
+        createNewMultPipeline(multPipelineName);
+        disableCreatedMultPipeline(multPipelineName);
 
         getDriver().findElement(By.xpath("//span[text()='" + multPipelineName + "']")).click();
-        getDriver().findElement(By.xpath("//button[@name='Submit']")).click();
+        getDriver().findElement(By.xpath("//button[contains(., 'Enable')]")).click();
         List<WebElement> disabledMultPipelineMessage = getDriver().findElements(
-            By.xpath("//form[@id='enable-project']"));
+            By.xpath("//form[contains(., 'This Multibranch Pipeline is currently disabled')]"));
 
-        Assert.assertEquals(disabledMultPipelineMessage.size(), 0, "Message is displayed!!!");
+        Assert.assertEquals(disabledMultPipelineMessage.size(), 0, "Disabled message is displayed!!!");
     }
 
-    private void disableCratedMultPipiline(String MultPipelineNameValue) {
-        getDriver().findElement(By.xpath("//span[text()='" + MultPipelineNameValue + "']")).click();
+    private void disableCreatedMultPipeline(String MultPipelineName) {
+        getDriver().findElement(By.xpath("//span[text()='" + MultPipelineName + "']")).click();
         WebElement configureLink = getDriver().findElement(By.xpath("//div/div[2]/span"));
         configureLink.click();
         if (getDriver().findElement(By.className("jenkins-toggle-switch__label__checked-title"))
@@ -33,14 +33,14 @@ public class MultibranchPipeline extends BaseTest {
             getDriver().findElement(By.cssSelector("[data-title*='Disabled']")).click();
         }
         getDriver().findElement(By.cssSelector("[name*='Submit']")).click();
-        getDriver().findElement(By.xpath("//a[text()='Dashboard']")).click();
+        getDriver().findElement(By.id("jenkins-home-link")).click();
     }
 
-    private void createNewMultPipiline(String MultPipelineNameValue) {
+    private void createNewMultPipeline(String MultPipelineName) {
         getDriver().findElement(By.xpath("//a[@href='newJob']")).click();
-        getDriver().findElement(By.id("name")).sendKeys(MultPipelineNameValue);
+        getDriver().findElement(By.id("name")).sendKeys(MultPipelineName);
         getDriver().findElement(By.cssSelector("[class*='WorkflowMultiBranchProject']")).click();
         getDriver().findElement(By.id("ok-button")).click();
-        getDriver().findElement(By.xpath("//a[text()='Dashboard']")).click();
+        getDriver().findElement(By.id("jenkins-home-link")).click();
     }
 }
