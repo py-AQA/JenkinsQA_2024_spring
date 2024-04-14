@@ -5,8 +5,10 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import school.redrover.runner.BaseTest;
+import static school.redrover.runner.TestUtils.*;
 
-public class AqaJenkinsTest extends AqaBaseTest {
+public class AqaJenkinsTest extends BaseTest {
 
     @Test
     public void testAuthJenkins() {
@@ -18,7 +20,7 @@ public class AqaJenkinsTest extends AqaBaseTest {
     public void testTitleJenkins() {
 
         Assert.assertEquals(
-                getWait15().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div h1"))).getText(),
+                getWait15(this).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div h1"))).getText(),
                 "Welcome to Jenkins!");
     }
 
@@ -44,20 +46,20 @@ public class AqaJenkinsTest extends AqaBaseTest {
     @Test
     public void testTitleDashboard() {
         Assert.assertEquals(
-                getWait15().until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Dashboard"))).getText(),
+                getWait15(this).until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Dashboard"))).getText(),
                 "Dashboard");
     }
 
     @Test
     public void testTitleText1() {
         Assert.assertEquals(
-                getWait15().until(ExpectedConditions.visibilityOfElementLocated(By.className("content-block__link"))).getText(),
+                getWait15(this).until(ExpectedConditions.visibilityOfElementLocated(By.className("content-block__link"))).getText(),
                 "Create a job");
     }
     @Test
     public void testTitleText2() {
         Assert.assertEquals(
-                getWait15().until(ExpectedConditions.visibilityOfElementLocated(By.id("description-link"))).getText(),
+                getWait15(this).until(ExpectedConditions.visibilityOfElementLocated(By.id("description-link"))).getText(),
                 "Add description");
     }
 }

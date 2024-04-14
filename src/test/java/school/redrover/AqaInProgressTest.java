@@ -8,8 +8,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
+import school.redrover.runner.BaseTest;
+import static school.redrover.runner.TestUtils.*;
 
-public class AqaInProgressTest extends AqaBaseTest {
+public class AqaInProgressTest extends BaseTest {
 
 //TODO rename item - fix and move to BaseClass
 
@@ -24,7 +26,7 @@ public class AqaInProgressTest extends AqaBaseTest {
                 .click()
                 .perform();
 
-        getWait15().until(ExpectedConditions.elementToBeClickable(By.cssSelector(String.format("a[href='/job/%s/confirm-rename']", name)))).click();
+        getWait15(this).until(ExpectedConditions.elementToBeClickable(By.cssSelector(String.format("a[href='/job/%s/confirm-rename']", name)))).click();
         getDriver().findElement(By.className("jenkins-input")).clear();
         getDriver().findElement(By.className("jenkins-input")).sendKeys(rename);
         getDriver().findElement(By.name("Submit")).click();
@@ -32,9 +34,9 @@ public class AqaInProgressTest extends AqaBaseTest {
 
     private void renameItem1(String name, String rename) {
 
-        openItemByNameClickInCurrentView(name);
+        openItemByNameClickInCurrentView(this, name);
 
-        getWait15().until(ExpectedConditions.elementToBeClickable(By.cssSelector(String.format("a[href='/job/%s/confirm-rename']", name)))).click();
+        getWait15(this).until(ExpectedConditions.elementToBeClickable(By.cssSelector(String.format("a[href='/job/%s/confirm-rename']", name)))).click();
         getDriver().findElement(By.className("jenkins-input")).clear();
         getDriver().findElement(By.className("jenkins-input")).sendKeys(rename);
         getDriver().findElement(By.name("Submit")).click();
@@ -57,8 +59,8 @@ public class AqaInProgressTest extends AqaBaseTest {
                 .click()
                 .perform();
 
-        sleep(60);
-        getWait15().until(ExpectedConditions.elementToBeClickable(By.cssSelector(String.format("a[href='/job/%s/confirm-rename']", name)))).click();
+        sleep(this,60);
+        getWait15(this).until(ExpectedConditions.elementToBeClickable(By.cssSelector(String.format("a[href='/job/%s/confirm-rename']", name)))).click();
         getDriver().findElement(By.className("jenkins-input")).clear();
         getDriver().findElement(By.className("jenkins-input")).sendKeys(rename);
         getDriver().findElement(By.name("Submit")).click();
@@ -96,7 +98,7 @@ public class AqaInProgressTest extends AqaBaseTest {
         final String initial_name = "org_folder";
         final String final_name = "Renamed1";
 
-        createItemAndReturnToDashboard(initial_name, Item.ORGANIZATION_FOLDER);
+        createItemAndReturnToDashboard(this, initial_name, Item.ORGANIZATION_FOLDER);
 
         renameItem(initial_name, final_name);
 
@@ -111,7 +113,7 @@ public class AqaInProgressTest extends AqaBaseTest {
     public void testChangeLanguage() {
         getDriver().findElement(By.cssSelector("a[href = '/manage']")).click();
         getDriver().findElement(By.cssSelector("a[href = 'configure']")).click();
-        WebElement l = getWait15().until(ExpectedConditions.visibilityOfElementLocated(By.name("_.systemLocale")));
+        WebElement l = getWait15(this).until(ExpectedConditions.visibilityOfElementLocated(By.name("_.systemLocale")));
         ((JavascriptExecutor) getDriver()).executeScript("return arguments[0].scrollIntoView(true);", l);
         l.sendKeys("ru");
         getDriver().findElement(By.cssSelector("[name = '_.ignoreAcceptLanguage']~label")).click();
@@ -131,7 +133,7 @@ public class AqaInProgressTest extends AqaBaseTest {
     public void testChangeLanguage1() {
         getDriver().findElement(By.cssSelector("a[href = '/manage']")).click();
         getDriver().findElement(By.cssSelector("a[href = 'configure']")).click();
-        WebElement l = getWait15().until(ExpectedConditions.visibilityOfElementLocated(By.name("_.systemLocale")));
+        WebElement l = getWait15(this).until(ExpectedConditions.visibilityOfElementLocated(By.name("_.systemLocale")));
         ((JavascriptExecutor)getDriver()).executeScript("return arguments[0].scrollIntoView(true);", l);
         l.sendKeys("ru");
         getDriver().findElement(By.cssSelector("[name = '_.ignoreAcceptLanguage']~label")).click();

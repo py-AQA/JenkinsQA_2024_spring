@@ -3,13 +3,16 @@ package school.redrover;
 import org.openqa.selenium.By;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import school.redrover.runner.BaseTest;
 
-public class AqaViewTest extends AqaBaseTest{
+import static school.redrover.runner.TestUtils.*;
+
+public class AqaViewTest extends BaseTest {
 
     @Test
     public void testCreateView() {
-        createItemAndReturnToDashboard("Project", Item.FREESTYLE_PROJECT);
-        createView("Second", View.MY_VIEW);
+        createItemAndReturnToDashboard(this, "Project", Item.FREESTYLE_PROJECT);
+        createView(this, "Second", View.MY_VIEW);
 
         Assert.assertTrue(getDriver().findElement(By.cssSelector(".tab.active")).getText().contains("Second"),
                 "The view has not been created");
@@ -17,8 +20,8 @@ public class AqaViewTest extends AqaBaseTest{
 
     @Test
     public void testDeleteView() {
-        createItemAndReturnToDashboard("Folder", Item.FOLDER);
-        createView("I_see", View.MY_VIEW);
+        createItemAndReturnToDashboard(this, "Folder", Item.FOLDER);
+        createView(this, "I_see", View.MY_VIEW);
 
         getDriver().findElement(By.cssSelector("[href = '/view/I_see/']")).click();
         getDriver().findElement(By.className("icon-edit-delete")).click();
@@ -30,8 +33,9 @@ public class AqaViewTest extends AqaBaseTest{
 
     @Test
     public void testAddDescriptionToView() {
-        createItemAndReturnToDashboard("Folder", Item.FOLDER);
-        createView("I_see", View.MY_VIEW);
+
+        createItemAndReturnToDashboard(this, "Folder", Item.FOLDER);
+        createView(this, "I_see", View.MY_VIEW);
 
         getDriver().findElement(By.cssSelector("[href = '/view/I_see/configure']")).click();
         getDriver().findElement(By.name("_.description")).sendKeys("I love Jenkins");

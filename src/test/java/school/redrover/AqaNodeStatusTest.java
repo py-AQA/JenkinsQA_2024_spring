@@ -4,8 +4,10 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import school.redrover.runner.BaseTest;
+import static school.redrover.runner.TestUtils.*;
 
-public class AqaNodeStatusTest extends AqaBaseTest {
+public class AqaNodeStatusTest extends BaseTest {
 
     @Test
     public void testNodeStatus() {
@@ -20,7 +22,7 @@ public class AqaNodeStatusTest extends AqaBaseTest {
         getDriver().findElement(By.cssSelector("[data-href = '/computer/']")).click();
         getDriver().findElement(By.className("jenkins-dropdown__item")).click();
         getDriver().findElement(By.name("Submit")).click();
-        getWait15().until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.cssSelector("#main-panel button")))).click();
+        getWait15(this).until(ExpectedConditions.elementToBeClickable(getDriver().findElement(By.cssSelector("#main-panel button")))).click();
 
         Assert.assertTrue(getDriver().findElement(By.className("message")).getText().contains("Disconnected"));
     }
