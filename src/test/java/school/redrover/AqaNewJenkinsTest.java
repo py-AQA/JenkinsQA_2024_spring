@@ -6,8 +6,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import school.redrover.runner.BaseTest;
+import static school.redrover.runner.TestUtils.*;
 
-public class AqaNewJenkinsTest extends AqaBaseTest {
+public class AqaNewJenkinsTest extends BaseTest {
 
     @Test
     public void testAuthJenkins() {
@@ -24,7 +26,7 @@ public class AqaNewJenkinsTest extends AqaBaseTest {
     @Test
     public void testNewItemJenkins() {
 
-        createItemAndReturnToDashboard("FP", Item.FREESTYLE_PROJECT);
+        createItemAndReturnToDashboard(this,"FP", Item.FREESTYLE_PROJECT);
 
         Assert.assertTrue(getDriver().findElement(By.cssSelector("td a[href = 'job/FP/']")).isDisplayed());
     }
@@ -32,11 +34,11 @@ public class AqaNewJenkinsTest extends AqaBaseTest {
     @Test
     public void testAddDescription() {
 
-        createItem("MCP", Item.MULTI_CONFIGURATION_PROJECT);
-        getWait15().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//textarea[@name = 'description']"))).sendKeys("xxx");
+        createItem(this, "MCP", Item.MULTI_CONFIGURATION_PROJECT);
+        getWait15(this).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//textarea[@name = 'description']"))).sendKeys("xxx");
 
         getDriver().findElement(By.xpath("//button[@formnovalidate = 'formNoValidate']")).click();
-        Assert.assertTrue(getWait15().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div#description"))).getText().startsWith("xxx"));
+        Assert.assertTrue(getWait15(this).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div#description"))).getText().startsWith("xxx"));
     }
 
     @Test
@@ -56,7 +58,7 @@ public class AqaNewJenkinsTest extends AqaBaseTest {
     @Test
     public void testNewFolder() {
 
-        createItemAndReturnToDashboard("Folder", Item.FOLDER);
+        createItemAndReturnToDashboard(this,"Folder", Item.FOLDER);
 
         Assert.assertTrue(getDriver().findElement(By.cssSelector("td a[href = 'job/Folder/']")).isDisplayed());
     }
@@ -64,12 +66,12 @@ public class AqaNewJenkinsTest extends AqaBaseTest {
     @Test
     public void testMoveItemToFolder() {
 
-        createItemAndReturnToDashboard("newFolder", Item.FOLDER);
+        createItemAndReturnToDashboard(this,"newFolder", Item.FOLDER);
 
-        createItemAndReturnToDashboard("Folder1", Item.FOLDER);
+        createItemAndReturnToDashboard(this,"Folder1", Item.FOLDER);
 
-        openItemByNameClickInCurrentView("newFolder");
-        getWait15().until(ExpectedConditions.elementToBeClickable(By.cssSelector("[href = '/job/newFolder/move']"))).click();
+        openItemByNameClickInCurrentView(this, "newFolder");
+        getWait15(this).until(ExpectedConditions.elementToBeClickable(By.cssSelector("[href = '/job/newFolder/move']"))).click();
         new Select(getDriver().findElement(By.name("destination"))).selectByValue("/Folder1");
         getDriver().findElement(By.name("Submit")).click();
 
@@ -79,9 +81,9 @@ public class AqaNewJenkinsTest extends AqaBaseTest {
     @Test
     public void testRenameFolder() {
 
-        createItemAndReturnToDashboard("newFolder", Item.FOLDER);
+        createItemAndReturnToDashboard(this, "newFolder", Item.FOLDER);
 
-        openItemByNameClickInCurrentView("newFolder");
+        openItemByNameClickInCurrentView(this,"newFolder");
         getDriver().findElement(By.cssSelector("a[href='/job/newFolder/confirm-rename']")).click();
         WebElement name = getDriver().findElement(By.name("newName"));
         name.clear();
@@ -89,7 +91,7 @@ public class AqaNewJenkinsTest extends AqaBaseTest {
         getDriver().findElement(By.name("Submit")).click();
 
         Assert.assertEquals(
-                getWait15().until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div#main-panel h1"))).getText(),
+                getWait15(this).until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div#main-panel h1"))).getText(),
                 "renameFolder");
     }
 }
